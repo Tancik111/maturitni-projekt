@@ -4,8 +4,308 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+   
+<!-- MENU -->
+
+    <nav class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><h2>Pověstník</h2></a>
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse fs-5 p-2" id="mainMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Naše poslání</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pověsti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">O nás</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Vlastní pověst</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mapa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sponzoři</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+<section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white mb-0">
+  <video autoplay muted loop playsinline class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
+    <source src="data/video.mp4" type="video/mp4">
+  </video>
+
+  <div class="position-absolute w-100 h-100 top-0 start-0 bg-dark opacity-50 z-0"></div>
+
+  <div class="container position-relative z-1 text-center">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="display-2 fw-bold mb-4">Pověstník</h1>
+        <p class="lead mb-5">Zprostředkováme pověsti zajímavou a moderní formou</p>
+        <div class="d-flex justify-content-center mt-5">
+          <a href="#dalsi-sekce" class="scroll-arrow" aria-label="Posunout dolů">
+            <span></span>
+            <span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="custom-ribbon text-center py-5 ">
+    <span class="fs-3 fw-light tracking-widest text-uppercase">Oživujeme příběhy našich předků</span>
+  </div>
+
+  <div class="container">
+    <h2 class="text-center display-5 mb-5 mt-5 fw-bold">Pověsti kraje</h2>
     
+    <div id="carouselPovesti" class="carousel slide" data-bs-ride="false">
+      <div class="carousel-inner">
+        
+        <div class="carousel-item active">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="povest-card">
+                <img src="data/bivoj.png" alt="Pověst 1">
+                <h4 class="text-center mt-3">O Bivojovi</h4>
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="povest-card">
+                <img src="data/blanicti.png" alt="Pověst 2">
+                <h4 class="text-center mt-3">Blaničtí rytíři</h4>
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="povest-card">
+                <img src="data/cech.png" alt="Pověst 3">
+                <h4 class="text-center mt-3">O Čechovi</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="povest-card">
+                <img src="data/haviri.png" alt="Pověst 4">
+                <h4 class="text-center mt-3">Kutnohorští havíři</h4>
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="povest-card">
+                <img src="data/krok.png" alt="Pověst 5">
+                <h4 class="text-center mt-3">O Krokovi a jeho dcerách</h4>
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="povest-card">
+                <img src="data/libuse.png" alt="Pověst 6">
+                <h4 class="text-center mt-3">O Libuši</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+              <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="povest-card">
+                <img src="data/semik.png" alt="Pověst 7">
+                <h4 class="text-center mt-3">O Křesomyslovi a Horymírovi</h4>
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="povest-card">
+                <img src="data/zizka.png" alt="Pověst 8">
+                <h4 class="text-center mt-3">O Žižkovi</h4>
+              </div>
+            </div>
+            <div class="col-md-4 d-none d-md-block">
+              <div class="povest-card">
+                <img src="data/bruncvik.png" alt="Pověst 9">
+                <h4 class="text-center mt-3">O Bruncvíkovi</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev custom-control" type="button" data-bs-target="#carouselPovesti" data-bs-slide="prev">
+        <span class="custom-arrow-icon">❮</span>
+      </button>
+      <button class="carousel-control-next custom-control" type="button" data-bs-target="#carouselPovesti" data-bs-slide="next">
+        <span class="custom-arrow-icon">❯</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- AI -->
+
+<div class="container">
+    <div class="row g-5">
+        <div class="col-md-7">
+            <h2 class="mb-4">Vdechněte život legendě</h2>
+            <div class="card p-4 shadow-sm">
+                <form id="povestForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Místo děje</label>
+                        <input type="text" name="misto" class="form-control" placeholder="např. hrad Loket" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Hlavní postava</label>
+                        <input type="text" name="postava" class="form-control" placeholder="např. lakomý purkrabí" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Zápletka</label>
+                        <textarea name="zapletka" class="form-control" rows="4" placeholder="O čem by pověst měla být?"></textarea>
+                    </div>
+                    <button type="submit" id="genBtn" class="btn btn-dark btn-lg w-100 shadow">Vytvořit pověst</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="rules-card p-4 shadow-sm rounded">
+                <h4 class="mb-3">Pravidla kroniky</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2">📍 <strong>Místo:</strong> Zadejte reálnou lokalitu.</li>
+                    <li class="mb-2">👤 <strong>Postava:</strong> Může být historická i nadpřirozená.</li>
+                    <li class="mb-2">📏 <strong>Délka:</strong> Generujeme text o délce cca 2000 znaků.</li>
+                    <li class="mb-2">🛡️ <strong>Ochrana:</strong> Max 5 pokusů za 10 minut.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="vysledekModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Zápis v tajné kronice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zavřít"></button>
+            </div>
+            <div class="modal-body p-4" id="vystupText" style="white-space: pre-line; font-family: 'Georgia', serif; font-size: 1.1rem; line-height: 1.6;">
+                </div>
+            <div class="modal-footer shadow-sm">
+                <button type="button" class="btn btn-success btn-lg w-100 fw-bold" onclick="stahnoutPDF()">STÁHNOUT JAKO PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pdf-export-area" style="display:none;">
+    <div id="pdf-text-content" style="white-space: pre-line;"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+
+
+
+<footer class="container-fluid py-5 mt-auto px-0">
+    <div class="container px-4">
+        <div class="row align-items-stretch">
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">Sídlo</h5>
+                <p class="text-muted mb-1">Kutnohorská 40</p>
+                <p class="text-muted mb-1">Kolín 280 02</p>
+                <h5 class="fw-bold mb-3">Kontakty</h5>
+                <p class="text-muted mb-1">Jednatel | Václav Vaněk</p>             
+                <p class="text-muted mb-1">+420 676 767 676</p>
+                <p class="text-muted mb-3">info.povestnik@seznam.cz</p>
+                <div class="d-flex gap-3 fs-4">
+                    <a href="https://www.tiktok.com/@m0mentum_studio" class="text-dark"><i class="bi bi-tiktok"></i></a>
+                    <a href="https://www.instagram.com/m0mentum_studio/" class="text-dark"><i class="bi bi-instagram"></i></a>
+                    <a href="https://x.com/Povestnik11" class="text-dark"><i class="bi bi-twitter-x"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">Kde nás najdete</h5>
+                <div id="historical-map" class="shadow-sm rounded" style="height: 270px; width: 100%; filter: sepia(0.5) contrast(1.1);"></div>
+            </div>
+
+<div class="col-lg-4 col-md-6 mb-4">
+    <h5 class="fw-bold mb-3 text-center">Dotazy</h5>
+    <form id="questionForm" method="POST">
+        <input type="email" name="email" class="form-control mb-3" placeholder="Váš e-mail" required>
+        
+        <textarea name="message" class="form-control mb-3" rows="4" placeholder="Váš dotaz" required></textarea>
+        
+        <button type="submit" class="btn w-100 fw-bold shadow-sm">Odeslat</button>
+    </form>
+</div>
+
+        <div class="row mt-4 pt-3">
+            <div class="col-md-6 text-center text-md-start small text-muted">
+                © 2026 Pověstník. Všechna práva vyhrazena.
+            </div>
+            <div class="col-md-6 text-center text-md-end small">
+                <a href="#" class="text-muted text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
+                <a href="#" class="text-muted text-decoration-none" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Nastavení ookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
