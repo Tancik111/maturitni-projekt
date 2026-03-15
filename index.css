@@ -1,8 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
 
+hr {
+    border: none;         
+    height: 50px;          
+    background-image: url('data/cara.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 100%;
+}
+
 body{
   font-family: "Eagle Lake", serif;
-  background-image: url('data/pozadi2.png');
+  background-image: url('data/pozadi.png');
   background-size: cover;
 }
 
@@ -11,142 +20,227 @@ body{
 }
         .navbar .nav-link:hover {
             color: #ccc !important;
-
         }
 
 .navbar-brand{
   margin-left: 1em;
 }
+
 /* HERO Sekce */
 
 .scroll-arrow {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .scroll-arrow span {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50px;
-  height: 50px;
-  margin-left: -12px;
-  border-left: 3px solid #fff; 
-  border-bottom: 3px solid #fff;
-  transform: rotate(-45deg);
-  animation: sdb 2s infinite;
-  box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -12px;
+    border-left: 3px solid #fff; 
+    border-bottom: 3px solid #fff;
+    transform: rotate(-45deg);
+    animation: sdb 2s infinite;
+    box-sizing: border-box;
 }
 
-/* Animace druhého segmentu šipky pro "pulzující" efekt */
 .scroll-arrow span:nth-of-type(1) {
-  top: 0;
+    top: 0;
 }
 .scroll-arrow span:nth-of-type(2) {
-  top: 20px;
-  animation-delay: .15s;
+    top: 20px;
+    animation-delay: .15s;
 }
 
 @keyframes sdb {
-  0% {
-    transform: rotate(-45deg) translate(0, 0);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(-45deg) translate(-20px, 20px);
-    opacity: 0;
-  }
+    0% {
+        transform: rotate(-45deg) translate(0, 0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(-45deg) translate(-20px, 20px);
+        opacity: 0;
+    }
 }
 
-/* Stylování pruhu zůstává stejné jako minule */
+/* POVĚSTI */
+
 .custom-ribbon {
     background-color: #921a1d;
     color: white;
     border-bottom: 12px solid transparent;
-    border-image: url('data/test.webp') 30 round;
-    letter-spacing: 2px;
-   
+    border-image: url('data/') 30 round; /* Tady bude ještě ozdobný okraj */
 }
 
-.povest-card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-.povest-card h4 {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 4em;
-}
-
-
-.custom-control {
-    width: 50px;
-    opacity: 1;
-}
-
-.carousel-control-prev { left: -100px; }
-.carousel-control-next { right: -100px; }
-
-.custom-arrow-icon {
-    font-size: 5rem;
-    color: black;
-}
-
-/* Responzivita pro menší obrazovky - šipky se vrátí dovnitř */
-@media (max-width: 1200px) {
-    .carousel-control-prev { left: 0; }
-    .carousel-control-next { right: 0; }
-    .custom-arrow-icon { color: white; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.rules-card { 
-  border-left: 5px solid #8d6e63; 
-  background: #fff; 
-  height: 100%; }
-      
-        #pdf-export-area {
-            display: none; 
-            width: 700px; 
-            padding: 60px; 
-            background: url('data/pozadi2.png') no-repeat center center;
-            background-size: cover;
-            color: #1a1a1a;
-            font-family: "Eagle Lake", serif;
+.carousel-container {
+            position: relative;
+            max-width: auto;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
         }
+        .povesti-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 20px 0;
+            scrollbar-width: none; 
+        }
+
+        .povesti-track::-webkit-scrollbar { 
+            display: none; 
+        } 
+
+        .povest-item {
+            flex: 0 0 100%; 
+            scroll-snap-align: center;
+            text-align: center;
+        }
+        
+        @media (min-width: 768px) {
+            .povest-item {
+                flex: 0 0 calc(33.333% - 14px); 
+            }
+        }
+        .povest-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .povest-card h4 { 
+            margin-top: 15px; 
+            font-size: 1.1rem; 
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            font-size: 4rem;
+            cursor: pointer;
+            padding: 0 20px;
+            z-index: 10;
+            user-select: none;
+        }
+
+
+
+
+.legend-container{
+    max-width:1300px;
+}
+
+.border-brown{
+    border-color:#7a5c3c !important;
+}
+
+.form-control{
+    background:rgba(255,255,255,0.6);
+    border-color:#bfae8c;
+}
+
+.btn-image{
+    background:none;
+    border:none;
+    padding:0;
+}
+
+.generate-btn{
+    width:230px;
+    cursor:pointer;
+}
+
+.lev{
+    position:absolute;
+    right:20px;
+    width:190px;
+}
+
+.btn-text-loading {
+    transition: opacity 0.3s ease;
+}
+
+.btn-text-original {
+    transition: opacity 0.3s ease;
+}
+      
+
+/* Skrytá oblast pro PDF - musí mít fixní šířku pro správný render */
+#pdf-export-area {
+    display: none; 
+    position: absolute;
+    left: -9999px;
+    width: 700px; /* Šířka odpovídající A4 */
+    min-height: 900px;
+}
+
+.pergamen-container {
+    background: url('data/pozadi.png') no-repeat center center;
+    background-size: 100% 100%;
+    padding: 60px 80px; /* Větší padding, aby text nezasahoval do krajů pergamenu */
+    min-height: 800px;
+    position: relative;
+    box-shadow: none;
+}
+
+.saga-title {
+    text-align: center;
+    color: #4a0404;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#vystupText {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #2c1a05;
+    background: transparent;
+}
+
+.custom-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 50px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+
+
+
+
+
+
+/* NÁŠ TÝM */
+
+.card-pergamen {
+    background-image: url('data/pergamentym.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -156,9 +250,11 @@ body{
 
 #responseMessage{
     display: none;
+    color: green; 
+    font-weight: bold; 
+    margin-top: 10px;
 }
 
-/* Styl pro průhledná pole */
 #questionForm .form-control {
     background-color: transparent !important; 
     border-radius: 2px;                                      
@@ -167,21 +263,25 @@ body{
 }
 
 #questionForm .btn {
-    background-color: #962c2cb9;         
+    background-color: #921a1d;         
     color: #f1e9d2;
     padding: 10px;
     border-radius: 4px;
 }
-
-#questionForm .btn:hover {
-    background-color: #3a7dbd;
-    color: white;
+#historical-map{
+    height: 270px; 
+    width: 100%; 
+    filter: sepia(0.5) contrast(1.1);
 }
 
-/* Odstranění modrého Bootstrap obrysu při kliknutí */
-#questionForm .form-control:focus {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* Jen lehké zesvětlení při psaní */
-    border-color: #5d4037;
-    box-shadow: none;
-    outline: none;
+.socky-icon {
+    width: 50px;     
+    height: 50px;    
+    object-fit: contain; 
+    transition: transform 0.2s ease;
+    display: block;   
+}
+
+a:hover .socky-icon {
+    transform: scale(1.15); 
 }
