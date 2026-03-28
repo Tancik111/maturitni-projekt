@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+
+<!-- MENU -->
+
+    <nav class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><h2>Pověstník</h2></a>
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse fs-5 p-2" id="mainMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Naše poslání</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pověsti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">O nás</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Vlastní pověst</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mapa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sponzoři</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Patička -->
+
+<footer class="container-fluid py-5 mt-auto px-0">
+    <div class="container px-4">
+        <div class="row align-items-stretch"> 
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">Sídlo</h5>
+                <p class="text-muted mb-1">Kutnohorská 40</p>
+                <p class="text-muted mb-1">Kolín 280 02</p>
+                <h5 class="fw-bold mb-3">Kontakty</h5>
+                <p class="text-muted mb-1">Jednatel | Václav Vaněk</p>             
+                <p class="text-muted mb-1">+420 676 767 676</p>
+                <p class="text-muted mb-3">info.povestnik@seznam.cz</p>
+                <div class="d-flex gap-3 fs-4">
+                    <a href="https://www.tiktok.com/@povestnik" class="text-dark"><img src="data/tiktok.png" class="socky-icon" alt=""></a>
+                    <a href="https://www.instagram.com/povestnik" class="text-dark"><img src="data/instagram.png" alt="" class="socky-icon"></a>
+                    <a href="https://x.com/Povestnik11" class="text-dark"><img src="data/X.png" alt="" class="socky-icon"></a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">Kde nás najdete</h5>
+                <div id="historical-map" class="shadow-sm rounded"></div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3 text-center">Dotazy</h5>
+                <form id="questionForm" method="POST">
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Váš e-mail" required>
+                    <textarea name="message" class="form-control mb-3" rows="4" placeholder="Váš dotaz" required></textarea>
+                    <button type="submit" class="btn w-100 fw-bold shadow-sm">Odeslat</button>
+                </form>
+                <div id="responseMessage"> Dotaz byl úspěšně odeslán!</div>
+            </div>
+
+        <div class="row mt-4 pt-3">
+            <div class="col-md-6 text-center text-md-start small text-muted">
+                © 2026 Pověstník. Všechna práva vyhrazena.
+            </div>
+            <div class="col-md-6 text-center text-md-end small">
+                <a href="#" class="text-muted text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
+                <a href="#" class="text-muted text-decoration-none" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Nastavení ookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js.js"></script>
+</div>
+</body>
+</html>
