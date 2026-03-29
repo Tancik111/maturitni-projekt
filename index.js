@@ -239,3 +239,20 @@ document.addEventListener("DOMContentLoaded", function() {
             const itemWidth = track.querySelector('.povest-item').offsetWidth + 20; 
             track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
         }    
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll(".nav-link");
+    const menu = document.getElementById("mainMenu");
+    const bsCollapse = new bootstrap.Collapse(menu, { toggle: false });
+
+    navLinks.forEach(function(link) {
+        link.addEventListener("click", function() {
+            // Zavře menu po kliknutí na jakýkoliv odkaz
+            if (window.innerWidth < 992) {
+                bsCollapse.hide();
+            }
+        });
+    });
+});

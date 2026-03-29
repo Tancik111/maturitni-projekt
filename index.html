@@ -19,9 +19,17 @@
     <nav class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><h2>Pověstník</h2></a>
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<button class="navbar-toggler border-0 p-0 shadow-none collapsed" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#mainMenu" 
+        aria-controls="mainMenu" 
+        aria-expanded="false">
+    <div class="modern-burger">
+        <span></span>
+        <span></span>
+    </div>
+</button>
             <div class="collapse navbar-collapse fs-5 p-2" id="mainMenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
@@ -156,7 +164,7 @@
   </div>
 
   <div class="row g-0">
-    <div class="col-md-6 p-4 border-end border-3 border-brown">
+    <div class="col-md-6 p-4 border-end border-3 border-brown bez-borderu">
       <form id="povestForm">
         <div class="mb-3">
           <label class="form-label fw-bold">Místo děje:</label>
@@ -183,7 +191,7 @@
         <li>Pověst si lze stáhnout ve formátu PDF.</li>
         <li>Text se generuje v délce cca 300-350 slov.</li>
       </ul>
-      <img src="data/pravidla.png" class="img-fluid" style="max-width:300px; height:auto;">
+      <img src="data/pravidla.png" class="img-fluid lev" style="max-width:300px; height:auto;">
     </div>
   </div>
 </div>
@@ -280,17 +288,15 @@
         <div class="mb-3 hvezdy">
           <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
         </div>
-        <p>Absolutní pověsti.</p>
+        <p>Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal. Rádi jsme vás podpořili!</p>
       </div>
       <div>
         <div class="mb-3 hvezdy">
           <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
         </div>
         <p>            
-          Text o tom jak absolutně zatím netuším co zde mám napsat.
-          Text o tom jak absolutně zatím netuším co zde mám napsat.
-          Text o tom jak absolutně zatím netuším co zde mám napsat.
-          Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+„Baví mě ten koncept – žádná cestovka, co vás honí v autobuse, ale interaktivní průvodce v kapse. Zkusil jsem se jich přes web zeptat na detail jedné trasy a odpověď byla blesková a přesná. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. To, že mají sídlo přímo v Kolíně na Kutnohorské, jim dodává na autentičnosti. Podpořit je přes QR kód je otázka deseti vteřin – za mě nejférovější přístup k obsahu, co jsem v poslední době viděl. Jen tak dál!“
+        </p>
       </div>
     </div>
 
@@ -312,7 +318,7 @@
             <a href="#" class="logo-item"><img src="data/sponzori/hora.png" alt="Město 1"></a>
             <a href="#" class="logo-item"><img src="data/sponzori/trebenice.png" alt="Město 2"></a>
             <a href="#" class="logo-item"><img src="data/sponzori/milovice.png" alt="Město 3"></a>
-            <a href="#" class="logo-item"><img src="data/sponzori/praha.png" alt="Sponzor 1"></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/praha.png" alt="Sponzor 1 class="text-logo""></a>
             <a href="#" class="logo-item"><img src="data/sponzori/regiontourist.png" alt="Sponzor 2"></a>
             <a href="#" class="logo-item"><img src="data/sponzori/kudy_z_nudy.png" alt="Sponzor 3"></a>
         </div>
