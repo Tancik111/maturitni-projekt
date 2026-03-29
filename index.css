@@ -107,11 +107,6 @@ body{
             text-align: center;
         }
         
-        @media (min-width: 768px) {
-            .povest-item {
-                flex: 0 0 calc(33.333% - 14px); 
-            }
-        }
         .povest-card img {
             width: 100%;
             height: auto;
@@ -241,7 +236,138 @@ body{
     box-shadow: none !important; 
   }
 
+/* PODPOŘIT */
 
+    .stredoveka-sekce {
+        background-color: transparent; 
+        padding: 60px 20px;
+        font-family: 'Georgia', serif;
+    }
+
+    .kontejner {
+        max-width: 1000px; 
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        gap: 50px; 
+    }
+
+    .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 30px 60px; 
+        width: 100%;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .logo-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+        width: 100%;
+    }
+            .logo-item:hover {
+                    transform: scale(1.08);
+                }
+
+    .logo-item img {
+        /* VELKÁ LOGA */
+        max-width: 250px; 
+        max-height: 140px;
+        width: auto;
+        height: auto;
+        filter: none; 
+        opacity: 1;
+        display: block;
+    }
+
+    .podpora-sekce {
+        margin-top: 20px;
+    }
+
+    .podporit-tlacitko {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+        transition: transform 0.3s ease;
+    }
+
+    .podporit-tlacitko img {
+        width: 380px; 
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 12px 20px rgba(0,0,0,0.35));
+    }
+            .podporit-tlacitko:hover {
+                transform: scale(1.05) translateY(-5px);
+            }
+
+/* Modální okno pro tlačítko podpořit */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-obsah {
+            background-color: #fdf6e3; 
+            margin: 10% auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: #3e2723;
+            border: 2px solid #d4a373;
+        }
+
+        .zavrit { 
+            float: right; 
+            font-size: 30px; 
+            cursor: pointer; 
+            color: #8b1a1a; 
+        }
+
+        .input-group {
+             margin: 25px 0; 
+            }
+        #castkaInput {
+            padding: 10px;
+            width: 120px;
+            font-size: 1.2rem;
+            border: 2px solid #8b1a1a;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .qr-vystup {
+            padding: 15px;
+            margin: 20px 0;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-update {
+            background: #8b1a1a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
 
 
@@ -293,4 +419,61 @@ body{
 
 a:hover .socky-icon {
     transform: scale(1.15); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 900px) {
+    .logo-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .kontejner { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    .podporit-tlacitko img { 
+        width: 250px; 
+    }
+}
+
+
+@media (min-width: 768px) {
+    .povest-item {
+        flex: 0 0 calc(33.333% - 14px); 
+    }
+    .logo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    .podporit-tlacitko img {
+        width: 300px;
+    }
+}
+ 
+@media (max-width: 480px) {
+    .logo-grid {
+        grid-template-columns: 1fr; 
+    }
 }

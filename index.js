@@ -1,11 +1,12 @@
 // AI  -  Logika, která řeší propojení stisknutí tlačítka s php a nasledné otevření modálního okna. Taktéž se stará o převedení pověsti do stažitelného PDF souboru
 
+
 const form = document.getElementById('povestForm');
 const modalElement = document.getElementById('vysledekModal');
 const modal = new bootstrap.Modal(modalElement);
 
 form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Zabrání obnovení stránky
+    e.preventDefault(); 
     
     const submitBtn = form.querySelector('button[type="submit"]');
     const imgInside = document.getElementById('genBtn'); 
@@ -24,9 +25,7 @@ form.addEventListener('submit', async (e) => {
         if (result.error) {
             alert(result.error);
         } else {
-            // Vložíme text do modálu
             document.getElementById('vystupText').innerText = result.text;
-            // Otevřeme modál
             modal.show();
         }
     } catch (err) {
@@ -46,7 +45,6 @@ function stahnoutPDF() {
         return;
     }
 
-    // Vytvoříme prvek, který budeme exportovat
     const element = document.createElement('div');
     
 element.innerHTML = `
@@ -92,7 +90,6 @@ element.innerHTML = `
     </style>
 `;
 
-    // Nastavení exportu
     const opt = {
         margin: 0,
         filename: 'vlastni_povest.pdf',
@@ -106,10 +103,12 @@ element.innerHTML = `
         jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
     };
 
-    // Spustíme export
     html2pdf().set(opt).from(element).save();
 }
-// Mapa v patičce   -   využívá data ze služeb a pomocí filtru se upravuje tak že vypadá jako kdyby byla velmi stará 
+
+
+// Mapa v patičce - kód který upravuje mapu v patičce tak aby vypadala více historicky
+
 
 var apiKey = '30fcd185-49ea-41f4-a088-55562103e2d3'; 
 
@@ -131,7 +130,9 @@ L.circleMarker([50.02702894315356, 15.204167729237522], {
   fillOpacity: 0.8
 }).addTo(map).bindPopup("<b>Sídlo Pověstníku</b>");
 
+
 // Formulář pro kontaktování    -   Slouží k posílání dotazů které se spolu s emailem který uživatel zadá ukladají do databáze
+
 
   document.getElementById('questionForm').addEventListener('submit', function(e) {
     e.preventDefault(); 
@@ -160,7 +161,9 @@ L.circleMarker([50.02702894315356, 15.204167729237522], {
     });
 });
 
+
 // COOKIES - Logika pro fungování cookies lišty a spodních tlačítek
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const cookieBar = document.getElementById('cookie-bar');
@@ -191,3 +194,48 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 }); 
+
+
+// Modální okno pro podporu projektu - generuje qr kódy s částkou zadanou uživatelem
+
+
+    const MOJE_CISLO_UCTU = "4320757043";
+    const MUJ_KOD_BANKY = "0800";       
+    const ZPRAVA = "Podpora projektu";
+
+    document.getElementById('zobrazenyUcet').innerText = MOJE_CISLO_UCTU + "/" + MUJ_KOD_BANKY;
+
+    function otevritModal() {
+        document.getElementById("platebniModal").style.display = "block";
+        generovatQR();
+    }
+
+    function zavritModal() {
+        document.getElementById("platebniModal").style.display = "none";
+    }
+
+    function generovatQR() {
+        const castka = document.getElementById("castkaInput").value;
+        const qrImg = document.getElementById("qrObrazek");
+        const qrText = document.getElementById("nacitaciText");
+
+        if (castka > 0) {
+            const url = `https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=${MOJE_CISLO_UCTU}&bankCode=${MUJ_KOD_BANKY}&amount=${castka}&currency=CZK&message=${encodeURIComponent(ZPRAVA)}`;
+            qrImg.src = url;
+            qrImg.style.display = "block";
+            qrText.style.display = "none";
+        }
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("platebniModal")) zavritModal();
+    }
+
+ 
+//  Funkce pro funkčnost pohybu karet s pověstmi
+    
+        function scrollCarousel(direction) {
+            const track = document.getElementById('track');
+            const itemWidth = track.querySelector('.povest-item').offsetWidth + 20; 
+            track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+        }    
