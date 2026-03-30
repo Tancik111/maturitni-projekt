@@ -45,66 +45,59 @@ function stahnoutPDF() {
         return;
     }
 
+    // Vytvoříme pomocný element pro tisk
     const element = document.createElement('div');
     
-element.innerHTML = `
-    <div style="
-        /* Kontejner, který drží rozměr A4 */
-        width: 210mm; 
-        min-height: 297mm; 
-        margin: 0 auto;
-        padding: 25mm 30mm; 
-        
-        /* Klíčová oprava: Pozadí fixované na celou plochu */
-        background-image: url('data/A4pergamen.png'); 
-        background-size: 100% 100%; 
-        background-attachment: fixed;
-        background-repeat: repeat-y;
-        background-color: #fdf5e6;
-        
-        font-family: 'Eagle Lake', serif; 
-        color: #2c1a05;
-        box-sizing: border-box;
-        position: relative;
-        z-index: 1;
-    ">
-        <h1 style="text-align: center; color: #4a0404; font-size: 28pt; margin-top: 0; margin-bottom: 25px; border-bottom: 2px solid #4a0404; padding-bottom: 10px;">
-            Zápis v tajné kronice
-        </h1>
-        
-        <div style="font-size: 14pt; line-height: 1.7; text-align: justify; white-space: pre-wrap;">
-            ${textZAI}
-        </div>
+    // Automatické zmenšení písma, pokud je text delší než 1100 znaků
+    const fontSize = textZAI.length > 1100 ? "12pt" : "14pt";
 
-        <div style="margin-top: 40px; text-align: right; font-style: italic; font-size: 12pt; color: #5e3a1a; border-top: 1px solid rgba(74, 4, 4, 0.2); padding-top: 10px;">
-            Pověstník - Oživujeme příběhy našich předků
-        </div>
-    </div>
-
-    <style>
-        /* Tento styl zajistí, že se při tisku nebude prvek trhat v půlce řádku */
-        @media print {
-            div { page-break-inside: auto; }
-            h1 { page-break-after: avoid; }
-        }
-    </style>
-`;
+    element.innerHTML = `
+        <div style="
+            width: 595pt; 
+            height: 842pt; 
+            padding: 85pt 95pt; 
+            box-sizing: border-box;
+            background-image: url('data/A4pergamen.png'); 
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            font-family: 'Eagle Lake', serif; 
+            color: #2c1a05;
+            position: relative;
+        ">
+            <h1 style="
+                text-align: center; 
+                color: #4a0404; 
+                font-size: 24pt; 
+                margin: 0 0 25pt 0; 
+                border-bottom: 2px solid #4a0404; 
+                padding-bottom: 10px;
+            ">Zápis v tajné kronice</h1>
+            
+            <div style="
+                font-size: ${fontSize}; 
+                line-height: 1.6; 
+                text-align: justify; 
+                white-space: pre-wrap;
+            ">${textZAI}</div>
+    `;
 
     const opt = {
         margin: 0,
         filename: 'vlastni_povest.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2, 
-            useCORS: true, 
-            letterRendering: true,
-            scrollY: 0
-        },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
         jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
     };
 
-    html2pdf().set(opt).from(element).save();
+    // Spustíme export a smažeme případnou prázdnou druhou stranu
+    html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+        const pages = pdf.internal.getNumberOfPages();
+        if (pages > 1) {
+            pdf.deletePage(pages); // Smaže přebývající bílou stránku
+        }
+    }).save();
 }
+
 
 
 // Mapa v patičce - kód který upravuje mapu v patičce tak aby vypadala více historicky

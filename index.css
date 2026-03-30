@@ -11,7 +11,7 @@ hr {
 
 body{
   font-family: "Eagle Lake", serif;
-  background-image: url('data/pozadi.png');
+  background-image: url('data/pozadi.png'); 
   background-size: cover;
 }
 
@@ -221,7 +221,7 @@ body{
 .pergamen-container {
     background: url('data/pozadi.png') no-repeat center center;
     background-size: 100% 100%;
-    padding: 60px 80px; /* Větší padding, aby text nezasahoval do krajů pergamenu */
+    padding: 60px 80px; 
     min-height: 800px;
     position: relative;
     box-shadow: none;
@@ -264,7 +264,7 @@ body{
   }
 
   .card-pergamen {
-    background-image: url('data/pergamentym.png'); 
+    background-image: url('data/pergamen2.png'); 
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
