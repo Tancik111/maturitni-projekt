@@ -3,7 +3,7 @@
 hr {
     border: none;         
     height: 50px;          
-    background-image: url('data/cara.png');
+    background-image: url('data/cara.webp');
     background-repeat: no-repeat;
     background-position: center;
     opacity: 100%;
@@ -11,7 +11,7 @@ hr {
 
 body{
   font-family: "Eagle Lake", serif;
-  background-image: url('data/pozadi.png'); 
+    background-image: url('data/pozadi.webp'); 
   background-size: cover;
 }
 
@@ -219,7 +219,7 @@ body{
 }
 
 .pergamen-container {
-    background: url('data/pozadi.png') no-repeat center center;
+    background: url('data/pozadi.webp') no-repeat center center;
     background-size: 100% 100%;
     padding: 60px 80px; 
     min-height: 800px;
@@ -264,7 +264,7 @@ body{
   }
 
   .card-pergamen {
-    background-image: url('data/pergamen2.png'); 
+    background-image: url('data/pergamen2.webp'); 
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -466,6 +466,11 @@ a:hover .socky-icon {
 
 
 
+@media (max-width: 1199px) {
+    .lev{
+        display: none;
+    }
+}
 
 
 @media (max-width: 991px) {
@@ -494,9 +499,7 @@ a:hover .socky-icon {
 }
 
 @media (max-width: 900px) {
-    .lev{
-        display: none;
-    }
+  
     .logo-grid { 
         grid-template-columns: repeat(2, 1fr); 
     }

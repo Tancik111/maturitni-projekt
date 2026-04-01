@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+  <meta name="description" content="Objevte zapomenuté pověsti českého kraje v moderním hávu. Prozkoumejte interaktivní mapu legend nebo si nechte od AI vyprávět svůj vlastní příběh z tajné kroniky.">
+</head>
     <title>Pověstník</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -14,9 +17,7 @@
 </head>
 <body>
 
-<!-- MENU -->
-
-    <nav class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+<nav class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><h2>Pověstník</h2></a>
                 <button class="navbar-toggler border-0 p-0 shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false"><div class="modern-burger">
@@ -49,8 +50,6 @@
         </div>
     </nav>
 
-<!-- HERO Sekce -->
-
 <section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white mb-0">
   <video autoplay muted loop playsinline class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
     <source src="data/video.mp4" type="video/mp4">
@@ -74,11 +73,7 @@
   </div>
 </section>
 
-<!-- O Nás o Firmě -->
-
-<!-- Sekce s Pověstmi  -->
-
-  <div class="custom-ribbon text-center py-5 ">
+<div class="custom-ribbon text-center py-5 ">
     <span class="fs-3 fw-light tracking-widest text-uppercase">Oživujeme příběhy našich předků</span>
   </div>
 
@@ -90,55 +85,55 @@
         <div class="povesti-track" id="track">
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/bivoj.png" alt="O Bivojovi">
+                    <img src="data/povesti/bivoj.webp" alt="O Bivojovi">
                     <h3 class="pt-3">O Bivojovi</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/blanicti.png" alt="Blaničtí rytíři">
+                    <img src="data/povesti/blanicti.webp" alt="Blaničtí rytíři">
                      <h3 class="pt-3">Blaničtí rytíři</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/cech.png" alt="O Čechovi">
+                    <img src="data/povesti/cech.webp" alt="O Čechovi">
                      <h3 class="pt-3">O Čechovi</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/haviri.png" alt="Kutnohorští havíři">
+                    <img src="data/povesti/haviri.webp" alt="Kutnohorští havíři">
                     <h3 class="pt-3">Kutnohorští havíři</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/krok.png" alt="O Krokovi">
+                    <img src="data/povesti/krok.webp" alt="O Krokovi">
                     <h3 class="pt-3">O Krokovi a dcerách</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/libuse.png" alt="O Libuši">
+                    <img src="data/povesti/libuse.webp" alt="O Libuši">
                     <h3 class="pt-3">O Libuši</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/semik.png" alt="O Semíkovi">
+                    <img src="data/povesti/semik.webp" alt="O Semíkovi">
                     <h3 class="pt-3">O Horymírovi</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/zizka.png" alt="O Žižkovi">
+                    <img src="data/povesti/zizka.webp" alt="O Žižkovi">
                     <h3 class="pt-3">O Žižkovi</h3>
                 </div>
             </div>
             <div class="povest-item">
                 <div class="povest-card">
-                    <img src="data/povesti/bruncvik.png" alt="O Bruncvíkovi">
+                    <img src="data/povesti/bruncvik.webp" alt="O Bruncvíkovi">
                     <h3 class="pt-3">O Bruncvíkovi</h3>
                 </div>
             </div>
@@ -148,9 +143,6 @@
     </div>
 
 <hr>
-
-<!-- AI -->
-
 
 <div class="container my-4 legend-container border border-3 border-brown">
   <div class="text-center fs-3 fw-bold py-2 border-bottom border-3 border-brown">
@@ -173,7 +165,7 @@
           <input type="text" name="zapletka" class="form-control" placeholder="O hledání železné roury..." required>
         </div>
         <button type="submit" class="btn-image mt-3" style="border: none; background: none; padding: 0;">
-          <img src="data/vytvorit_povest.png" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
+          <img src="data/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
         </button>
       </form>
     </div>
@@ -185,7 +177,7 @@
         <li>Pověst si lze stáhnout ve formátu PDF.</li>
         <li>Text se generuje v délce cca 300-350 slov.</li>
       </ul>
-      <img src="data/pravidla.png" class="img-fluid lev" style="max-width:300px; height:auto;">
+      <img src="data/pravidla.webp" class="img-fluid lev" alt="lev" style="max-width:300px; height:auto;">
     </div>
   </div>
 </div>
@@ -194,11 +186,11 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="background: transparent; border: none;">
             <div class="pergamen-container">
-                <img src="data/zrušit.png" class="custom-close" data-bs-dismiss="modal" alt="Zavřít">
+                <img src="data/zrušit.webp" class="custom-close" data-bs-dismiss="modal" alt="Zavřít">
                 <h5 class="saga-title">Zápis v tajné kronice</h5>
                 <div class="modal-body" id="vystupText"></div>
                 <div class="text-center mt-3">
-                    <img src="data/export.png" onclick="stahnoutPDF()" style="cursor: pointer; max-width: 250px;" alt="Převést do PDF">
+                    <img src="data/export.webp" onclick="stahnoutPDF()" style="cursor: pointer; max-width: 250px;" alt="Převést do PDF">
                 </div>
             </div>
         </div>
@@ -213,8 +205,6 @@
 
 <hr>
 
-
-<!-- Náš Tým -->
 
 <div class="container-fluid p-0">
   <img src="https://placehold.co/600x400" class="img-fluid w-100" style="height: 500px; object-fit: cover;" alt="Hlavní foto">
@@ -264,8 +254,6 @@
 
 <hr>
 
-<!-- Hodnocení a Mapa Pověstí  -->
-
 <section class="container py-5">
   <div class="row g-5 mb-4">
     <div class="col-lg-4 text-center">
@@ -296,7 +284,7 @@
 
     <div class="col-lg-8">
       <div class="overflow-hidden">
-        <img src="data/mapa.png" class="img-fluid w-100" alt="Mapa">
+        <img src="data/mapa.webp" class="img-fluid w-100" alt="Mapa">
       </div>
     </div>
   </div>
@@ -304,27 +292,23 @@
 
 <hr>
 
-<!-- Sponzoři a Tlačítko podpořit -->
-
 <section class="stredoveka-sekce pt-5 pb-5">
     <div class="kontejner">
         <div class="logo-grid">
-            <a href="#" class="logo-item"><img src="data/sponzori/hora.png" alt="Město 1"></a>
-            <a href="#" class="logo-item"><img src="data/sponzori/trebenice.png" alt="Město 2"></a>
-            <a href="#" class="logo-item"><img src="data/sponzori/milovice.png" alt="Město 3"></a>
-            <a href="#" class="logo-item"><img src="data/sponzori/praha.png" alt="Sponzor 1 class="text-logo""></a>
-            <a href="#" class="logo-item"><img src="data/sponzori/regiontourist.png" alt="Sponzor 2"></a>
-            <a href="#" class="logo-item"><img src="data/sponzori/kudy_z_nudy.png" alt="Sponzor 3"></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/hora.webp" alt="Město 1"></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/trebenice.webp" alt="Město 2"></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/milovice.webp" alt="Město 3"></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/praha.webp" alt="Sponzor 1 class="text-logo""></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/regiontourist.webp" alt="Sponzor 2"></a>
+            <a href="#" class="logo-item"><img src="data/sponzori/kudy_z_nudy.webp" alt="Sponzor 3"></a>
         </div>
         <div class="podpora-sekce">
             <button class="podporit-tlacitko" onclick="otevritModal()">
-                <img src="data/sponzori/donate.png" alt="Podpořit nás">
+                <img src="data/sponzori/donate.webp" alt="Podpořit nás">
             </button>
         </div>
     </div>
 </section>
-
-<hr>
 
 <div id="platebniModal" class="modal">
     <div class="modal-obsah">
@@ -345,7 +329,6 @@
     </div>
 </div>
 
-<!-- Patička -->
 
 <footer class="container-fluid py-5 mt-auto px-0">
     <div class="container px-4">
@@ -359,9 +342,9 @@
                 <p class="text-muted mb-1">+420 676 767 676</p>
                 <p class="text-muted mb-3">info.povestnik@seznam.cz</p>
                 <div class="d-flex gap-3 fs-4">
-                    <a href="https://www.tiktok.com/@povestnik" class="text-dark"><img src="data/tiktok.png" class="socky-icon" alt=""></a>
-                    <a href="https://www.instagram.com/povestnik" class="text-dark"><img src="data/instagram.png" alt="" class="socky-icon"></a>
-                    <a href="https://x.com/Povestnik11" class="text-dark"><img src="data/X.png" alt="" class="socky-icon"></a>
+                    <a href="https://www.tiktok.com/@povestnik" class="text-dark"><img src="data/tiktok.webp" class="socky-icon" alt=""></a>
+                    <a href="https://www.instagram.com/povestnik" class="text-dark"><img src="data/instagram.webp" alt="" class="socky-icon"></a>
+                    <a href="https://x.com/Povestnik11" class="text-dark"><img src="data/X.webp" alt="" class="socky-icon"></a>
                 </div>
             </div>
 
