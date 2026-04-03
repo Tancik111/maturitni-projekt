@@ -124,10 +124,8 @@ body{
 /* POVĚSTI */
 
 .custom-ribbon {
-    background-color: #921a1d;
+    background-color: #790409;
     color: white;
-    border-bottom: 12px solid transparent;
-    border-image: url('data/') 30 round; /* Tady bude ještě ozdobný okraj */
 }
 
 .carousel-container {
@@ -249,12 +247,6 @@ body{
     cursor: pointer;
     z-index: 10;
 }
-
-
-
-
-
-
 
 
 /* NÁŠ TÝM */
@@ -408,18 +400,6 @@ body{
             font-weight: bold;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* FOOTER */
 
 #responseMessage{
@@ -461,6 +441,66 @@ a:hover .socky-icon {
 }
 
 
+/* Modální okna GDPR */
+
+
+.modal-content.bg-transparent {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.cookie-simple-bar {
+    position: fixed;
+    bottom: -150px;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: #740609 !important;
+}
+
+.cookie-simple-bar.show-cookie-bar {
+    bottom: 0;
+}
+
+.cookie-overlay-buttons {
+    position: absolute;
+    bottom: 8%; 
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+.gdpr-overlay-buttons {
+    position: absolute;
+    bottom: 15%; 
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    outline: none;
+}
+
+.img-btn img {
+    width: 230px; 
+    height: auto;
+    display: block;
+}
+
+.img-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 
 
 
@@ -471,7 +511,11 @@ a:hover .socky-icon {
         display: none;
     }
 }
-
+@media (min-width: 992px) {
+    .modal-gdpr {
+        max-width: 1400px; 
+    }
+}
 
 @media (max-width: 991px) {
     

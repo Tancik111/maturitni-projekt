@@ -102,11 +102,8 @@ function stahnoutPDF() {
 
 // Mapa v patičce - kód který upravuje mapu v patičce tak aby vypadala více historicky
 
-
 var apiKey = '30fcd185-49ea-41f4-a088-55562103e2d3'; 
-
 var map = L.map('historical-map').setView([50.02702894315356, 15.204167729237522], 12);
-
 L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg?api_key=' + apiKey, {
   maxZoom: 16,
   attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://stamen.com/">Stamen Design</a>'
@@ -123,11 +120,9 @@ L.circleMarker([50.02702894315356, 15.204167729237522], {
   fillOpacity: 0.8
 }).addTo(map).bindPopup("<b>Sídlo Pověstníku</b>");
 
-
 // Formulář pro kontaktování    -   Slouží k posílání dotazů které se spolu s emailem který uživatel zadá ukladají do databáze
 
-
-  document.getElementById('questionForm').addEventListener('submit', function(e) {
+document.getElementById('questionForm').addEventListener('submit', function(e) {
     e.preventDefault(); 
 
     const formData = new FormData(this);
@@ -154,64 +149,64 @@ L.circleMarker([50.02702894315356, 15.204167729237522], {
     });
 });
 
-
 // COOKIES - Logika pro fungování cookies lišty a spodních tlačítek
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const cookieBar = document.getElementById('cookie-bar');
     const acceptBtn = document.getElementById('accept-cookies');
     const revokeBtn = document.getElementById('btn-revoke-everything');
-    const statusMsg = document.getElementById('cookie-status-msg');
     const storageKey = 'momentum_cookies_accepted';
 
-    if (cookieBar && !localStorage.getItem(storageKey)) {
-        cookieBar.classList.add('show-cookie-bar');
+    if (!localStorage.getItem(storageKey)) {
+        setTimeout(() => cookieBar.classList.add('show-cookie-bar'), 1000);
     }
-
     if (acceptBtn) {
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem(storageKey, 'true');
             cookieBar.classList.remove('show-cookie-bar');
         });
     }
-
     if (revokeBtn) {
         revokeBtn.addEventListener('click', function() {
             localStorage.removeItem(storageKey);
-            if (statusMsg) statusMsg.classList.remove('d-none');
-            revokeBtn.disabled = true; 
+            
+            const modalEl = document.getElementById('cookieSettingsModal');
+            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modal.hide();
             setTimeout(() => {
-                location.reload();
-            }, 1000);
+                cookieBar.classList.add('show-cookie-bar');
+            }, 600);
         });
     }
-}); 
-
+    const privacyToCookieBtn = document.querySelector('[data-bs-target="#cookieSettingsModal"]');
+    if (privacyToCookieBtn) {
+        privacyToCookieBtn.addEventListener('click', function() {
+            const privacyModalEl = document.getElementById('privacyModal');
+            const privacyModal = bootstrap.Modal.getInstance(privacyModalEl);
+            if (privacyModal) {
+                privacyModal.hide(); 
+            }
+        });
+    }
+});
 
 // Modální okno pro podporu projektu - generuje qr kódy s částkou zadanou uživatelem
-
 
     const MOJE_CISLO_UCTU = "4320757043";
     const MUJ_KOD_BANKY = "0800";       
     const ZPRAVA = "Podpora projektu";
-
     document.getElementById('zobrazenyUcet').innerText = MOJE_CISLO_UCTU + "/" + MUJ_KOD_BANKY;
-
     function otevritModal() {
         document.getElementById("platebniModal").style.display = "block";
         generovatQR();
     }
-
     function zavritModal() {
         document.getElementById("platebniModal").style.display = "none";
     }
-
     function generovatQR() {
         const castka = document.getElementById("castkaInput").value;
         const qrImg = document.getElementById("qrObrazek");
         const qrText = document.getElementById("nacitaciText");
-
         if (castka > 0) {
             const url = `https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=${MOJE_CISLO_UCTU}&bankCode=${MUJ_KOD_BANKY}&amount=${castka}&currency=CZK&message=${encodeURIComponent(ZPRAVA)}`;
             qrImg.src = url;
@@ -219,7 +214,6 @@ document.addEventListener("DOMContentLoaded", function() {
             qrText.style.display = "none";
         }
     }
-
     window.onclick = function(event) {
         if (event.target == document.getElementById("platebniModal")) zavritModal();
     }
@@ -227,22 +221,17 @@ document.addEventListener("DOMContentLoaded", function() {
  
 //  Funkce pro funkčnost pohybu karet s pověstmi
     
-        function scrollCarousel(direction) {
-            const track = document.getElementById('track');
-            const itemWidth = track.querySelector('.povest-item').offsetWidth + 20; 
-            track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+    function scrollCarousel(direction) {
+        const track = document.getElementById('track');
+        const itemWidth = track.querySelector('.povest-item').offsetWidth + 20; 
+        track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
         }    
-
-
-
-        document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll(".nav-link");
     const menu = document.getElementById("mainMenu");
     const bsCollapse = new bootstrap.Collapse(menu, { toggle: false });
-
     navLinks.forEach(function(link) {
         link.addEventListener("click", function() {
-            // Zavře menu po kliknutí na jakýkoliv odkaz
             if (window.innerWidth < 992) {
                 bsCollapse.hide();
             }
