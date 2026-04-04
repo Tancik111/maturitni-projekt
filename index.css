@@ -175,7 +175,7 @@ body{
             user-select: none;
         }
 
-
+/* AI */
 
 
 .legend-container{
@@ -194,7 +194,11 @@ body{
 .btn-image{
     background:none;
     border:none;
+    transition: transform 0.2s ease-in-out;
     padding:0;
+}
+.btn-image:hover{
+    transform: scale(1.08);
 }
 
 .generate-btn{
@@ -251,26 +255,44 @@ body{
 
 /* NÁŠ TÝM */
 
-.bg-transparent {
-    background-color: transparent !important;
-  }
+.hero-section img {
+            width: 100%;
+            object-fit: cover;
+            height: 300px; 
+        }
 
-  .card-pergamen {
-    background-image: url('data/pergamen2.webp'); 
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #2c2115; 
-    min-height: 250px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+        .cards-overlap-container {
+            position: relative;
+            z-index: 10;
+            margin-top: 20px; 
+        }
 
-  .card.shadow-lg {
-    filter: drop-shadow(0 1rem 3rem rgba(0,0,0,.175));
-    box-shadow: none !important; 
-  }
+        .bg-transparent {
+            background-color: transparent !important;
+        }
+
+        .card-pergamen {
+            background-image: url('data/pergamen2.webp'); 
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #2c2115; 
+            min-height: 250px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: none !important;
+        }
+
+        .card.shadow-custom {
+            filter: drop-shadow(0 0.5rem 1rem rgba(0,0,0,0.15));
+            box-shadow: none !important; 
+        }
+
+        .hvezdy {
+            color: #2c2115;
+            font-size: 0.9rem;
+        }
 
 /* PODPOŘIT */
 
@@ -443,12 +465,6 @@ a:hover .socky-icon {
 
 /* Modální okna GDPR */
 
-
-.modal-content.bg-transparent {
-    box-shadow: none !important;
-    border: none !important;
-}
-
 .cookie-simple-bar {
     position: fixed;
     bottom: -150px;
@@ -459,47 +475,135 @@ a:hover .socky-icon {
 }
 
 .cookie-simple-bar.show-cookie-bar {
-    bottom: 0;
+    bottom: 0 !important;
+    transition: bottom 0.5s ease-in-out;
 }
 
-.cookie-overlay-buttons {
-    position: absolute;
-    bottom: 8%; 
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-}
-.gdpr-overlay-buttons {
-    position: absolute;
-    bottom: 15%; 
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
+.custom-parchment-box {
+    background-color: #f4e4bc !important; 
+    border: 3px solid #634a31 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6) !important;
 }
 
-.img-btn {
-    background: none;
-    border: none;
-    padding: 0;
+.modal-title-medieval {
+    color: #4a0404; 
+    font-weight: bold;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.modal-text-content {
+    color: #2c1a05; 
+    line-height: 1.6; 
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+.modal-text-content .lead {
+    font-size: 1.15rem;
+    font-style: italic;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.medieval-section {
+    margin-bottom: 25px;
+}
+
+.medieval-section h5 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4a0404;
+    margin-bottom: 10px;
+}
+
+.medieval-section ul {
+    list-style-type: none;
+    padding-left: 15px;
+}
+
+.medieval-section ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.medieval-section ul li::before {
+    content: "•"; 
+    position: absolute;
+    left: 0;
+    color: #8b7355;
+    font-weight: bold;
+}
+
+.medieval-section strong {
+    color: #4a0404;
+    font-variant: small-caps;
+}
+
+.modal-footer-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; 
+    padding: 20px 0;
+    width: 100%;
+}
+
+.img-btn-link {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
     cursor: pointer;
+    width: 35%; 
+    max-width: 200px;
+    min-width: 120px;
     transition: transform 0.2s ease-in-out;
-    outline: none;
 }
 
-.img-btn img {
-    width: 230px; 
+.img-btn-link img {
+    width: 100%;
     height: auto;
     display: block;
+    box-shadow: none !important; 
 }
 
-.img-btn:focus {
-    outline: none;
-    box-shadow: none;
+.img-btn-link:hover {
+    transform: scale(1.08);
 }
+#cookieSettingsModal .img-btn-link {
+    width: 70%;         
+    max-width: 250px;   
+}
+
+/* --- RESPONZIVITA --- */
+@media (max-width: 576px) {
+    .modal-title-medieval {
+        font-size: 1.4rem;
+    }
+    .modal-text-content {
+        font-size: 0.95rem;
+    }
+    .modal-footer-btns {
+        gap: 15px; /* Trochu menší mezera na mobilu */
+    }
+    .img-btn-link {
+        width: 45%; /* Tlačítka trochu širší na mobilu pro lepší klikatelnost */
+    }
+}
+
+/* Specifická úprava pro velmi malé mobily (volitelné) */
+@media (max-width: 400px) {
+    .modal-footer-btns {
+        gap: 10px;
+    }
+}
+
+
+
+
 
 
 
@@ -509,11 +613,6 @@ a:hover .socky-icon {
 @media (max-width: 1199px) {
     .lev{
         display: none;
-    }
-}
-@media (min-width: 992px) {
-    .modal-gdpr {
-        max-width: 1400px; 
     }
 }
 
@@ -571,6 +670,12 @@ a:hover .socky-icon {
     }
     .podporit-tlacitko img {
         width: 300px;
+    }
+    .hero-section img {
+        height: 550px; 
+    }
+    .cards-overlap-container {
+        margin-top: -100px; 
     }
 }
  

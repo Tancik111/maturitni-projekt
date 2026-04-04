@@ -238,86 +238,127 @@
 <hr>
 
 
-<div class="container-fluid p-0">
-  <img src="data/muzi.webp" class="img-fluid w-100" style="height: 550px; object-fit: cover;" alt="Hlavní foto">
+<div class="container-fluid p-0 hero-section">
+        <img src="data/muzi.webp" class="img-fluid" alt="Hlavní foto">
+    </div>
+
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content custom-parchment-box">
+            <div class="modal-body p-4 p-md-5">
+                <h2 class="modal-title-medieval text-center mb-4">Ochrana soukromí a osobních údajů (GDPR)</h2>
+                
+                <div class="modal-text-content">
+                    <p class="lead">Vítejte u projektu Pověstník. Vaše soukromí chráníme stejně pečlivě jako naše pověsti. Data zpracováváme jen v nezbytném rozsahu.</p>
+                    
+                    <div class="medieval-section">
+                        <h5>1. Správce údajů</h5>
+                        <ul>
+                            <li><strong>Projekt:</strong> Pověstník (Kutnohorská 40, 280 02 Kolín)</li>
+                            <li><strong>Web:</strong> karoch.soskolin.eu/maturita/index.html</li>
+                            <li><strong>Kontakt:</strong> info.povestnik@seznam.cz</li>
+                        </ul>
+                    </div>
+
+                    <div class="medieval-section">
+                        <h5>2. Jaké údaje sbíráme a proč?</h5>
+                        <ul>
+                            <li><strong>Komunikace:</strong> Jméno a e-mail z formulářů ukládáme pouze pro vyřízení dotazu (max. 1 rok).</li>
+                            <li><strong>Bezpečnost:</strong> Pro ochranu webu a AI evidujeme IP adresu (max. 90 dnů).</li>
+                            <li><strong>Podpora:</strong> U dobrovolných plateb evidujeme jméno a účet pro účetnictví (10 let).</li>
+                        </ul>
+                    </div>
+
+                    <div class="medieval-section">
+                        <h5>3. Vaše práva a odpovědnost</h5>
+                        <p>Máte právo na přístup k údajům, opravu či výmaz. Trasy využíváte na vlastní odpovědnost. Neodpovídáme za stav cest ani zásahy nadpřirozených bytostí.</p>
+                    </div>
+                </div>
+
+                <div class="modal-footer-btns mt-4">
+                    <button type="button" class="img-btn-link" data-bs-dismiss="modal">
+                        <img src="data/souhlas.webp" alt="Souhlasím">
+                    </button>
+                    <button type="button" class="img-btn-link">
+                        <img src="data/n_souhlas.webp" alt="Nesouhlasím">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container" style="margin-top: -100px;"> 
-  <div class="row g-4 justify-content-center">
-    
-    <div class="col-md-4">
-      <div class="card shadow-lg h-100 border-0 bg-transparent"> 
-        <div class="card-body p-4 card-pergamen">
-          <h5 class="card-title fw-bold text-center">Václav Vaněk</h5>
-          <p class="card-text text-muted text-center">
-            Text o tom jak absolutně zatím netuším co zde mám napsat.
-            Text o tom jak absolutně zatím netuším co zde mám napsat.
-          </p>
-        </div>
-      </div>
-    </div>
+<div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-parchment-box">
+            <div class="modal-body p-4 p-md-5">
+                <h2 class="modal-title-medieval text-center mb-4">Nastavení soukromí</h2>
+                
+                <div class="modal-text-content">
+                    <p>Tyto cookies jsou pro chod webu kritické. Bez nich by stránka nemusela správně zobrazovat mapy nebo interaktivní prvky.</p>
+                    
+                    <div class="medieval-section">
+                        <h5>1. Účel</h5>
+                        <ul>
+                            <li>zajišťují stabilitu serveru</li>
+                            <li>chrání naše AI funkce před přetížením</li>
+                        </ul>
+                    </div>
 
-    <div class="col-md-4">
-      <div class="card shadow-lg h-100 border-0 bg-transparent"> 
-        <div class="card-body p-4 card-pergamen">
-          <h5 class="card-title fw-bold text-center">Zdeněk Peterka</h5>
-          <p class="card-text text-muted text-center">
-            Text o tom jak absolutně zatím netuším co zde mám napsat.
-            Text o tom jak absolutně zatím netuším co zde mám napsat.
-          </p>
-        </div>
-      </div>
-    </div>
+                    <div class="medieval-section">
+                        <h5>2. Právní základ</h5>
+                        <ul>
+                            <li>oprávněný zájem správce</li>
+                            <li>souhlas není vyžadován, ale informujeme vás</li>
+                        </ul>
+                    </div>
+                </div>
 
-    <div class="col-md-4">
-      <div class="card shadow-lg h-100 border-0 bg-transparent"> 
-        <div class="card-body p-4 card-pergamen">
-          <h5 class="card-title fw-bold text-center">Štěpán Karoch</h5>
-          <p class="card-text text-muted text-center">
-          Sexy krásnej starostlivej chlapeček.
-          </p>
+                <div class="modal-footer-btns mt-4">
+                    <button type="button" class="img-btn-link" data-bs-dismiss="modal">
+                        <img src="data/souhlasit.webp" alt="Ponechat">
+                    </button>
+                    <button type="button" class="img-btn-link" id="btn-revoke-everything">
+                        <img src="data/nesouhlas.webp" alt="Odebrat">
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-  </div>
 </div>
 
 <hr>
 
 <section class="container py-5">
-  <div class="row g-5 mb-4">
-    <div class="col-lg-4 text-center">
-      <h2 class="mb-4">HODNOCENÍ OD VÁS</h2>
-    </div>
-    <div class="col-lg-8">
-      <h2 class="mb-0 text-center">MAPA POVĚSTÍ</h2>
-    </div>
-  </div>
-
   <div class="row g-5">
+    
     <div class="col-lg-4 d-flex flex-column text-center">
+      <h2 class="mb-4">HODNOCENÍ OD VÁS</h2>
+      
       <div class="mb-5">
         <div class="mb-3 hvezdy">
           <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
         </div>
         <p>Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal. Rádi jsme vás podpořili!</p>
       </div>
+
       <div>
         <div class="mb-3 hvezdy">
           <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
         </div>
-        <p>            
-„Baví mě ten koncept – žádná cestovka, co vás honí v autobuse, ale interaktivní průvodce v kapse. Zkusil jsem se jich přes web zeptat na detail jedné trasy a odpověď byla blesková a přesná. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. To, že mají sídlo přímo v Kolíně na Kutnohorské, jim dodává na autentičnosti. Podpořit je přes QR kód je otázka deseti vteřin – za mě nejférovější přístup k obsahu, co jsem v poslední době viděl. Jen tak dál!“
+        <p>
+          „Baví mě ten koncept – žádná cestovka, co vás honí v autobuse, ale interaktivní průvodce v kapse. Zkusil jsem se jich přes web zeptat na detail jedné trasy a odpověď byla blesková a přesná. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. To, že mají sídlo přímo v Kolíně na Kutnohorské, jim dodává na autentičnosti. Podpořit je přes QR kód je otázka deseti vteřin – za mě nejférovější přístup k obsahu, co jsem v poslední době viděl. Jen tak dál!“
         </p>
       </div>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-8 text-center">
+      <h2 class="mb-4">MAPA POVĚSTÍ</h2>
       <div class="overflow-hidden">
         <img src="data/mapa.webp" class="img-fluid w-100" alt="Mapa">
       </div>
     </div>
+
   </div>
 </section>
 

@@ -157,39 +157,61 @@ document.addEventListener("DOMContentLoaded", function() {
     const revokeBtn = document.getElementById('btn-revoke-everything');
     const storageKey = 'momentum_cookies_accepted';
 
+    // 1. Zobrazení lišty po načtení
     if (!localStorage.getItem(storageKey)) {
-        setTimeout(() => cookieBar.classList.add('show-cookie-bar'), 1000);
+        setTimeout(() => {
+            cookieBar.classList.add('show-cookie-bar');
+        }, 1000);
     }
+
+    // 2. Tlačítko SOUHLASÍM
     if (acceptBtn) {
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem(storageKey, 'true');
             cookieBar.classList.remove('show-cookie-bar');
         });
     }
+
+    // 3. Tlačítko ODEBRAT (Opravená logika)
     if (revokeBtn) {
         revokeBtn.addEventListener('click', function() {
+            // Smažeme záznam
             localStorage.removeItem(storageKey);
             
+            // Najdeme otevřený modál a zavřeme ho přes Bootstrap API
             const modalEl = document.getElementById('cookieSettingsModal');
-            const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-            modal.hide();
-            setTimeout(() => {
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            
+            if (modal) {
+                modal.hide();
+
+                // Počkáme, až modál úplně zmizí (včetně backdropu), pak ukážeme lištu
+                modalEl.addEventListener('hidden.bs.modal', function () {
+                    setTimeout(() => {
+                        cookieBar.classList.add('show-cookie-bar');
+                    }, 100);
+                }, { once: true }); // Spustí se jen jednou
+            } else {
+                // Pokud modál náhodou nebyl detekován, prostě lištu ukaž
                 cookieBar.classList.add('show-cookie-bar');
-            }, 600);
-        });
-    }
-    const privacyToCookieBtn = document.querySelector('[data-bs-target="#cookieSettingsModal"]');
-    if (privacyToCookieBtn) {
-        privacyToCookieBtn.addEventListener('click', function() {
-            const privacyModalEl = document.getElementById('privacyModal');
-            const privacyModal = bootstrap.Modal.getInstance(privacyModalEl);
-            if (privacyModal) {
-                privacyModal.hide(); 
             }
         });
     }
-});
 
+    // 4. Tlačítko NESOUHLASÍM v GDPR (přesměrování na Google)
+    const gdprModal = document.getElementById('privacyModal');
+    if (gdprModal) {
+        // Najdeme druhé tlačítko (Nesouhlasím) uvnitř GDPR modálu
+        const gdprDeclineBtn = gdprModal.querySelector('.modal-footer-btns button:last-child');
+        
+        if (gdprDeclineBtn) {
+            gdprDeclineBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = "https://www.google.com";
+            });
+        }
+    }
+});
 // Modální okno pro podporu projektu - generuje qr kódy s částkou zadanou uživatelem
 
     const MOJE_CISLO_UCTU = "4320757043";
