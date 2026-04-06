@@ -255,44 +255,67 @@ body{
 
 /* NÁŠ TÝM */
 
-.hero-section img {
-            width: 100%;
-            object-fit: cover;
-            height: 300px; 
-        }
+/* --- Horní obal pro obrázek --- */
+.team-top-wrapper {
+  width: 100%;
+  overflow: hidden;
 
-        .cards-overlap-container {
-            position: relative;
-            z-index: 10;
-            margin-top: 20px; 
-        }
+}
 
-        .bg-transparent {
-            background-color: transparent !important;
-        }
+.team-main-img {
+  width: 100%;
+  display: block;
+  object-fit: cover; /* Zajistí, že se obrázek nedeformuje */
+  object-position: center 20%; /* Priorita na horní část (obličeje) */
+  
+  /* Fixní výška pro stabilitu na PC */
+  height: 500px; 
+}
 
-        .card-pergamen {
-            background-image: url('data/pergamen2.webp'); 
-            background-size: 100% 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #2c2115; 
-            min-height: 250px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border: none !important;
-        }
+/* --- Kontejner s kartami --- */
+.team-cards-container {
+  position: relative;
+  z-index: 10;
+  /* Na PC karty překrývají spodní část obrázku */
+  margin-top: -130px; 
+  padding-bottom: 60px;
+}
 
-        .card.shadow-custom {
-            filter: drop-shadow(0 0.5rem 1rem rgba(0,0,0,0.15));
-            box-shadow: none !important; 
-        }
+/* --- Responzivita pro Tablety (Šířka pod 992px) --- */
+@media (max-width: 991px) {
+  .team-main-img {
+    height: 400px; /* Snížíme výšku obrázku, aby na tabletu nebyl obří */
+  }
+  .team-cards-container {
+    margin-top: -100px; /* Menší překryv na tabletu */
+  }
+}
 
-        .hvezdy {
-            color: #2c2115;
-            font-size: 0.9rem;
-        }
+/* --- Responzivita pro Mobily (Šířka pod 768px) --- */
+@media (max-width: 767px) {
+  .team-main-img {
+    height: 320px; /* Kompaktní výška pro telefony */
+  }
+  .team-cards-container {
+    margin-top: 15px; /* Na mobilu se karty odsunou úplně pod obrázek */
+  }
+}
+
+/* --- Vzhled karet (Pergamen) --- */
+.card-pergamen {
+  background-image: url('data/pergamen2.webp'); 
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
 
 /* PODPOŘIT */
 
@@ -577,6 +600,15 @@ a:hover .socky-icon {
     width: 70%;         
     max-width: 250px;   
 }
+/* #privacyModal .custom-parchment-box {
+    background-image: url('data/pozadi-gdpr.webp') !important;
+    background-size: cover;
+}
+
+#cookieSettingsModal .custom-parchment-box {
+    background-image: url('data/pozadi-cookies.webp') !important;
+    background-size: cover;
+} */
 
 /* --- RESPONZIVITA --- */
 @media (max-width: 576px) {
