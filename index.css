@@ -77,47 +77,76 @@ body{
 
 
 /* HERO Sekce */
+/* Dynamický overlay - tmavší u okrajů */
+.hero-overlay {
+    background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+.hero-nadpis {
+    /* Responzivní velikost písma: min 3rem, ideálně 10vw, max 7rem */
+    font-size: clamp(3rem, 10vw, 7rem); 
+
+}
+
+.hero-subtext {
+    font-weight: 300;
+    letter-spacing: 1px;
+    max-width: 600px; /* Omezení šířky pro lepší čtení */
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.hero-divider {
+    height: 2px;
+    width: 130px;
+    background-color: #fff;
+    transition: width 1s ease-in-out;
+}
 
 .scroll-arrow {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+    display: block;
+    width: 60px;
+    height: 100px;
 }
 
 .scroll-arrow span {
     position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50px;
-    height: 50px;
-    margin-left: -12px;
-    border-left: 3px solid #fff; 
-    border-bottom: 3px solid #fff;
+    width: 30px;
+    height: 30px;
+    border-left: 2px solid #fff; /* Tenčí čára pro eleganci */
+    border-bottom: 2px solid #fff;
     transform: rotate(-45deg);
-    animation: sdb 2s infinite;
-    box-sizing: border-box;
+    animation: sdb-fluid 2s infinite; /* Plynulejší animace */
+    opacity: 0;
 }
 
 .scroll-arrow span:nth-of-type(1) {
     top: 0;
+    animation-delay: 0s;
 }
+
 .scroll-arrow span:nth-of-type(2) {
-    top: 20px;
+    top: 15px;
     animation-delay: .15s;
 }
 
-@keyframes sdb {
-    0% {
-        transform: rotate(-45deg) translate(0, 0);
-        opacity: 0;
+/* Nová, plynulejší animace scrollu */
+@keyframes sdb-fluid {
+    0% { transform: rotate(-45deg) translate(0, 0); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: rotate(-45deg) translate(-20px, 20px); opacity: 0; }
+}
+
+/* Fix pro mobilní telefony (mírné zmenšení extrémů) */
+@media (max-width: 768px) {
+    .hero-nadpis {
+        font-size: 3.5rem;
+        letter-spacing: 4px;
     }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(-45deg) translate(-20px, 20px);
-        opacity: 0;
+    .hero-divider {
+        width: 40px;
     }
 }
 
@@ -194,11 +223,12 @@ body{
 .btn-image{
     background:none;
     border:none;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.4s ease-in-out;
     padding:0;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
 }
 .btn-image:hover{
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .generate-btn{
@@ -214,12 +244,6 @@ body{
     transition: opacity 0.3s ease;
 }
       
-
-#pdf-export-area {
-    background: #fdf5e6 !important; /* Béžová barva místo obrázku */
-    color: #000 !important;
-}
-
 .pergamen-container {
     background: url('data/pozadi.webp') no-repeat center center;
     background-size: 100% 100%;
@@ -255,53 +279,41 @@ body{
 
 /* NÁŠ TÝM */
 
-/* --- Horní obal pro obrázek --- */
 .team-top-wrapper {
   width: 100%;
   overflow: hidden;
-
+  display: flex;
+  justify-content: center;
+  padding: 0 15px; 
 }
 
 .team-main-img {
   width: 100%;
+  max-width: 1100px; 
   display: block;
-  object-fit: cover; /* Zajistí, že se obrázek nedeformuje */
-  object-position: center 20%; /* Priorita na horní část (obličeje) */
-  
-  /* Fixní výška pro stabilitu na PC */
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 20px; 
   height: 500px; 
 }
 
-/* --- Kontejner s kartami --- */
 .team-cards-container {
   position: relative;
   z-index: 10;
-  /* Na PC karty překrývají spodní část obrázku */
-  margin-top: -130px; 
+  margin-top: -100px; 
   padding-bottom: 60px;
 }
 
-/* --- Responzivita pro Tablety (Šířka pod 992px) --- */
-@media (max-width: 991px) {
-  .team-main-img {
-    height: 400px; /* Snížíme výšku obrázku, aby na tabletu nebyl obří */
-  }
-  .team-cards-container {
-    margin-top: -100px; /* Menší překryv na tabletu */
-  }
-}
-
-/* --- Responzivita pro Mobily (Šířka pod 768px) --- */
 @media (max-width: 767px) {
   .team-main-img {
-    height: 320px; /* Kompaktní výška pro telefony */
+    height: 320px;
+    border-radius: 10px; 
   }
   .team-cards-container {
-    margin-top: 15px; /* Na mobilu se karty odsunou úplně pod obrázek */
+    margin-top: 15px;
   }
 }
 
-/* --- Vzhled karet (Pergamen) --- */
 .card-pergamen {
   background-image: url('data/pergamen2.webp'); 
   background-size: 100% 100%;
@@ -354,8 +366,11 @@ body{
     height: auto !important;
     max-height: 100px; 
     object-fit: contain;
+    transition: transform 0.3s ease;
 }
-
+.logo-item img:hover {
+    transform: scale(1.05) translateY(-5px) !important;
+}
 
 .logo-grid .logo-item:nth-child(4) img {
     max-height: 70px; 
@@ -372,7 +387,7 @@ body{
         padding: 0;
         cursor: pointer;
         outline: none;
-        transition: transform 0.3s ease;
+        transition: transform 0.2s ease;
     }
 
     .podporit-tlacitko img {
@@ -382,7 +397,7 @@ body{
         filter: drop-shadow(0 12px 20px rgba(0,0,0,0.35));
     }
             .podporit-tlacitko:hover {
-                transform: scale(1.05) translateY(-5px);
+                transform: scale(1.05) translateY(-5px) !important;
             }
 
 /* Modální okno pro tlačítko podpořit */
@@ -459,6 +474,7 @@ body{
     border-radius: 2px;                                      
     padding: 12px;
     box-shadow: inset 0 0 15px rgba(139, 115, 85, 0.2);
+    padding-bottom: 2.5em;
 }
 
 #questionForm .btn {
@@ -485,7 +501,11 @@ a:hover .socky-icon {
     transform: scale(1.15); 
 }
 
-
+footer a, 
+.footer-link {
+    color: inherit !important; /* Přebírá barvu textu od rodiče (muted/dark) */
+    text-decoration: none !important;
+}
 /* Modální okna GDPR */
 
 .cookie-simple-bar {

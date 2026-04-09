@@ -37,69 +37,6 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-function stahnoutPDF() {
-    const textZAI = document.getElementById('vystupText').innerText;
-
-    if (!textZAI || textZAI.trim() === "") {
-        alert("Pověst ještě není vygenerována.");
-        return;
-    }
-
-    // Vytvoříme pomocný element pro tisk
-    const element = document.createElement('div');
-    
-    // Automatické zmenšení písma, pokud je text delší než 1100 znaků
-    const fontSize = textZAI.length > 1100 ? "12pt" : "14pt";
-
-    element.innerHTML = `
-        <div style="
-            width: 595pt; 
-            height: 842pt; 
-            padding: 85pt 95pt; 
-            box-sizing: border-box;
-            background-image: url('data/A4pergamen.png'); 
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
-            font-family: 'Eagle Lake', serif; 
-            color: #2c1a05;
-            position: relative;
-        ">
-            <h1 style="
-                text-align: center; 
-                color: #4a0404; 
-                font-size: 24pt; 
-                margin: 0 0 25pt 0; 
-                border-bottom: 2px solid #4a0404; 
-                padding-bottom: 10px;
-            ">Zápis v tajné kronice</h1>
-            
-            <div style="
-                font-size: ${fontSize}; 
-                line-height: 1.6; 
-                text-align: justify; 
-                white-space: pre-wrap;
-            ">${textZAI}</div>
-    `;
-
-    const opt = {
-        margin: 0,
-        filename: 'vlastni_povest.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
-    };
-
-    // Spustíme export a smažeme případnou prázdnou druhou stranu
-    html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
-        const pages = pdf.internal.getNumberOfPages();
-        if (pages > 1) {
-            pdf.deletePage(pages); // Smaže přebývající bílou stránku
-        }
-    }).save();
-}
-
-
-
 // Mapa v patičce - kód který upravuje mapu v patičce tak aby vypadala více historicky
 
 var apiKey = '30fcd185-49ea-41f4-a088-55562103e2d3'; 

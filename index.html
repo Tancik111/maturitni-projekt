@@ -7,11 +7,9 @@
     <title>Pověstník</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 </head>
 <body>
 
@@ -26,16 +24,16 @@
             <div class="collapse navbar-collapse fs-5 p-2" id="mainMenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Naše poslání</a>
+                    <a class="nav-link" href="#menu1">Naše poslání</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pověsti</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">O nás</a>
+                    <a class="nav-link" href="#">Vlastní pověst</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Vlastní pověst</a>
+                    <a class="nav-link" href="#">O nás</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Mapa</a>
@@ -48,141 +46,160 @@
         </div>
     </nav>
 
-<section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white mb-0">
+<section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white">
   <video autoplay muted loop playsinline class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
     <source src="data/video.mp4" type="video/mp4">
   </video>
 
-  <div class="position-absolute w-100 h-100 top-0 start-0 bg-dark opacity-50 z-0"></div>
+  <div class="position-absolute w-100 h-100 top-0 start-0 hero-overlay z-0"></div>
 
   <div class="container position-relative z-1 text-center">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <h1 class="display-2 fw-bold mb-4">Pověstník</h1>
-        <p class="lead mb-5">Zprostředkováme pověsti zajímavou a moderní formou</p>
-        <div class="d-flex justify-content-center mt-5">
-          <a href="#dalsi-sekce" class="scroll-arrow" aria-label="Posunout dolů">
-            <span></span>
-            <span></span>
-          </a>
-        </div>
+      <div class="col-lg-10">
+        <h1 class="fw-bold mb-3 hero-nadpis text-uppercase" data-aos="zoom-out" data-aos-duration="1500">
+          Pověstník
+        </h1>
+        
+        <div class="hero-divider mb-4 mx-auto" data-aos="zoom-in-left" data-aos-delay="400"></div>
+        
+        <p class="lead mb-5 hero-subtext" data-aos="fade-up" data-aos-delay="600">
+          Zprostředkováme pověsti <span class="text-accent">zajímavou a moderní</span> formou
+        </p>
       </div>
     </div>
   </div>
+
+  <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-1">
+    <a href="#menu1" class="scroll-arrow" aria-label="Posunout dolů">
+      <span></span>
+      <span></span>
+    </a>
+  </div>
 </section>
 
-<div class="custom-ribbon text-center py-5 ">
-    <span class="fs-3 fw-light tracking-widest text-uppercase">Oživujeme příběhy našich předků</span>
-  </div>
+<div class="custom-ribbon text-center py-5">
+    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">
+        Oživujeme příběhy našich předků
+    </span>
+</div>
 
 
-<section class="container my-5 py-4">
+<section class="container my-5 py-4 overflow-hidden" id="menu1">
     <div class="row mb-5">
         <div class="col-12 text-center">
-            <img src="data/o_nas.webp" alt="O nás" class="img-fluid o-nas" style="max-height: 200px;">
+            <img src="data/o_nas.webp" alt="O nás" class="img-fluid o-nas" style="max-height: 200px;" data-aos="fade-up" srcset>
         </div>
     </div>
 
     <div class="row align-items-center">
-        <div class="col-lg-6 mb-4 mb-lg-0">
-            <img src="data/navrh1.webp" alt="Ilustrace kronikářů" class="img-fluid rounded">
+        <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+            <img src="data/navrh1.webp" alt="Ilustrace kronikářů" class="img-fluid rounded hover-glow">
         </div>
 
-        <div class="col-lg-6 ps-lg-5">
+        <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
             <div class="mb-5">
                 <h3 class="h2 mb-3">Mise a Vize</h3>
-                <p class="lead">
-                    Oživujeme zapomenuté pověsti z prachu knihoven a provázíme vás na místa, kde se psaly mýty.
-                </p>
+                <p class="lead">Oživujeme zapomenuté pověsti z prachu knihoven a provázíme vás na místa, kde se psaly mýty.</p>
             </div>
 
             <div>
-                <h3 class="h2 mb-3"">Proces</h3>
-                <p class="lead">
-                    Každou trasu osobně procházíme a konzultujeme s místními kronikáři. 
-                    Hledáme drobné detaily, které běžný turista přehlédne.
-                </p>
+                <h3 class="h2 mb-3">Proces</h3>
+                <p class="lead">Každou trasu osobně procházíme a konzultujeme s místními kronikáři. Hledáme drobné detaily, které běžný turista přehlédne.</p>
             </div>
         </div>
     </div>
 </section>
 
-<hr>
+<hr data-aos="fade-up">
   
-  <div class="container">
-    <h2 class="text-center display-5 mb-5 mt-5 fw-bold">Pověsti kraje</h2>
-    <div class="carousel-container">
-        <button class="nav-btn" onclick="scrollCarousel(-1)">❮</button>
+  <section class="container py-5 overflow-hidden">
+    <h2 class="text-center display-5 mb-5 mt-5 fw-bold" data-aos="fade-up">
+        Pověsti kraje
+    </h2>
+
+    <div class="carousel-container" data-aos="fade-up" data-aos-delay="200">
+        <button class="nav-btn" onclick="scrollCarousel(-1)" aria-label="Předchozí">❮</button>
         
         <div class="povesti-track" id="track">
+            
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/bivoj.webp" alt="O Bivojovi">
                     <h3 class="pt-3">O Bivojovi</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/blanicti.webp" alt="Blaničtí rytíři">
-                     <h3 class="pt-3">Blaničtí rytíři</h3>
+                    <h3 class="pt-3">Blaničtí rytíři</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/cech.webp" alt="O Čechovi">
-                     <h3 class="pt-3">O Čechovi</h3>
+                    <h3 class="pt-3">O Čechovi</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/haviri.webp" alt="Kutnohorští havíři">
                     <h3 class="pt-3">Kutnohorští havíři</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/krok.webp" alt="O Krokovi">
                     <h3 class="pt-3">O Krokovi a dcerách</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/libuse.webp" alt="O Libuši">
                     <h3 class="pt-3">O Libuši</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/semik.webp" alt="O Semíkovi">
                     <h3 class="pt-3">O Horymírovi</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/zizka.webp" alt="O Žižkovi">
                     <h3 class="pt-3">O Žižkovi</h3>
                 </div>
             </div>
+
             <div class="povest-item">
                 <div class="povest-card">
                     <img src="data/povesti/bruncvik.webp" alt="O Bruncvíkovi">
                     <h3 class="pt-3">O Bruncvíkovi</h3>
                 </div>
             </div>
+
         </div>
 
-        <button class="nav-btn" onclick="scrollCarousel(1)">❯</button>
+        <button class="nav-btn" onclick="scrollCarousel(1)" aria-label="Další">❯</button>
     </div>
+</section>
 
-<hr>
+<hr data-aos="fade-up">
 
-<div class="container my-4 legend-container border border-3 border-brown">
+<div class="container my-4 legend-container border border-3 border-brown" data-aos="zoom-in">
   <div class="text-center fs-3 fw-bold py-2 border-bottom border-3 border-brown">
     Vytvořte si vlastní pověst
   </div>
 
   <div class="row g-0">
-    <div class="col-md-6 p-4 border-end border-3 border-brown bez-borderu">
+    <div class="col-md-6 p-4 border-end border-3 border-brown bez-borderu" data-aos="fade-right" data-aos-delay="300">
       <form id="povestForm">
         <div class="mb-3">
           <label class="form-label fw-bold">Místo děje:</label>
@@ -202,11 +219,11 @@
       </form>
     </div>
 
-    <div class="col-md-6 p-4 d-flex align-items-start">
+    <div class="col-md-6 p-4 d-flex align-items-start" data-aos="fade-left" data-aos-delay="500">
       <ul class="rules-text flex-grow-1 me-4">
         <li>Pro vygenerování pověsti musí být vyplněno: hlavní postava, místo děje a zápletka.</li>
         <li>AI může vygenerovat maximálně 5 pověstí za 10 minut.</li>
-        <li>Pověst si lze stáhnout ve formátu PDF.</li>
+        <li>xxx</li>
         <li>Text se generuje v délce cca 300-350 slov.</li>
       </ul>
       <img src="data/pravidla.webp" class="img-fluid lev" alt="lev" style="max-width:300px; height:auto;">
@@ -215,63 +232,53 @@
 </div>
 
 <div class="modal fade" id="vysledekModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg" data-aos="zoom-in">
         <div class="modal-content" style="background: transparent; border: none;">
             <div class="pergamen-container">
                 <img src="data/zrušit.webp" class="custom-close" data-bs-dismiss="modal" alt="Zavřít">
                 <h5 class="saga-title">Zápis v tajné kronice</h5>
                 <div class="modal-body" id="vystupText"></div>
-                <div class="text-center mt-3">
-                    <img src="data/export.webp" onclick="stahnoutPDF()" style="cursor: pointer; max-width: 250px;" alt="Převést do PDF">
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="pdf-export-area" style="display: none; width: 700px; padding: 40px; font-family: serif;">
-    <h2 style="text-align: center; color: #4a0404; margin-bottom: 20px;">Zápis v tajné kronice</h2>
-    <div id="pdf-text-content" style="color: black !important; font-size: 14pt; line-height: 1.6; white-space: pre-line;">
-    </div>
-</div>
+<hr data-aos="fade-up">
 
-<hr>
-
- <div class="container-fluid p-0 team-top-wrapper text-center">
-    <img src="data/muzi.webp" class="img-fluid team-main-img" alt="Ilustrace týmu">
+<div class="container-fluid p-0 team-top-wrapper text-center">
+    <img src="data/muzi.webp" class="img-fluid team-main-img" alt="Ilustrace týmu" data-aos="fade-in">
 </div>
 
 <div class="container team-cards-container"> 
-  <div class="row g-4 justify-content-center">
+    <div class="row g-4 justify-content-center">
     
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="cardh-100 border-0 bg-transparent"> 
-        <div class="card-body p-4 card-pergamen">
-          <h5 class="card-title fw-bold text-center">Štěpán Karoch</h5>
-          <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-0 bg-transparent"> 
+                <div class="card-body p-4 card-pergamen">
+                    <h5 class="card-title fw-bold text-center">Štěpán Karoch</h5>
+                    <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card h-100 border-0 bg-transparent"> 
-        <div class="card-body p-4 card-pergamen">
-          <h5 class="card-title fw-bold text-center">Zdeněk Peterka</h5>
-          <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100 border-0 bg-transparent"> 
+                <div class="card-body p-4 card-pergamen">
+                    <h5 class="card-title fw-bold text-center">Zdeněk Peterka</h5>
+                    <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card h-100 border-0 bg-transparent"> 
-        <div class="card-body p-4 card-pergamen">
-          <h5 class="card-title fw-bold text-center">Václav Vaněk</h5>
-          <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="card h-100 border-0 bg-transparent"> 
+                <div class="card-body p-4 card-pergamen">
+                    <h5 class="card-title fw-bold text-center">Václav Vaněk</h5>
+                    <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-  </div>
 </div>
 
 
@@ -287,18 +294,18 @@
                     <div class="medieval-section">
                         <h5>1. Správce údajů</h5>
                         <ul>
-                            <li><strong>Projekt:</strong> Pověstník (Kutnohorská 40, 280 02 Kolín)</li>
-                            <li><strong>Web:</strong> karoch.soskolin.eu/maturita/index.html</li>
-                            <li><strong>Kontakt:</strong> info.povestnik@seznam.cz</li>
+                            <li><b>Projekt:</b> Pověstník (Kutnohorská 40, 280 02 Kolín)</li>
+                            <li><b>Web:</b> karoch.soskolin.eu/maturita/index.html</li>
+                            <li><b>Kontakt:</b> info.povestnik@seznam.cz</li>
                         </ul>
                     </div>
 
                     <div class="medieval-section">
                         <h5>2. Jaké údaje sbíráme a proč?</h5>
                         <ul>
-                            <li><strong>Komunikace:</strong> Jméno a e-mail z formulářů ukládáme pouze pro vyřízení dotazu (max. 1 rok).</li>
-                            <li><strong>Bezpečnost:</strong> Pro ochranu webu a AI evidujeme IP adresu (max. 90 dnů).</li>
-                            <li><strong>Podpora:</strong> U dobrovolných plateb evidujeme jméno a účet pro účetnictví (10 let).</li>
+                            <li><b>Komunikace:</b> Jméno a e-mail z formulářů ukládáme pouze pro vyřízení dotazu (max. 1 rok).</li>
+                            <li><b>Bezpečnost:</b> Pro ochranu webu a AI evidujeme IP adresu (max. 90 dnů).</li>
+                            <li><b>Podpora:</b> U dobrovolných plateb evidujeme jméno a účet pro účetnictví (10 let).</li>
                         </ul>
                     </div>
 
@@ -360,32 +367,28 @@
     </div>
 </div>
 
-<hr>
+<hr data-aos="fade-up">
 
-<section class="container py-5">
+<section class="container py-5 overflow-hidden">
   <div class="row g-5">
     
-    <div class="col-lg-4 d-flex flex-column text-center">
+    <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
       <h2 class="mb-4">HODNOCENÍ OD VÁS</h2>
       
-      <div class="mb-5">
-        <div class="mb-3 hvezdy">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-        </div>
-        <p>Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal. Rádi jsme vás podpořili!</p>
+      <div class="mb-5 review-box p-3">
+        <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+        <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal. Rádi jsme vás podpořili!"</p>
       </div>
 
-      <div>
-        <div class="mb-3 hvezdy">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-        </div>
+      <div class="review-box p-3">
+        <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
         <p>
-          „Baví mě ten koncept – žádná cestovka, co vás honí v autobuse, ale interaktivní průvodce v kapse. Zkusil jsem se jich přes web zeptat na detail jedné trasy a odpověď byla blesková a přesná. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. To, že mají sídlo přímo v Kolíně na Kutnohorské, jim dodává na autentičnosti. Podpořit je přes QR kód je otázka deseti vteřin – za mě nejférovější přístup k obsahu, co jsem v poslední době viděl. Jen tak dál!“
+          "Baví mě ten koncept – žádná cestovka, co vás honí v autobuse, ale interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. To, že mají sídlo přímo v Kolíně na Kutnohorské, jim dodává na autentičnosti. Jen tak dál!"
         </p>
       </div>
     </div>
 
-    <div class="col-lg-8 text-center">
+    <div class="col-lg-8 text-center" data-aos="fade-left">
       <h2 class="mb-4">MAPA POVĚSTÍ</h2>
       <div class="overflow-hidden">
         <img src="data/mapa.webp" class="img-fluid w-100" alt="Mapa">
@@ -395,21 +398,23 @@
   </div>
 </section>
 
-<hr>
+<hr data-aos="fade-up">
 
 <section class="stredoveka-sekce pt-5 pb-5">
     <div class="kontejner">
         <div class="logo-grid">
-            <a href="https://www.kutnahora.cz/" class="logo-item"><img src="data/sponzori/hora.webp" alt="Město 1"></a>
-            <a href="https://www.mesto-trebenice.cz/" class="logo-item"><img src="data/sponzori/trebenice.webp" alt="Město 2"></a>
-            <a href="https://www.mesto-milovice.cz/" class="logo-item"><img src="data/sponzori/milovice.webp" alt="Město 3"></a>
-            <a href="https://prague.eu/en/" class="logo-item"><img src="data/sponzori/praha.webp" alt="Sponzor 1 class="text-logo""></a>
-            <a href="https://www.regiontourist.cz/" class="logo-item"><img src="data/sponzori/regiontourist.webp" alt="Sponzor 2"></a>
-            <a href="https://www.kudyznudy.cz/" class="logo-item"><img src="data/sponzori/kudy_z_nudy.webp" alt="Sponzor 3"></a>
+            <a href="https://www.kutnahora.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="100"><img src="data/sponzori/hora.webp" alt="Město 1"></a>
+            <a href="https://www.mesto-trebenice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="200"><img src="data/sponzori/trebenice.webp" alt="Město 2"></a>
+            <a href="https://www.mesto-milovice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="300"><img src="data/sponzori/milovice.webp" alt="Město 3"></a>
+            
+            <a href="https://prague.eu/en/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="400"><img src="data/sponzori/praha.webp" alt="Sponzor 1"></a>
+            <a href="https://www.regiontourist.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="500"><img src="data/sponzori/regiontourist.webp" alt="Sponzor 2"></a>
+            <a href="https://www.kudyznudy.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="600"><img src="data/sponzori/kudy_z_nudy.webp" alt="Sponzor 3"></a>
         </div>
-        <div class="podpora-sekce">
-            <button class="podporit-tlacitko" onclick="otevritModal()">
-                <img src="data/sponzori/donate.webp" alt="Podpořit nás">
+
+        <div class="podpora-sekce text-center mt-5">
+            <button class="podporit-tlacitko" onclick="otevritModal()" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="data/sponzori/donate.webp" alt="Podpořit nás" style="max-width: 300px;">
             </button>
         </div>
     </div>
@@ -486,56 +491,85 @@
     </div>
 </div>
 
-<footer class="container-fluid py-5 mt-auto px-0">
-    <div class="container px-4">
-        <div class="row align-items-stretch"> 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5 class="fw-bold mb-3">Sídlo</h5>
-                <p class="text-muted mb-1">Kutnohorská 40</p>
-                <p class="text-muted mb-1">Kolín 280 02</p>
-                <h5 class="fw-bold mb-3">Kontakty</h5>
-                <p class="text-muted mb-1">Jednatel | Václav Vaněk</p>             
-                <p class="text-muted mb-1">+420 676 767 676</p>
-                <p class="text-muted mb-3">info.povestnik@seznam.cz</p>
-                <div class="d-flex gap-3 fs-4">
-                    <a href="https://www.tiktok.com/@povestnik" class="text-dark"><img src="data/tiktok.webp" class="socky-icon" alt=""></a>
-                    <a href="https://www.instagram.com/povestnik" class="text-dark"><img src="data/instagram.webp" alt="" class="socky-icon"></a>
-                    <a href="https://x.com/Povestnik11" class="text-dark"><img src="data/X.webp" alt="" class="socky-icon"></a>
+
+<div class="custom-ribbon text-center py-5">
+    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">
+        Bude zde nějaky text?
+    </span>
+</div>
+
+
+<footer class="container-fluid py-5 mt-auto">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            
+            <div class="col-lg-3 col-md-6 order-2 order-lg-1">
+                <div class="ps-lg-3">
+                    <h5 class="fw-bold mb-4">Kontakt</h5>
+                    <div class="mb-4">
+                        <p class="mb-1 fw-semibold text-dark">Sídlo společnosti</p>
+                        <p class="text-muted mb-0 small">Kutnohorská 40</p>
+                        <p class="text-muted mb-0 small">Kolín 280 02</p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mb-1 fw-semibold text-dark">Jednatel</p>
+                        <p class="text-muted mb-0 small">Václav Vaněk</p>
+                        <p class="text-muted mb-0 small">+420 676 767 676</p>
+                        <a href="mailto:info.povestnik@seznam.cz" class="footer-link small">info.povestnik@seznam.cz</a>
+                    </div>
+                    <div class="d-flex gap-3 pt-2">
+                        <a href="https://www.tiktok.com/@povestnik" class="socky-link"><img src="data/tiktok.webp" class="socky-icon" alt="TikTok"></a>
+                        <a href="https://www.instagram.com/povestnik" class="socky-link"><img src="data/instagram.webp" class="socky-icon" alt="Instagram"></a>
+                        <a href="https://x.com/Povestnik11" class="socky-link"><img src="data/X.webp" class="socky-icon" alt="X"></a>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5 class="fw-bold mb-3">Kde nás najdete</h5>
-                <div id="historical-map" class="shadow-sm rounded"></div>
+            <div class="col-lg-5 col-md-12 order-1 order-lg-2 ">
+                <h5 class="fw-bold mb-4">Kde nás najdete</h5>
+                <div class="position-relative p-2 ">
+                    <div id="historical-map" class="rounded"></div>
+                </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5 class="fw-bold mb-3 text-center">Dotazy</h5>
-                <form id="questionForm" method="POST">
-                    <input type="email" name="email" class="form-control mb-3" placeholder="Váš e-mail" required>
-                    <textarea name="message" class="form-control mb-3" rows="4" placeholder="Váš dotaz" required></textarea>
-                    <button type="submit" class="btn w-100 fw-bold shadow-sm">Odeslat</button>
+            <div class="col-lg-4 col-md-6 order-3 order-lg-3">
+                <h5 class="fw-bold mb-4">Napište nám</h5>
+                <form id="questionForm">
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Váš e-mail" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="message" class="form-control" rows="3" placeholder="Jaký je váš dotaz?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn w-100 py-2 fw-bold shadow-sm">Odeslat zprávu</button>
                 </form>
-                <div id="responseMessage"> Dotaz byl úspěšně odeslán!</div>
+                <div id="responseMessage">Dotaz byl úspěšně odeslán!</div>
             </div>
+        </div>
 
-        <div class="row mt-4 pt-3">
-            <div class="col-md-6 text-center text-md-start small text-muted">
-                © 2026 Pověstník. Všechna práva vyhrazena.
+        <div class="row mt-5 pt-4">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <span class="small text-muted">© 2026 Pověstník. Všechna práva vyhrazena.</span>
             </div>
-            <div class="col-md-6 text-center text-md-end small">
-                <a href="#" class="text-muted text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
-                <a href="#" class="text-muted text-decoration-none" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Nastavení Cookies</a>
-                <a href="login.php" class="text-muted text-decoration-none  ">Admin</a>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
+                <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Cookies</a>
+                <a href="login.php" class="footer-link small"> Admin</a>
             </div>
         </div>
     </div>
 </footer>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="index.js"></script>
 
 </div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // jak dlouho animace trvá (ms)
+    once: true      // animace proběhne jen jednou při odrolování
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>
