@@ -411,7 +411,7 @@ body{
         }
 
         .modal-obsah {
-            background-color: #fdf6e3; 
+            background-color: #ddc39b; 
             margin: 10% auto;
             padding: 40px;
             width: 90%;
@@ -483,11 +483,14 @@ body{
     padding: 10px;
     border-radius: 4px;
 }
-#historical-map{
+#historical-map {
     height: 270px; 
-    width: 100%; 
-    filter: sepia(0.5) contrast(1.1);
+    width: 100%;
+    border-radius: 10px;
+    filter: sepia(0.4) contrast(1.1) brightness(0.9);
 }
+
+
 
 .socky-icon {
     width: 50px;     
@@ -508,6 +511,7 @@ footer a,
 }
 /* Modální okna GDPR */
 
+/* --- 1. SPODNÍ ČERVENÁ LIŠTA (Cookie Bar) --- */
 .cookie-simple-bar {
     position: fixed;
     bottom: -150px;
@@ -515,18 +519,54 @@ footer a,
     width: 100%;
     z-index: 9999;
     background-color: #740609 !important;
+    padding: 15px 0;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    transition: bottom 0.5s ease-in-out;
 }
 
 .cookie-simple-bar.show-cookie-bar {
     bottom: 0 !important;
-    transition: bottom 0.5s ease-in-out;
 }
 
+/* --- 2. CSS PERGAMEN (Tvar a barva bez obrázků) --- */
 .custom-parchment-box {
-    background-color: #f4e4bc !important; 
-    border: 3px solid #634a31 !important;
-    border-radius: 12px !important;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6) !important;
+    /* Základní barva a jemná textura papíru */
+    background-color: #e8d5b7 !important;
+    background-image: 
+        radial-gradient(circle at 2px 2px, rgba(0,0,0,0.03) 1px, transparent 0),
+        linear-gradient(135deg, #f4e4bc 0%, #d2b48c 100%) !important;
+    background-size: 30px 30px, 100% 100% !important;
+
+    /* ASYMETRICKÝ TVAR: Vytváří organický, "šišatý" vzhled ručního papíru */
+    border-radius: 30px 240px 15px 180px / 180px 15px 240px 30px !important;
+    
+    /* VRSTVENÉ STÍNY: Vnitřní ztmavení okrajů + vnější stín pod modálem */
+    box-shadow: 
+        inset 0 0 80px rgba(89, 62, 26, 0.35),
+        2px 3px 20px rgba(0,0,0,0.2),
+        0 20px 50px rgba(0,0,0,0.5) !important;
+
+    /* Odstranění Bootstrap okrajů a přidání jemné linky svitku */
+    border: 1px solid rgba(139, 115, 85, 0.4) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efekt "srolovaného" růžku vpravo dole */
+.custom-parchment-box::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.15) 100%);
+    pointer-events: none;
+}
+
+/* --- 3. OBSAH A TYPOGRAFIE --- */
+.modal-body.p-4.p-md-5 {
+    padding: 3.5rem !important; /* Větší prostor pro nepravidelné okraje */
 }
 
 .modal-title-medieval {
@@ -535,6 +575,7 @@ footer a,
     font-size: 1.8rem;
     line-height: 1.2;
     margin-bottom: 25px;
+    text-align: center;
 }
 
 .modal-text-content {
@@ -548,7 +589,7 @@ footer a,
     font-size: 1.15rem;
     font-style: italic;
     margin-bottom: 25px;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .medieval-section {
@@ -560,6 +601,7 @@ footer a,
     font-weight: bold;
     color: #4a0404;
     margin-bottom: 10px;
+
 }
 
 .medieval-section ul {
@@ -586,6 +628,7 @@ footer a,
     font-variant: small-caps;
 }
 
+/* --- 4. TLAČÍTKA (Ponechána obrázková pro styl) --- */
 .modal-footer-btns {
     display: flex;
     justify-content: center;
@@ -601,7 +644,7 @@ footer a,
     padding: 0 !important;
     cursor: pointer;
     width: 35%; 
-    max-width: 200px;
+    max-width: 180px;
     min-width: 120px;
     transition: transform 0.2s ease-in-out;
 }
@@ -610,46 +653,31 @@ footer a,
     width: 100%;
     height: auto;
     display: block;
-    box-shadow: none !important; 
+    /* Filtr, aby obrázková tlačítka lépe ladila s CSS pergamenem */
+    filter: sepia(0.2) drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
 }
 
 .img-btn-link:hover {
     transform: scale(1.08);
 }
+
+/* Úprava pro modál nastavení (větší tlačítka) */
 #cookieSettingsModal .img-btn-link {
-    width: 70%;         
-    max-width: 250px;   
-}
-/* #privacyModal .custom-parchment-box {
-    background-image: url('data/pozadi-gdpr.webp') !important;
-    background-size: cover;
+    width: 45%; 
+    max-width: 220px; 
 }
 
-#cookieSettingsModal .custom-parchment-box {
-    background-image: url('data/pozadi-cookies.webp') !important;
-    background-size: cover;
-} */
-
-/* --- RESPONZIVITA --- */
-@media (max-width: 576px) {
+/* --- 5. RESPONZIVITA --- */
+@media (max-width: 768px) {
+    .modal-body.p-4.p-md-5 {
+        padding: 2rem !important;
+    }
     .modal-title-medieval {
         font-size: 1.4rem;
     }
-    .modal-text-content {
-        font-size: 0.95rem;
-    }
-    .modal-footer-btns {
-        gap: 15px; /* Trochu menší mezera na mobilu */
-    }
-    .img-btn-link {
-        width: 45%; /* Tlačítka trochu širší na mobilu pro lepší klikatelnost */
-    }
-}
-
-/* Specifická úprava pro velmi malé mobily (volitelné) */
-@media (max-width: 400px) {
-    .modal-footer-btns {
-        gap: 10px;
+    .custom-parchment-box {
+        /* Na mobilech zmírníme asymetrii pro lepší čitelnost */
+        border-radius: 15px !important;
     }
 }
 

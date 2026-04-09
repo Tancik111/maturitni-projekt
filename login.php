@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
         @import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
         body {
             font-family: "Eagle Lake", serif;
-            background-image: url('data/pozadi.png');
+            background-image: url('data/pozadi.webp');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
