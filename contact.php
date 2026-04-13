@@ -1,7 +1,6 @@
+<!-- Toto je kód pro zpracování kontaktního formuláře na webu Pověstník. Kód načítá konfiguraci z .env souboru, připojuje se k databázi a vytváří tabulku pro ukládání dotazů, pokud ještě neexistuje. Pokud je odeslán POST požadavek, sanitizuje vstupní data, kontroluje jejich validitu a pokud jsou v pořádku, ukládá je do databáze. V případě úspěchu vrací "success", jinak vrací chybovou zprávu s příslušným HTTP status kódem. -->
+
 <?php
-/**
- * Funkce pro načtení .env souboru
- */
 function loadEnv($path) {
     if (!file_exists($path)) return;
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -14,16 +13,13 @@ function loadEnv($path) {
     }
 }
 
-// Načtení proměnných
 loadEnv(__DIR__ . '/.env');
 
-// Konfigurace z .env
 $host = 'localhost';
-$db   = getenv('DB_NAME') ?: 'c554contact'; // Načte z .env, jinak použije default
+$db   = getenv('DB_NAME') ?: 'c554contact'; 
 $user = 'c554karoch';
-$pass = getenv('DB_PASS') ?: '';           // Načte heslo z .env
+$pass = getenv('DB_PASS') ?: '';           
 $charset = 'utf8mb4';
-
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -33,8 +29,6 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-
-    // Automatické vytvoření tabulky 'dotazy', pokud ještě neexistuje
     $pdo->exec("CREATE TABLE IF NOT EXISTS dotazy (
         id INT AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
@@ -47,7 +41,6 @@ try {
         $message = $_POST['message'] ?? ''; 
 
         if (!empty($email) && !empty($message)) {
-            // Validace e-mailu (vždycky dobrý nápad)
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 http_response_code(400);
                 echo "Invalid email format";
@@ -57,7 +50,6 @@ try {
             $sql = "INSERT INTO dotazy (email, dotaz) VALUES (?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$email, $message]);
-            
             echo "success";
             exit;
         } else {
@@ -68,7 +60,6 @@ try {
     }
 } catch (\PDOException $e) {
     http_response_code(500);
-    // V produkci je lepší vypsat jen obecnou chybu, ale pro ladění necháváme:
     echo "Database Error: " . $e->getMessage();
     exit;
 }

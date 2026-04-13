@@ -1,7 +1,7 @@
+<!-- Toto je kód pro přihlašovací stránku administrátorů Pověstníku. Kód načítá konfiguraci z .env souboru, ověřuje zadané uživatelské jméno a heslo proti uloženým hashům a pokud jsou údaje správné, nastaví session proměnné pro přihlášení a přesměruje uživatele na admin.php. Pokud jsou údaje nesprávné, zobrazí chybovou zprávu. -->
 <?php
 session_start();
 
-// --- FUNKCE PRO NAČTENÍ .ENV ---
 function loadEnv($path) {
     if (!file_exists($path)) return;
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -19,7 +19,6 @@ if (isset($_POST['login'])) {
     $user_input = $_POST['user'];
     $pass_input = $_POST['pass'];
 
-    // Načtení dat z .env
     $users = [
         getenv('ADMIN1_USER') => getenv('ADMIN1_PASS'),
         getenv('ADMIN2_USER') => getenv('ADMIN2_PASS'),
@@ -28,12 +27,10 @@ if (isset($_POST['login'])) {
 
     $authenticated = false;
 
-    // Ověření uživatele
+    // Ověření uživatele a hesla
     if (array_key_exists($user_input, $users)) {
-        // Zde používáme password_verify. 
-        // POZNÁMKA: V produkci byste v databázi/env měli mít už hash (vytvořený přes password_hash)
-        // Pro zjednodušení v tomto scriptu simulujeme hashování:
-        if ($pass_input === $users[$user_input]) {
+        // password_verify porovná zadané heslo s uloženým hashem
+        if (password_verify($pass_input, $users[$user_input])) {
             $authenticated = true;
         }
     }
@@ -69,22 +66,19 @@ if (isset($_POST['login'])) {
             justify-content: center;
             min-height: 100vh;
         }
-
         .login-container {
             width: 100%; 
             max-width: 800px; 
             padding: 20px;
         }
-
         .pergamen-card {
-            background-image: url('data/pergamen2.png');
+            background-image: url('data/pergamen2.webp');
             background-size: 100% 100%;
             background-repeat: no-repeat;
             padding: 100px 90px; 
             text-align: center;
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
         }
-
         h2 {
             color: #4a0404;
             font-size: 2.8rem; 
@@ -92,7 +86,6 @@ if (isset($_POST['login'])) {
             border-bottom: 3px double #8b1a1a;
             padding-bottom: 20px;
         }
-
         .form-label {
             color: #2c1a05;
             font-size: 1.1rem;
@@ -100,7 +93,6 @@ if (isset($_POST['login'])) {
             text-align: left;
             margin-bottom: 8px;
         }
-
         .form-control {
             background: rgba(255, 255, 255, 0.5);
             border: 2px solid #7a5c3c;
@@ -111,7 +103,6 @@ if (isset($_POST['login'])) {
             font-size: 1.1rem;
             width: 100%;
         }
-
         .btn-login {
             background-color: #8b1a1a;
             color: #f1e9d2;
@@ -126,13 +117,11 @@ if (isset($_POST['login'])) {
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
         .btn-login:hover {
             background-color: #5a1111;
             transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(0,0,0,0.4);
         }
-
         .error-msg {
             color: #8b1a1a;
             font-weight: bold;
@@ -141,7 +130,6 @@ if (isset($_POST['login'])) {
             margin-bottom: 20px;
             border-radius: 5px;
         }
-
         .back-link {
             display: inline-block;
             margin-top: 30px;
@@ -150,11 +138,9 @@ if (isset($_POST['login'])) {
             font-size: 1rem;
             border-bottom: 1px solid transparent;
         }
-
         .back-link:hover {
             border-bottom: 1px solid #8b1a1a;
         }
-
         @media (max-width: 768px) {
             .pergamen-card { padding: 60px 40px; }
             h2 { font-size: 1.8rem; }
@@ -169,7 +155,7 @@ if (isset($_POST['login'])) {
         <h2>Vstup do kroniky</h2>
         
         <?php if(isset($error)): ?>
-            <p class="error-msg"><?php echo $error; ?></p>
+            <p class="error-msg"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
 
         <form method="POST">

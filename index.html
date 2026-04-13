@@ -31,27 +31,31 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><h2>Pověstník</h2></a>
-            <button class="navbar-toggler border-0 p-0 shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false">
-                <div class="modern-burger">
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-            <div class="collapse navbar-collapse fs-5 p-2" id="mainMenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#menu1">Naše poslání</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#menu2">Pověsti</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#menu3">Vlastní pověst</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#menu4">O nás</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#menu5">Mapa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#menu6">Sponzoři</a></li>
-                </ul>
-            </div>
+ <nav id="mainNavbar" class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="index.html"><h2>Pověstník</h2></a>
+        
+        <button class="navbar-toggler border-0 p-0 shadow-none collapsed" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#mainMenu" 
+                aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="modern-burger">
+                <span></span>
+                <span></span>
+                <span></span> </div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav ms-auto fs-5">
+                <li class="nav-item"><a class="nav-link" href="#menu1" >Naše poslání</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu2">Pověsti</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu3">Vlastní pověst</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu4">O nás</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu5">Mapa</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu6">Sponzoři</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white">
         <video autoplay muted loop playsinline class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
@@ -84,7 +88,7 @@
     <section class="container my-5 py-4 overflow-hidden" id="menu1">
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <img src="data/o_nas.webp" alt="O nás" class="img-fluid o-nas" style="max-height: 200px;" data-aos="fade-up">
+                <img src="data/nadpisy/o_nas.webp" alt="O nás" class="img-fluid nadpis" data-aos="fade-up">
             </div>
         </div>
         <div class="row align-items-center">
@@ -107,7 +111,9 @@
     <hr data-aos="fade-up">
 
     <section class="container py-5 overflow-hidden" id="menu2">
-        <h2 class="text-center display-5 mb-5 mt-5 fw-bold" data-aos="fade-up">Pověsti kraje</h2>
+            <div class="col-12 text-center">
+                <img src="data/nadpisy/nadpis_povesti.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
+            </div>
         <div class="carousel-container" data-aos="fade-up" data-aos-delay="200">
             <button class="nav-btn" onclick="scrollCarousel(-1)" aria-label="Předchozí">❮</button>
             <div class="povesti-track" id="track">
@@ -455,13 +461,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script src="index.js" defer></script>
 
-    <script>
-      // AOS iniciujeme až po načtení dokumentu
-      document.addEventListener('DOMContentLoaded', function() {
-        if (typeof AOS !== 'undefined') {
-          AOS.init({ duration: 1000, once: true, offset: 100 });
-        }
-      });
-    </script>
+
+
 </body>
 </html>

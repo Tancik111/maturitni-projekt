@@ -1,10 +1,7 @@
+<!-- Kód pro odhlášení uživatele z administrátorského rozhraní Pověstníku. Kód začíná session_start() pro zahájení session, poté vymaže všechny session proměnné a pokud jsou používány cookies pro session, nastaví cookie s minulým datem, aby se odstranila. Nakonec zničí session a přesměruje uživatele zpět na přihlašovací stránku login.php. -->
 <?php
 session_start();
-
-// Smaže všechny proměnné v session
 $_SESSION = array();
-
-// Pokud chcete zničit i session cookie, odstraňte ji z prohlížeče
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -12,11 +9,7 @@ if (ini_get("session.use_cookies")) {
         $params["secure"], $params["httponly"]
     );
 }
-
-// Úplné zničení session na serveru
 session_destroy();
-
-// Přesměrování na přihlašovací formulář
 header("Location: login.php");
 exit;
 ?>

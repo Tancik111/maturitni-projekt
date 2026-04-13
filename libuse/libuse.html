@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Objevte zapomenuté pověsti českého kraje v moderním hávu. Prozkoumejte interaktivní mapu legend nebo si nechte od AI vyprávět svůj vlastní příběh z tajné kroniky.">
+    <title>Pověstník</title>
+    <link rel="shortcut icon" href="../data/favi.ico" type="image/x-icon">
+    <link rel="preload" href="data/video.mp4" as="video" type="video/mp4">
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="css.css" as="style">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css.css">
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?24e4274d00984ad6d870636f1bc30030" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+        <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
+    </noscript>
+</head>
+<body>
+
+ <!-- v této části kódu se nachází horní menu, a takzvaná hero sekce, takže úvodní fotka a název pověsti -->   
+ <nav id="mainNavbar" class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="../index.html"><h2>Pověstník</h2></a>
+        
+        <button class="navbar-toggler border-0 p-0 shadow-none collapsed" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#mainMenu" 
+                aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="modern-burger">
+                <span></span>
+                <span></span>
+                <span></span> </div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav ms-auto fs-5">
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu1" >Naše poslání</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu2">Pověsti</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu3">Vlastní pověst</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu4">O nás</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu5">Mapa</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu6">Sponzoři</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white">
+        <img src="./data/libuse.webp" alt="Pozadí" class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
+        <div class="position-absolute w-100 h-100 top-0 start-0 hero-overlay z-0"></div>
+        <div class="container position-relative z-1 text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h1 class="fw-bold mb-3 hero-nadpis text-uppercase" data-aos="zoom-out" data-aos-duration="1500">Kněžna Libuše</h1>
+                    <div class="hero-divider mb-4 mx-auto" data-aos="zoom-in-left" data-aos-delay="400"></div>
+                    <p class="lead mb-5 hero-subtext" data-aos="fade-up" data-aos-delay="600">
+                        Proroctví, které dalo vzniknout <span class="text-accent">slávě a moci</span> Prahy
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-1">
+            <a href="#sipka" class="scroll-arrow" aria-label="Posunout dolů">
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+    </section>
+
+ <!-- v této části kódu se nachází kartičky se základnimi informacemi, udělané jako .webp obrázky a postavičky, které jsou vždy tématicky k pověsti -->   
+<section class="info-section py-5" id="sipka">
+    <div class="container">
+        
+        <div class="row mb-5">
+            <div class="col-12 d-flex justify-content-center">
+                <img src="./data/informace.webp" alt="Základní informace" class="img-fluid main-header-img">
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-4 text-center text-md-start">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <div class="parchment-container">
+                    <img src="./data/libuse1.webp" alt="Kdo byla Libuše" class="img-fluid">
+                    </div>
+            </div>
+            <div class="col-md-5 d-flex justify-content-center">
+                <img src="./data/random.webp" alt="Postava" class="img-fluid character-img">
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-4 text-center text-md-start flex-column-reverse flex-md-row">
+            <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+                <img src="./data/sasek.webp" alt="Šašek" class="img-fluid character-img">
+            </div>
+            <div class="col-md-7">
+                <div class="parchment-container">
+                    <img src="./data/libuse2.webp" alt="Magická místa" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center text-center text-md-start">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <div class="parchment-container">
+                    <img src="./data/./libuse3.webp" alt="Symbolika Prahy" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-5 d-flex justify-content-center">
+                <img src="./data/knez.webp" alt="Postava" class="img-fluid character-img">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+ <!-- v této části kódu se nachází interaktivní kniha, kde si uživatel může prolistovat celou pověst (tato kniha funguje díky JS) -->   
+<section class="kronika-section">
+    <div class="container d-flex flex-column align-items-center">
+        
+        <img src="./data/kronika.webp" alt="Z kronik" class="img-fluid mb-5 kronika-header">
+
+        <div class="parchment-frame">
+            <div class="book-viewport">
+                <div class="book-container" id="book">
+                    
+                    <div class="page-static-left">
+                        <h2>Libuše: Kněžna</h2>
+                        <p>Nejmladší z dcer Krokových, moudrá a věštbami nadaná. Její příběh je příběhem počátku našeho národa. Od pradávných věků, kdy se první Slované usadili v povodí Vltavy, až po slavné proroctví, které dalo vzniknout našemu hlavnímu městu. Listujte vpravo a ponořte se do hlubin historie.</p>
+                        <span class="page-num">1</span>
+                    </div>
+
+                    <div class="page" style="z-index: 5;">
+                        <div class="front">
+                            <h2>Tři sestry</h2>
+                            <p>Kazi znala sílu bylin a uměla léčit i ty nejhorší neduhy. Teta učila lid uctívat bohy a ctít staré rituály. Ale Libuše, nejmladší z dcer, byla obdařena moudrostí, která převyšovala všechny ostatní. Její úsudek byl spravedlivý a její srdce čisté. Proto se celý lid rozhodl, že právě ona bude jejich kněžnou a soudcem.</p>
+                            <span class="page-num">2</span>
+                        </div>
+                        <div class="back">
+                            <h2>Libušin soud</h2>
+                            <p>„Běda mužům, kterým žena vládne!“ vykřikl jeden ze stařinů, když byl nespokojen s rozsudkem. Libuše však zachovala důstojnost a klid. Pravila: „Pokud si přejete muže, který vám bude vládnout pevnou rukou, já vám ho najdu.“ Tímto okamžikem začala nová kapitola naší historie.</p>
+                            <span class="page-num">3</span>
+                        </div>
+                    </div>
+
+                    <div class="page" style="z-index: 4;">
+                        <div class="front">
+                            <h2>Hledání knížete</h2>
+                            <p>Kněžna Libuše věděla, že národ potřebuje silného vůdce. Požádala starší rodu, aby vyslali poselstvo. „Můj kůň vás dovede k muži, který jí u železného stolu,“ pravila a ukázala směr. Poslové, plni naděje i obav, následovali zvíře přes hory a údolí, až dorazili do malé vesnice Stadice.</p>
+                            <span class="page-num">4</span>
+                        </div>
+                        <div class="back">
+                            <h2>Přemysl Oráč</h2>
+                            <p>Vesničané je zavedli na pole, kde muž jménem Přemysl právě oral s voly. Poslové mu předali vzkaz od kněžny. Přemysl bez zaváhání obrátil pluh a u jeho železného radlice, která sloužila jako stůl, pohostil unavené posly. Tak byl nalezen první český kníže, zakladatel dynastie Přemyslovců.</p>
+                            <span class="page-num">5</span>
+                        </div>
+                    </div>
+
+                    <div class="page" style="z-index: 3;">
+                        <div class="front">
+                            <h2>Slavná věštba</h2>
+                            <p>Jednoho dne stanula kněžna Libuše na vysoké skále Vyšehradu a v extázi věštila. Její pohled směřoval k hustým lesům u řeky Vltavy. „Vidím město veliké, jehož sláva hvězd se dotýká!“ Její hlas se nesl vzduchem a poslové se zájmem naslouchali každému jejímu slovu.</p>
+                            <span class="page-num">6</span>
+                        </div>
+                        <div class="back">
+                            <h2>Založení Prahy</h2>
+                            <p>Dále pravila: „Tam, kde muž tesá práh do svého domu, vznikne město, které se bude jmenovat Praha.“ Poslové šli na označené místo a skutečně tam našli muže, který tesal práh pro své obydlí. Tak byl položen základní kámen našeho hlavního města, sídla českých králů.</p>
+                            <span class="page-num">7</span>
+                        </div>
+                    </div>
+
+                    <div class="page" style="z-index: 2;">
+                        <div class="front">
+                            <h2>Moudrá vláda</h2>
+                            <p>Kněžna Libuše a kníže Přemysl vládli zemi po mnoho let. Jejich vláda byla spravedlivá a moudrá. Zavedli řád a zákony, které platily pro všechny bez rozdílu. Pod jejich vedením český národ vzkvétal a sílil. Založili rod, který dal naší zemi hrdost a jméno na tisíc let.</p>
+                            <span class="page-num">8</span>
+                        </div>
+                        <div class="back">
+                            <h2>Konec věků</h2>
+                            <p>Když se naplnil čas kněžny Libuše, odešla, ale její odkaz zůstal živý. Její proroctví a moudrost žijí dál v každém kameni historického Vyšehradu a v srdcích všech Čechů. Její příběh je připomínkou naší síly, moudrosti a odhodlání.</p>
+                            <span class="page-num">9</span>
+                        </div>
+                    </div>
+
+                    <div class="page-static-right">
+                        <div class="end-content">
+                            <h3>Zde končí zápis</h3>
+                            <p>Pověst o kněžně Libuši, moudré panovnici a věštkyni, je zapsána v srdcích našeho lidu na věčné časy.</p>
+                            <hr>
+                            <p style="font-size: 0.8rem;">Pro více informací o našem spolku a dalších pověstech navštivte sekci "O nás".</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<audio id="kronikaAudio" preload="auto">
+    <source src="https://www.soundjay.com/misc/sounds/paper-flip-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- v této části kódu se nachází mapa s interaktivními body -->   
+<section class="mapa-section py-5">
+    <div class="container d-flex flex-column align-items-center">
+        
+        <div class="text-center mb-5">
+            <img src="./data/mapa.webp" alt="Legendy starého Vyšehradu" class="img-fluid mapa-header">
+        </div>
+
+        <div class="old-school-container">
+            <div id="map"></div>
+            
+            <div class="map-overlay-texture"></div>
+            <div class="inner-shadow"></div>
+        </div>
+
+        <p class="text-center mt-4 text-muted fst-italic">
+            Klikněte na symboly na mapě pro odhalení tajemství Vyšehradu.
+        </p>
+
+    </div>
+</section>
+
+<!-- checklist jako obrázek ve formátu .webp -->   
+
+<section class="checklist-section container-fluid px-0">
+    <div class="checklist-bg d-flex justify-content-center align-items-center">
+        <img src="data/potreby.webp" alt="Poutníkův checklist" class="img-fluid w-100">
+    </div>
+</section>
+
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content custom-parchment-box">
+                <div class="modal-body p-4 p-md-5">
+                    <h2 class="modal-title-medieval text-center mb-4">Ochrana soukromí a osobních údajů (GDPR)</h2>
+                    
+                    <div class="modal-text-content">
+                        <p class="lead text-center">Vítejte u projektu Pověstník. Vaše soukromí chráníme stejně pečlivě jako naše pověsti. Data zpracováváme jen v nezbytném rozsahu.</p>
+                        
+                        <div class="medieval-section">
+                            <h5>1. Správce údajů</h5>
+                            <ul>
+                                <li><b>Projekt:</b> Pověstník (Kutnohorská 40, 280 02 Kolín)</li>
+                                <li><b>Web:</b> karoch.soskolin.eu/maturita/index.html</li>
+                                <li><b>Kontakt:</b> info.povestnik@seznam.cz</li>
+                            </ul>
+                        </div>
+    
+                        <div class="medieval-section">
+                            <h5>2. Jaké údaje sbíráme a proč?</h5>
+                            <ul>
+                                <li><b>Komunikace:</b> Jméno a e-mail z formulářů a zpráv ukládáme pouze pro vyřízení vašeho dotazu (max. 1 rok).</li>
+                                <li><b>Bezpečnost & AI:</b> Pro ochranu webu a AI technologií před útoky a přetížením evidujeme vaši IP adresu (max. 90 dnů).</li>
+                                <li><b>Podpora (Dary):</b> U dobrovolných plateb evidujeme jméno plátce a číslo účtu pro účely účetnictví (zákonná povinnost 10 let).</li>
+                            </ul>
+                        </div>
+    
+                        <div class="medieval-section">
+                            <h5>3. Sdílení a zabezpečení</h5>
+                            <p>Data neprodáváme. Přístup k nim mají pouze nezbytní partneři (hosting, banka, IT správa). Web je šifrován pomocí SSL.</p>
+                        </div>
+    
+                        <div class="medieval-section">
+                            <h5>4. Vaše práva</h5>
+                            <p>Dle GDPR máte právo na přístup k údajům, jejich opravu, výmaz nebo vznesení námitky proti zpracování. Kontaktujte nás na výše uvedeném e-mailu.</p>
+                        </div>
+    
+                        <div class="medieval-section">
+                            <h5>5. Odpovědnost</h5>
+                            <p>Trasy využíváte na vlastní odpovědnost. Neodpovídáme za stav cest v terénu ani za zásahy vyšší moci či nadpřirozených bytostí.</p>
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer-btns mt-4">
+                        <button type="button" class="img-btn-link" data-bs-dismiss="modal">
+                            <img src="../data/tlacitka/souhlas.webp" alt="Souhlasím">
+                        </button>
+                        <button type="button" class="img-btn-link">
+                            <img src="../data/tlacitka/n_souhlas.webp" alt="Nesouhlasím">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content custom-parchment-box">
+                    <div class="modal-body p-4 p-md-5">
+                        <h2 class="modal-title-medieval text-center mb-4">Nastavení soukromí</h2>
+                        <div class="modal-text-content">
+                            <p>Tyto cookies jsou pro chod webu kritické. Bez nich by stránka nemusela správně zobrazovat mapy nebo interaktivní prvky.</p>
+                            <div class="medieval-section">
+                                <h5>1. Účel</h5>
+                                <ul>
+                                    <li>zajišťují stabilitu serveru</li>
+                                    <li>chrání naše AI funkce před přetížením</li>
+                                </ul>
+                            </div>
+                            <div class="medieval-section">
+                                <h5>2. Právní základ</h5>
+                                <ul>
+                                    <li>oprávněný zájem správce</li>
+                                    <li>souhlas není vyžadován, ale informujeme vás</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer-btns mt-4">
+                            <button type="button" class="img-btn-link" data-bs-dismiss="modal">
+                                <img src="../data/tlacitka/souhlasit.webp" alt="Ponechat">
+                            </button>
+                            <button type="button" class="img-btn-link" id="btn-revoke-everything">
+                                <img src="../data/tlacitka/nesouhlas.webp" alt="Odebrat">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <footer class="container-fluid py-5 mt-auto">
+        <div class="container">
+            <div class="row g-5 align-items-start">
+                <div class="col-lg-3 col-md-6 order-2 order-lg-1">
+                    <div class="ps-lg-3">
+                        <h5 class="fw-bold mb-4">Kontakt</h5>
+                        <div class="mb-4">
+                            <p class="mb-1 fw-semibold text-dark">Sídlo společnosti</p>
+                            <p class="text-muted mb-0 small">Kutnohorská 40, Kolín 280 02</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="mb-1 fw-semibold text-dark">Jednatel</p>
+                            <p class="text-muted mb-0 small">Václav Vaněk, +420 676 767 676</p>
+                            <a href="mailto:info.povestnik@seznam.cz" class="footer-link small">info.povestnik@seznam.cz</a>
+                        </div>
+                        <div class="d-flex gap-3 pt-2">
+                            <a href="https://www.tiktok.com/@povestnik" class="socky-link"><img src="../data/tlacitka/tiktok.webp" class="socky-icon" alt="TikTok"></a>
+                            <a href="https://www.instagram.com/povestnik" class="socky-link"><img src="../data/tlacitka/instagram.webp" class="socky-icon" alt="Instagram"></a>
+                            <a href="https://x.com/Povestnik11" class="socky-link"><img src="../data/tlacitka/X.webp" class="socky-icon" alt="X"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 order-1 order-lg-2">
+                    <h5 class="fw-bold mb-3">Kde nás najdete</h5>
+                    <div id="historical-map" class="shadow-sm rounded"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 order-3 order-lg-3">
+                    <h5 class="fw-bold mb-4">Napište nám</h5>
+                    <form id="questionForm">
+                        <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Váš e-mail" required></div>
+                        <div class="mb-3"><textarea name="message" class="form-control" rows="3" placeholder="Jaký je váš dotaz?" required></textarea></div>
+                        <button type="submit" class="btn w-100 py-2 fw-bold shadow-sm">Odeslat zprávu</button>
+                    </form>
+                    <div id="responseMessage">Dotaz byl úspěšně odeslán!</div>
+                </div>
+            </div>
+            <div class="row mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <span class="small text-muted">© 2026 Pověstník. Všechna práva vyhrazena.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
+                    <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Cookies</a>
+                    <a href="../login.php" class="footer-link small"> Admin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="js.js" defer></script>
+
+
+
+</body>
+</html>

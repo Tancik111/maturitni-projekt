@@ -1,5 +1,6 @@
+<!-- Tento kód je zodpovědný za zpracování požadavků na generování pověstí pomocí API Groq. Nejprve načítá konfiguraci z .env souboru, poté se připojuje k databázi a kontroluje počet požadavků z dané IP adresy za posledních 10 minut, aby se zabránilo zneužití. Následně sanitizuje vstupní data, kontroluje je proti blacklistu nevhodných slov a pokud jsou data v pořádku, posílá požadavek na API Groq pro generování pověsti. Výsledek se vrací jako JSON odpověď. Pokud dojde k chybě, vrací se chybová zpráva. -->
+
 <?php
-// Tady ty řádky necháme pro ladění, dokud to nerozchodíme
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -43,27 +44,20 @@ try {
         $db_config['pass']
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
-    
-    // Antispam limit
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM api_logs WHERE ip_address = ? AND created_at > NOW() - INTERVAL 10 MINUTE");
     $stmt->execute(array($ip));
     if ($stmt->fetchColumn() >= 5) {
         echo json_encode(array('error' => 'Poutníku, tvé pero je unavené. Další příběh zapiš za 10 minut.'));
         exit;
     }
-
     $misto    = mb_substr(htmlspecialchars(trim($_POST['misto'] ?? '')), 0, 150);
     $postava  = mb_substr(htmlspecialchars(trim($_POST['postava'] ?? '')), 0, 150);
     $zapletka = mb_substr(htmlspecialchars(trim($_POST['zapletka'] ?? '')), 0, 500);
-
     if (empty($misto) || empty($postava) || empty($zapletka)) {
         echo json_encode(array('error' => 'Všechna pole musí být vyplněna.'));
         exit;
     }
-
-    // ROZSÁHLÝ BLACKLIST
     $blacklist = array(
         'kokot', 'pica', 'píča', 'curak', 'čurák', 'mrdat', 'hovno', 'zmrd', 'debil', 'kunda', 
         'mrdko', 'idiot', 'kretén', 'hajzl', 'pizda', 'šulin', 'zkurv', 'kurva', 'děvka',
@@ -80,7 +74,6 @@ try {
     $deep_clean_input = str_replace(array(' ', '.', ',', '-', '_', '*', '/', '|', '+'), '', $input_to_check);
 
     foreach ($blacklist as $word) {
-        // Používáme strpos místo str_contains pro starší PHP
         if (strpos($input_to_check, $word) !== false || strpos($deep_clean_input, $word) !== false) {
             echo json_encode(array('error' => 'Zadání obsahuje nevhodná slova.'));
             exit;

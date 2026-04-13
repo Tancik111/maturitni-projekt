@@ -21,45 +21,6 @@ document.addEventListener('click', function (e) {
         }
       });
 
-// AI  -  Logika, která řeší propojení stisknutí tlačítka s php a nasledné otevření modálního okna. Taktéž se stará o převedení pověsti do stažitelného PDF souboru
-
-
-const form = document.getElementById('povestForm');
-const modalElement = document.getElementById('vysledekModal');
-const modal = new bootstrap.Modal(modalElement);
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault(); 
-    
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const imgInside = document.getElementById('genBtn'); 
-    
-    submitBtn.disabled = true;
-    if (imgInside) imgInside.style.opacity = "0.5";
-
-    const formData = new FormData(form);
-    try {
-        const resp = await fetch('index.php', { method: 'POST', body: formData });
-        
-        if (!resp.ok) throw new Error('Server error ' + resp.status);
-
-        const result = await resp.json();
-
-        if (result.error) {
-            alert(result.error);
-        } else {
-            document.getElementById('vystupText').innerText = result.text;
-            modal.show();
-        }
-    } catch (err) {
-        console.error(err);
-        alert('Chyba: ' + err.message);
-    } finally {
-        submitBtn.disabled = false;
-        if (imgInside) imgInside.style.opacity = "1";
-    }
-});
-
 // Mapa v patičce - kód který upravuje mapu v patičce tak aby vypadala více historicky  a zároveň zobrazuje místo sídla Pověstníku pomocí markeru. Kromě toho se přidává filtr pro vytvoření starobylého vzhledu mapy a používá se API klíč pro načítání dlaždic z externího zdroje.
 
 var apiKey = '30fcd185-49ea-41f4-a088-55562103e2d3'; 
@@ -89,7 +50,7 @@ document.getElementById('questionForm').addEventListener('submit', function(e) {
     const responseDiv = document.getElementById('responseMessage');
     const form = this;
 
-    fetch('contact.php', {
+    fetch('../contact.php', {
         method: 'POST',
         body: formData
     })
@@ -165,53 +126,92 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// Modální okno pro podporu projektu - generuje qr kódy s částkou zadanou uživatelem a zobrazuje je v modálním okně, které se otevře po stisknutí tlačítka "Podpořit projekt"
+// moje věci, pak se dokomentuje
 
-    const MOJE_CISLO_UCTU = "4320757043";
-    const MUJ_KOD_BANKY = "0800";       
-    const ZPRAVA = "Podpora projektu";
-    document.getElementById('zobrazenyUcet').innerText = MOJE_CISLO_UCTU + "/" + MUJ_KOD_BANKY;
-    function otevritModal() {
-        document.getElementById("platebniModal").style.display = "block";
-        generovatQR();
-    }
-    function zavritModal() {
-        document.getElementById("platebniModal").style.display = "none";
-    }
-    function generovatQR() {
-        const castka = document.getElementById("castkaInput").value;
-        const qrImg = document.getElementById("qrObrazek");
-        const qrText = document.getElementById("nacitaciText");
-        if (castka > 0) {
-            const url = `https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=${MOJE_CISLO_UCTU}&bankCode=${MUJ_KOD_BANKY}&amount=${castka}&currency=CZK&message=${encodeURIComponent(ZPRAVA)}`;
-            qrImg.src = url;
-            qrImg.style.display = "block";
-            qrText.style.display = "none";
-        }
-    }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("platebniModal")) zavritModal();
-    }
 
- 
-//  Funkce pro funkčnost pohybu karet s pověstmi - tato funkce umožňuje posouvat karty s pověstmi v karuselu pomocí tlačítek pro posouvání. Vypočítává šířku jednotlivých položek a posouvá obsah karuselu o tuto šířku v požadovaném směru s plynulou animací.
+document.addEventListener('DOMContentLoaded', () => {
+    const pages = document.querySelectorAll('.page');
+    const audio = document.getElementById('kronikaAudio');
     
-    function scrollCarousel(direction) {
-        const track = document.getElementById('track');
-        const itemWidth = track.querySelector('.povest-item').offsetWidth + 20; 
-        track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
-        }    
-    document.addEventListener("DOMContentLoaded", function() {
-    const navLinks = document.querySelectorAll(".nav-link");
-    const menu = document.getElementById("mainMenu");
-    const bsCollapse = new bootstrap.Collapse(menu, { toggle: false });
-    navLinks.forEach(function(link) {
-        link.addEventListener("click", function() {
-            if (window.innerWidth < 992) {
-                bsCollapse.hide();
+
+    pages.forEach((page, index) => {
+        page.style.zIndex = pages.length - index + 1;
+
+        const shadow = document.createElement('div');
+        shadow.className = 'page-shadow';
+        page.appendChild(shadow);
+
+        page.addEventListener('click', () => {
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+            }
+
+            const currentShadow = page.querySelector('.page-shadow');
+
+            if (page.classList.contains('flipped')) {
+                page.classList.remove('flipped');
+                
+       
+                currentShadow.style.opacity = '0.5';
+                setTimeout(() => { currentShadow.style.opacity = '0'; }, 800);
+
+                setTimeout(() => {
+                    page.style.zIndex = pages.length - index + 1;
+                }, 800);
+            } else {
+                // Otevírání stránky (doleva)
+                page.classList.add('flipped');
+
+                currentShadow.style.opacity = '0.5';
+                setTimeout(() => { currentShadow.style.opacity = '0'; }, 800);
+
+                setTimeout(() => {
+                    page.style.zIndex = 20 + index;
+                }, 800);
             }
         });
     });
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('map')) {
+        var map = L.map('map', {
+            scrollWheelZoom: false 
+        }).setView([50.0644, 14.4195], 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; Staré pověsti české'
+        }).addTo(map);
+
+        var points = [
+            {
+                lat: 50.0641, lng: 14.4172, 
+                title: "Libušina lázeň", 
+                desc: "Zřícenina na skále, odkud kněžna věštila slávu Prahy."
+            },
+            {
+                lat: 50.0647, lng: 14.4201, 
+                title: "Bazilika sv. Petra a Pavla", 
+                desc: "Místo, kde odpočívají největší osobnosti českých dějin."
+            },
+            {
+                lat: 50.0632, lng: 14.4208, 
+                title: "Čertovy sloupy", 
+                desc: "Tři kamenné sloupy, které sem podle legendy vzteky odhodil čert."
+            },
+            {
+                lat: 50.0652, lng: 14.4194, 
+                title: "Vyšehradská skála", 
+                desc: "Místo, odkud bájný Šemík skočil do Vltavy."
+            }
+        ];
+
+        points.forEach(function(p) {
+            var marker = L.marker([p.lat, p.lng]).addTo(map);
+            marker.bindPopup("<h5 style='margin-bottom:5px; font-weight:bold;'>" + p.title + "</h5><p style='margin:0;'>" + p.desc + "</p>");
+        });
+    }
+});

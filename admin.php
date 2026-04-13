@@ -1,12 +1,9 @@
+<!-- Toto je kód pro administrátorskou stránku Pověstníku, která umožňuje spravovat dotazy zaslané uživateli. Kód načítá konfiguraci z .env souboru, připojuje se k databázi, zobrazuje všechny dotazy a umožňuje administrátorovi odpovídat na ně pomocí e-mailu nebo je mazat. Odpovědi jsou odesílány pomocí PHPMaileru s HTML šablonou pro lepší vzhled. Administrátor může také vidět stav každého dotazu (vyřízeno/nevyrizeno) a po odeslání odpovědi se stav aktualizuje. -->
 <?php
 session_start();
 if (!isset($_SESSION['admin_logged'])) { header("Location: login.php"); exit; }
-
-// 1. Výpis chyb (vypni v ostrém provozu)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-// 2. Načtení PHPMailer knihoven
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -15,7 +12,6 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-// --- FUNKCE PRO NAČTENÍ .ENV ---
 function loadEnv($path) {
     if (!file_exists($path)) return;
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -29,14 +25,11 @@ function loadEnv($path) {
 }
 loadEnv(__DIR__ . '/.env');
 
-// 3. Konfigurace z .env
 $host = 'localhost';
 $db   = 'c554contact'; 
 $user = 'c554karoch';
-$pass = getenv('DB_PASS'); // Načteno z .env
+$pass = getenv('DB_PASS'); 
 $charset = 'utf8mb4';
-
-// Připojení k DB
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=$charset", $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -46,7 +39,6 @@ try {
     die("Chyba archivu: " . $e->getMessage());
 }
 
-// --- LOGIKA: SMAZÁNÍ DOTAZU ---
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     try {
         $id_ke_smazani = $_GET['delete'];
@@ -59,7 +51,6 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     }
 }
 
-// --- LOGIKA: ODESÍLÁNÍ ODPOVĚDI ---
 if (isset($_POST['send_reply'])) {
     $mail = new PHPMailer(true);
     try {
@@ -67,15 +58,13 @@ if (isset($_POST['send_reply'])) {
         $mail->Host       = 'smtp.seznam.cz'; 
         $mail->SMTPAuth   = true;
         $mail->Username   = 'info.povestnik@seznam.cz'; 
-        $mail->Password   = getenv('SMTP_PASS'); // Předpokládám, že v .env máš SMTP_PASS
+        $mail->Password   = getenv('SMTP_PASS'); 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->CharSet    = 'UTF-8';
-
         $mail->setFrom('info.povestnik@seznam.cz', 'Pověstník');
         $mail->addAddress($_POST['email']);
         $mail->addReplyTo('info.povestnik@seznam.cz', 'Pověstník');
-
         $reply_text = $_POST['reply_text'];
         $original_query = $_POST['original_query'];
 
@@ -106,20 +95,16 @@ if (isset($_POST['send_reply'])) {
         $mail->Subject = 'Odpověď na Váš dotaz:';
         $mail->Body    = $email_template;
         $mail->AltBody = "Odpověď: " . $reply_text;
-
         $mail->send();
-
         $stmt = $pdo->prepare("UPDATE dotazy SET vyrizeno = 1 WHERE id = ?");
         $stmt->execute([$_POST['id']]);
         header("Location: admin.php?msg=Posel byl vyslán! Odpověď doručena.");
         exit;
-
     } catch (Exception $e) {
         $error = "Posel zabloudil: {$mail->ErrorInfo}";
     }
 }
 
-// Načtení všech dotazů
 $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DESC")->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -131,30 +116,92 @@ $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DES
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
     <style>
-        body { font-family: "Eagle Lake", serif; background-image: url('data/pozadi.png'); background-size: cover; background-attachment: fixed; }
-        .admin-nav { background-color: #8b1a1a; padding: 15px 0; }
-        .admin-container { max-width: 950px; margin: 40px auto; padding: 0 20px; }
-        .card-dotaz { background-image: url('data/pergamen2.png'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center; border: none; margin-bottom: 50px; padding: 90px 110px; min-height: 400px; position: relative; background-color: transparent !important; }
-        .card-dotaz.vyrizeno { opacity: 0.85; filter: sepia(0.3) contrast(0.9); }
-        .dotaz-obsah { background: rgba(0, 0, 0, 0.04); border-radius: 4px; padding: 25px; margin: 25px 0; font-family: 'Georgia', serif; font-style: italic; font-size: 1.2rem; line-height: 1.6; border-left: 4px solid #8b1a1a; }
-        .btn-povestnik { background-color: #8b1a1a; color: #f1e9d2; border: none; padding: 12px 25px; font-family: "Eagle Lake", serif; transition: 0.3s; }
-        .btn-povestnik:hover { background-color: #5a1111; color: white; transform: translateY(-2px); }
-        .btn-delete { color: #8b1a1a; text-decoration: none; font-size: 0.9rem; font-family: sans-serif; margin-left: 20px; }
-        .btn-delete:hover { text-decoration: underline; color: #f00; }
-        .status-badge { font-family: sans-serif; font-weight: bold; letter-spacing: 1px; padding: 8px 12px; }
-        .btn-logout { border: 2px solid #f1e9d2; color: #f1e9d2; text-decoration: none; padding: 8px 20px; transition: 0.3s; }
-        .btn-logout:hover { background: #f1e9d2; color: #8b1a1a; }
+        body { 
+            font-family: "Eagle Lake", serif; 
+            background-image: url('data/pozadi.webp'); 
+            background-size: cover; 
+            background-attachment: fixed; 
+        }
+        .admin-nav { 
+            background-color: #8b1a1a; 
+            padding: 15px 0; 
+        }
+        .admin-container { 
+            max-width: 950px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+        .card-dotaz { 
+            background-image: url('data/pergamen2.webp'); 
+            background-size: 100% 100%; 
+            background-repeat: no-repeat; 
+            background-position: center; border: none; 
+            margin-bottom: 50px; padding: 90px 110px; 
+            min-height: 400px; position: relative; 
+            ackground-color: transparent !important; 
+        }
+        .card-dotaz.vyrizeno { 
+            opacity: 0.85; 
+            filter: sepia(0.3) contrast(0.9); 
+        }
+        .dotaz-obsah { 
+            background: rgba(0, 0, 0, 0.04); 
+            border-radius: 4px; 
+            padding: 25px; 
+            margin: 25px 0; 
+            font-style: italic; 
+            font-size: 1.2rem; 
+            line-height: 1.6; 
+            border-left: 4px solid #8b1a1a; 
+        }
+        .btn-povestnik { 
+            background-color: #8b1a1a; 
+            color: #f1e9d2; 
+            border: none; 
+            padding: 12px 25px; 
+            font-family: "Eagle Lake", serif; 
+            transition: 0.3s; 
+        }
+        .btn-povestnik:hover { 
+            background-color: #5a1111; 
+            color: white; 
+            transform: translateY(-2px); 
+        }
+        .btn-delete { 
+            color: #080808; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            margin-left: 20px; 
+        }
+        .btn-delete:hover { 
+            text-decoration: underline; 
+            color: #f00;
+        }
+        .status-badge { 
+            font-weight: bold; 
+            letter-spacing: 1px; 
+            padding: 8px 12px; 
+        }
+        .btn-logout { 
+            border: 2px solid #f1e9d2; 
+            color: #f1e9d2; 
+            text-decoration: none; 
+            padding: 8px 20px; 
+            transition: 0.3s; 
+        }
+        .btn-logout:hover { 
+            background: #f1e9d2; 
+            color: #8b1a1a; 
+        }
     </style>
 </head>
 <body>
-
 <nav class="admin-nav sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
         <h1 class="h3 m-0" style="color: #f1e9d2;">Správa kroniky</h1>
         <a href="logout.php" class="btn-logout">Opustit archiv</a>
     </div>
 </nav>
-
 <div class="admin-container">
     <?php if(isset($_GET['msg'])): ?>
         <div id="status-alert" class="alert alert-info shadow text-center"><?php echo htmlspecialchars($_GET['msg']); ?></div>
@@ -162,7 +209,6 @@ $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DES
     <?php if(isset($error)): ?>
         <div id="status-alert" class="alert alert-danger shadow text-center"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
-
     <div class="row">
         <?php foreach ($dotazy as $d): ?>
         <div class="col-12">
@@ -211,7 +257,6 @@ $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DES
         <?php endforeach; ?>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
