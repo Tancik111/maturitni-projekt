@@ -1,126 +1,111 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 // Logika pro zavírání menu po kliknutí na odkaz v mobilní verzi. Tento kód naslouchá na kliknutí na dokument a kontroluje, zda bylo kliknuto na odkaz s třídou 'nav-link'. Pokud ano, zkontroluje, zda je menu otevřené (má třídu 'show') a pokud ano, zavře ho odstraněním této třídy a aktualizuje stav burger tlačítka pro správnou animaci a přístupnost.
-
-document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('nav-link')) {
-        const menu = document.getElementById('mainMenu');
-        const toggler = document.querySelector('.navbar-toggler');
-        if (menu.classList.contains('show')) {
-            // Zavřeme menu odstraněním třídy
-            menu.classList.remove('show');
-            toggler.classList.add('collapsed');
-            toggler.setAttribute('aria-expanded', 'false');
-        }
+    const menu = document.getElementById('mainMenu');
+    if (menu && typeof bootstrap !== 'undefined') {
+        const bsCollapse = new bootstrap.Collapse(menu, { toggle: false });
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('nav-link')) {
+                const toggler = document.querySelector('.navbar-toggler');
+                if (menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                    if (toggler) {
+                        toggler.classList.add('collapsed');
+                        toggler.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            }
+        });
     }
-});
-
 
 // Animace při scrollování, které jsou definované pomocí knihovny AOS. Iniciuje se až po načtení celého dokumentu, aby se předešlo problémům s načítáním a fungováním animací.
-      document.addEventListener('DOMContentLoaded', function() {
-        if (typeof AOS !== 'undefined') {
-          AOS.init({ duration: 1000, once: true, offset: 100 });
-        }
-      });
+    if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 1000, once: true, offset: 100 });
+    }
 
 // AI  -  Logika, která řeší propojení stisknutí tlačítka s php a nasledné otevření modálního okna. Taktéž se stará o převedení pověsti do stažitelného PDF souboru
-
-
-const form = document.getElementById('povestForm');
-const modalElement = document.getElementById('vysledekModal');
-const modal = new bootstrap.Modal(modalElement);
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault(); 
+    const form = document.getElementById('povestForm');
+    const modalElement = document.getElementById('vysledekModal');
     
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const imgInside = document.getElementById('genBtn'); 
-    
-    submitBtn.disabled = true;
-    if (imgInside) imgInside.style.opacity = "0.5";
+    if (form && modalElement && typeof bootstrap !== 'undefined') {
+        const modal = new bootstrap.Modal(modalElement);
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const imgInside = document.getElementById('genBtn'); 
+            submitBtn.disabled = true;
+            if (imgInside) imgInside.style.opacity = "0.5";
 
-    const formData = new FormData(form);
-    try {
-        const resp = await fetch('index.php', { method: 'POST', body: formData });
-        
-        if (!resp.ok) throw new Error('Server error ' + resp.status);
-
-        const result = await resp.json();
-
-        if (result.error) {
-            alert(result.error);
-        } else {
-            document.getElementById('vystupText').innerText = result.text;
-            modal.show();
-        }
-    } catch (err) {
-        console.error(err);
-        alert('Chyba: ' + err.message);
-    } finally {
-        submitBtn.disabled = false;
-        if (imgInside) imgInside.style.opacity = "1";
+            const formData = new FormData(form);
+            try {
+                const resp = await fetch('index.php', { method: 'POST', body: formData });
+                if (!resp.ok) throw new Error('Server error ' + resp.status);
+                const result = await resp.json();
+                if (result.error) {
+                    alert(result.error);
+                } else {
+                    const vystup = document.getElementById('vystupText');
+                    if (vystup) vystup.innerText = result.text;
+                    modal.show();
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Chyba: ' + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                if (imgInside) imgInside.style.opacity = "1";
+            }
+        });
     }
-});
 
 // Mapa v patičce - kód který upravuje mapu v patičce tak aby vypadala více historicky  a zároveň zobrazuje místo sídla Pověstníku pomocí markeru. Kromě toho se přidává filtr pro vytvoření starobylého vzhledu mapy a používá se API klíč pro načítání dlaždic z externího zdroje.
+    const mapElement = document.getElementById('historical-map');
+    if (mapElement && typeof L !== 'undefined') {
+        var apiKey = '30fcd185-49ea-41f4-a088-55562103e2d3'; 
+        var map = L.map('historical-map').setView([50.02702894315356, 15.204167729237522], 12);
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg?api_key=' + apiKey, {
+            maxZoom: 16,
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://stamen.com/">Stamen Design</a>'
+        }).addTo(map);
 
-var apiKey = '30fcd185-49ea-41f4-a088-55562103e2d3'; 
-var map = L.map('historical-map').setView([50.02702894315356, 15.204167729237522], 12);
-L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg?api_key=' + apiKey, {
-  maxZoom: 16,
-  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://stamen.com/">Stamen Design</a>'
-}).addTo(map);
+        mapElement.style.filter = "sepia(0.8) contrast(1.2) brightness(0.9) hue-rotate(-10deg)";
 
-var mapElement = document.getElementById('historical-map');
-mapElement.style.filter = "sepia(0.8) contrast(1.2) brightness(0.9) hue-rotate(-10deg)";
-
-L.circleMarker([50.02702894315356, 15.204167729237522], {
-  radius: 8,
-  fillColor: "#8b0000",
-  weight: 2,
-  opacity: 1,
-  fillOpacity: 0.8
-}).addTo(map).bindPopup("<b>Sídlo Pověstníku</b>");
+        L.circleMarker([50.02702894315356, 15.204167729237522], {
+            radius: 8, fillColor: "#8b0000", weight: 2, opacity: 1, fillOpacity: 0.8
+        }).addTo(map).bindPopup("<b>Sídlo Pověstníku</b>");
+    }
 
 // Formulář pro kontaktování    -   Slouží k posílání dotazů které se spolu s emailem který uživatel zadá ukladají do databáze a následně se odesílají na email administrátorů. Po úspěšném odeslání se zobrazí modální okno s potvrzením o úspěšném odeslání a formulář se resetuje.
+    const questionForm = document.getElementById('questionForm');
+    if (questionForm) {
+        questionForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const formData = new FormData(this);
+            const responseDiv = document.getElementById('responseMessage');
+            const currentForm = this;
 
-document.getElementById('questionForm').addEventListener('submit', function(e) {
-    e.preventDefault(); 
-
-    const formData = new FormData(this);
-    const responseDiv = document.getElementById('responseMessage');
-    const form = this;
-
-    fetch('contact.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            responseDiv.style.display = 'block';
-            form.reset();
-            setTimeout(() => {
-                responseDiv.style.display = 'none';
-            }, 3000);
-        } else {
-            alert("Server error. Please try again later.");
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
+            fetch('contact.php', { method: 'POST', body: formData })
+            .then(response => {
+                if (response.ok) {
+                    if (responseDiv) responseDiv.style.display = 'block';
+                    currentForm.reset();
+                    setTimeout(() => { if (responseDiv) responseDiv.style.display = 'none'; }, 3000);
+                } else {
+                    alert("Server error. Please try again later.");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
 
 // COOKIES - Logika pro fungování cookies lišty a spodních tlačítek která umožňují uživatelům přijmout cookies nebo je odmítnout a znovu zobrazit lištu pro výběr cookies. Tato logika využívá localStorage pro ukládání stavu souhlasu s cookies a Bootstrap pro správu modálních oken.
-
-document.addEventListener("DOMContentLoaded", function() {
     const cookieBar = document.getElementById('cookie-bar');
     const acceptBtn = document.getElementById('accept-cookies');
     const revokeBtn = document.getElementById('btn-revoke-everything');
     const storageKey = 'momentum_cookies_accepted';
 
-    if (!localStorage.getItem(storageKey)) {
-        setTimeout(() => {
-            cookieBar.classList.add('show-cookie-bar');
-        }, 1000);
+    if (cookieBar && !localStorage.getItem(storageKey)) {
+        setTimeout(() => { cookieBar.classList.add('show-cookie-bar'); }, 1000);
     }
 
     if (acceptBtn) {
@@ -130,20 +115,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    if (revokeBtn) {
+    if (revokeBtn && typeof bootstrap !== 'undefined') {
         revokeBtn.addEventListener('click', function() {
             localStorage.removeItem(storageKey);
-            
             const modalEl = document.getElementById('cookieSettingsModal');
-            const modal = bootstrap.Modal.getInstance(modalEl);
-            
-            if (modal) {
-                modal.hide();
-
+            const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            if (modalInstance) {
+                modalInstance.hide();
                 modalEl.addEventListener('hidden.bs.modal', function () {
-                    setTimeout(() => {
-                        cookieBar.classList.add('show-cookie-bar');
-                    }, 100);
+                    setTimeout(() => { cookieBar.classList.add('show-cookie-bar'); }, 100);
                 }, { once: true }); 
             } else {
                 cookieBar.classList.add('show-cookie-bar');
@@ -154,7 +134,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const gdprModal = document.getElementById('privacyModal');
     if (gdprModal) {
         const gdprDeclineBtn = gdprModal.querySelector('.modal-footer-btns button:last-child');
-        
         if (gdprDeclineBtn) {
             gdprDeclineBtn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -162,56 +141,66 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     }
-});
-
 
 // Modální okno pro podporu projektu - generuje qr kódy s částkou zadanou uživatelem a zobrazuje je v modálním okně, které se otevře po stisknutí tlačítka "Podpořit projekt"
-
     const MOJE_CISLO_UCTU = "4320757043";
     const MUJ_KOD_BANKY = "0800";       
     const ZPRAVA = "Podpora projektu";
-    document.getElementById('zobrazenyUcet').innerText = MOJE_CISLO_UCTU + "/" + MUJ_KOD_BANKY;
-    function otevritModal() {
-        document.getElementById("platebniModal").style.display = "block";
-        generovatQR();
+    
+    const ucetElement = document.getElementById('zobrazenyUcet');
+    if (ucetElement) {
+        ucetElement.innerText = MOJE_CISLO_UCTU + "/" + MUJ_KOD_BANKY;
     }
-    function zavritModal() {
-        document.getElementById("platebniModal").style.display = "none";
-    }
-    function generovatQR() {
-        const castka = document.getElementById("castkaInput").value;
+
+    window.otevritModal = function() {
+        const modal = document.getElementById("platebniModal");
+        if (modal) {
+            modal.style.display = "block";
+            window.generovatQR();
+        }
+    };
+
+    window.zavritModal = function() {
+        const modal = document.getElementById("platebniModal");
+        if (modal) modal.style.display = "none";
+    };
+
+    window.generovatQR = function() {
+        const castkaInput = document.getElementById("castkaInput");
         const qrImg = document.getElementById("qrObrazek");
         const qrText = document.getElementById("nacitaciText");
-        if (castka > 0) {
-            const url = `https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=${MOJE_CISLO_UCTU}&bankCode=${MUJ_KOD_BANKY}&amount=${castka}&currency=CZK&message=${encodeURIComponent(ZPRAVA)}`;
+        if (castkaInput && qrImg && castkaInput.value > 0) {
+            const url = `https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=${MOJE_CISLO_UCTU}&bankCode=${MUJ_KOD_BANKY}&amount=${castkaInput.value}&currency=CZK&message=${encodeURIComponent(ZPRAVA)}`;
             qrImg.src = url;
             qrImg.style.display = "block";
-            qrText.style.display = "none";
+            if (qrText) qrText.style.display = "none";
         }
-    }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("platebniModal")) zavritModal();
-    }
+    };
 
- 
+    window.onclick = function(event) {
+        const platebniModal = document.getElementById("platebniModal");
+        if (event.target == platebniModal) window.zavritModal();
+    };
+
 //  Funkce pro funkčnost pohybu karet s pověstmi - tato funkce umožňuje posouvat karty s pověstmi v karuselu pomocí tlačítek pro posouvání. Vypočítává šířku jednotlivých položek a posouvá obsah karuselu o tuto šířku v požadovaném směru s plynulou animací.
-    
-    function scrollCarousel(direction) {
+    window.scrollCarousel = function(direction) {
         const track = document.getElementById('track');
-        const itemWidth = track.querySelector('.povest-item').offsetWidth + 20; 
-        track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
-        }    
-    document.addEventListener("DOMContentLoaded", function() {
-    const navLinks = document.querySelectorAll(".nav-link");
-    const menu = document.getElementById("mainMenu");
-    const bsCollapse = new bootstrap.Collapse(menu, { toggle: false });
-    navLinks.forEach(function(link) {
-        link.addEventListener("click", function() {
-            if (window.innerWidth < 992) {
-                bsCollapse.hide();
+        if (track) {
+            const item = track.querySelector('.povest-item');
+            if (item) {
+                const itemWidth = item.offsetWidth + 20; 
+                track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
             }
-        });
-    });
+        }
+    };
+
 });
 
+// Toto je funkce, která zajišťuje vybrání náhodné stránky u společného bodu
 
+
+function randomRedirect(event, url1, url2) {
+    event.preventDefault(); 
+    const finalUrl = Math.random() < 0.5 ? url1 : url2;
+    window.location.href = finalUrl;
+}

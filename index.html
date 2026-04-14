@@ -5,29 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Objevte zapomenuté pověsti českého kraje v moderním hávu. Prozkoumejte interaktivní mapu legend nebo si nechte od AI vyprávět svůj vlastní příběh z tajné kroniky.">
     <title>Pověstník</title>
-    <link rel="shortcut icon" href="data/favi.ico" type="image/x-icon">
-    <link rel="preload" href="data/video.mp4" as="video" type="video/mp4">
 
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?1bb88869c979cf3276cd86b24056291a" as="font" type="font/woff2" crossorigin>
+    
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
     <link rel="preload" href="index.css" as="style">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?24e4274d00984ad6d870636f1bc30030" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
-    <noscript>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-        <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
-    </noscript>
+    <link rel="shortcut icon" href="data/favi.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -97,7 +95,7 @@
             </div>
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
                 <div class="mb-5">
-                    <h3 class="h2 mb-3">Mise a Vize</h3>
+                    <h2 class="h2 mb-3">Mise a Vize</h2>
                     <p class="lead">Oživujeme zapomenuté pověsti z prachu knihoven a provázíme vás na místa, kde se psaly mýty.</p>
                 </div>
                 <div>
@@ -116,7 +114,7 @@
             </div>
         <div class="carousel-container" data-aos="fade-up" data-aos-delay="200">
             <button class="nav-btn" onclick="scrollCarousel(-1)" aria-label="Předchozí">❮</button>
-            <div class="povesti-track" id="track">
+            <div class="povesti-track" id="track" tabindex="0">
                 <div class="povest-item"><div class="povest-card"><img src="data/povesti/bivoj.webp" alt="O Bivojovi"><h3 class="pt-3">O Bivojovi</h3></div></div>
                 <div class="povest-item"><div class="povest-card"><img src="data/povesti/blanicti.webp" alt="Blaničtí rytíři"><h3 class="pt-3">Blaničtí rytíři</h3></div></div>
                 <div class="povest-item"><div class="povest-card"><img src="data/povesti/cech.webp" alt="O Čechovi"><h3 class="pt-3">O Čechovi</h3></div></div>
@@ -151,7 +149,7 @@
                         <input type="text" name="zapletka" class="form-control" placeholder="O hledání železné roury..." required>
                     </div>
                     <button type="submit" class="btn-image mt-3" style="border: none; background: none; padding: 0;">
-                        <img src="data/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
+                        <img src="data/tlacitka/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
                     </button>
                 </form>
             </div>
@@ -167,11 +165,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="vysledekModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="vysledekModal" tabindex="-1" aria-labelledby="Pověst" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered modal-lg" data-aos="zoom-in">
             <div class="modal-content" style="background: transparent; border: none;">
                 <div class="pergamen-container">
-                    <img src="data/zrušit.webp" class="custom-close" data-bs-dismiss="modal" alt="Zavřít">
+                    <img src="data/tlacitka/zrušit.webp" class="custom-close" data-bs-dismiss="modal" alt="Zavřít">
                     <h5 class="saga-title">Zápis v tajné kronice</h5>
                     <div class="modal-body" id="vystupText"></div>
                 </div>
@@ -190,7 +188,7 @@
             <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card h-100 border-0 bg-transparent"> 
                     <div class="card-body p-4 card-pergamen">
-                        <h5 class="card-title fw-bold text-center">Václav Vaněk</h5>
+                        <h4 class="card-title fw-bold text-center">Václav Vaněk</h4>
                         <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
                     </div>
                 </div>
@@ -198,7 +196,7 @@
             <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="card h-100 border-0 bg-transparent"> 
                     <div class="card-body p-4 card-pergamen">
-                        <h5 class="card-title fw-bold text-center">Zdeněk Peterka</h5>
+                        <h4 class="card-title fw-bold text-center">Zdeněk Peterka</h4>
                         <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
                     </div>
                 </div>
@@ -206,7 +204,7 @@
             <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
                 <div class="card h-100 border-0 bg-transparent"> 
                     <div class="card-body p-4 card-pergamen">
-                        <h5 class="card-title fw-bold text-center">Štěpán Karoch</h5>
+                        <h4 class="card-title fw-bold text-center">Štěpán Karoch</h4>
                         <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
                     </div>
                 </div>
@@ -214,7 +212,7 @@
         </div>
     </div>
 
-<div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="GDPR" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content custom-parchment-box">
             <div class="modal-body p-4 p-md-5">
@@ -259,10 +257,10 @@
 
                 <div class="modal-footer-btns mt-4">
                     <button type="button" class="img-btn-link" data-bs-dismiss="modal">
-                        <img src="data/souhlas.webp" alt="Souhlasím">
+                        <img src="data/tlacitka/souhlas.webp" alt="Souhlasím">
                     </button>
                     <button type="button" class="img-btn-link">
-                        <img src="data/n_souhlas.webp" alt="Nesouhlasím">
+                        <img src="data/tlacitka/n_souhlas.webp" alt="Nesouhlasím">
                     </button>
                 </div>
             </div>
@@ -270,7 +268,7 @@
     </div>
 </div>
 
-    <div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-labelledby="Cookies" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content custom-parchment-box">
                 <div class="modal-body p-4 p-md-5">
@@ -294,10 +292,10 @@
                     </div>
                     <div class="modal-footer-btns mt-4">
                         <button type="button" class="img-btn-link" data-bs-dismiss="modal">
-                            <img src="data/souhlasit.webp" alt="Ponechat">
+                            <img src="data/tlacitka/souhlasit.webp" alt="Ponechat">
                         </button>
                         <button type="button" class="img-btn-link" id="btn-revoke-everything">
-                            <img src="data/nesouhlas.webp" alt="Odebrat">
+                            <img src="data/tlacitka/nesouhlas.webp" alt="Odebrat">
                         </button>
                     </div>
                 </div>
@@ -322,11 +320,18 @@
             </div>
             <div class="col-lg-8 text-center" data-aos="fade-left">
                 <h2 class="mb-4">MAPA POVĚSTÍ</h2>
-                <div class="overflow-hidden">
-                    <img src="data/mapa.webp" class="img-fluid w-100" alt="Mapa">
-                </div>
+                    <div class="map-wrapper">
+                        <img src="data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
+                        <a href="cech/cech.html" class="map-point pt-orange pos-1" aria-label="O Čechovi"><span class="custom-tooltip">O Čechovi</span></a>
+                        <a href="krok/krok.html" class="map-point pt-yellow pos-2" aria-label="O Krokovi a jeho dcerách"><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
+                        <a href="bruncvik/bruncvik.html" class="map-point pt-darkred pos-3" aria-label="O Bruncvíkovi"><span class="custom-tooltip">O Bruncvíkovi</span></a>
+                        <a href="libuse/libuse.html" class="map-point pt-green pos-4" onclick="randomRedirect(event, 'libuse/libuse.html', 'semik/semik.html')" aria-label="Pověst o Libuši nebo o Horymírovi"><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
+                        <a href="bivoj/bivoj.html" class="map-point pt-lightblue pos-5" aria-label="O Bivojovi"><span class="custom-tooltip">O Bivojovi</span></a>
+                        <a href="haviri/haviri.html" class="map-point pt-purple pos-6" aria-label="Kurnohorští havíři"><span class="custom-tooltip">Kutnohorští havíři</span></a>
+                        <a href="rytiri/rytiri.html" class="map-point pt-white pos-7" aria-label="Blaničtí rytíři"><span class="custom-tooltip">Blaničtí rytíři</span></a>
+                        <a href="zizka/zizka.html" class="map-point pt-blue pos-8" aria-label="O Žižkovi"><span class="custom-tooltip">O Žižkovi</span></a>
+                    </div>
             </div>
-        </div>
     </section>
 
     <hr data-aos="fade-up" id="menu6">
@@ -337,7 +342,7 @@
                 <a href="https://www.kutnahora.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="100"><img src="data/sponzori/hora.webp" alt="Město 1"></a>
                 <a href="https://www.mesto-trebenice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="200"><img src="data/sponzori/trebenice.webp" alt="Město 2"></a>
                 <a href="https://www.mesto-milovice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="300"><img src="data/sponzori/milovice.webp" alt="Město 3"></a>
-                <a href="https://prague.eu/en/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="400"><img src="data/sponzori/praha.webp" alt="Sponzor 1"></a>
+                <a href="https://www.getyourguide.com/cs-cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="400"><img src="data/sponzori/gyg.webp" alt="Sponzor 1"></a>
                 <a href="https://www.regiontourist.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="500"><img src="data/sponzori/regiontourist.webp" alt="Sponzor 2"></a>
                 <a href="https://www.kudyznudy.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="600"><img src="data/sponzori/kudy_z_nudy.webp" alt="Sponzor 3"></a>
             </div>
@@ -349,7 +354,7 @@
         </div>
     </section>
 
-    <div id="platebniModal" class="modal">
+    <div id="platebniModal" class="modal" tabindex="-1" aria-labelledby="QR" aria-hidden="false">
         <div class="modal-obsah">
             <span class="zavrit" onclick="zavritModal()">&times;</span>
             <h2>Podpořit projekt</h2>
@@ -375,34 +380,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-responsive">
-            <div class="modal-content border-0 bg-transparent"> 
-                <div class="modal-body p-0 position-relative">
-                    <img src="data/cookies.webp" alt="Nastavení soukromí" class="img-fluid w-100">
-                    <div class="cookie-overlay-buttons">
-                        <button type="button" class="img-btn" data-bs-dismiss="modal"><img src="data/souhlasit.webp" alt="Ponechat"></button>
-                        <button type="button" class="img-btn" id="btn-revoke-everything"><img src="data/nesouhlas.webp" alt="Odebrat"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg modal-gdpr modal-dialog-responsive">
-            <div class="modal-content border-0 bg-transparent">
-                <div class="modal-body p-0 position-relative">
-                    <img src="data/ochrana.webp" alt="Zásady GDPR" class="img-fluid w-100">
-                    <div class="gdpr-overlay-buttons">
-                        <button type="button" class="img-btn" data-bs-dismiss="modal"><img src="data/souhlas.webp" alt="Souhlasím"></button>
-                        <button type="button" class="img-btn" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal"><img src="data/n_souhlas.webp" alt="Nesouhlasím"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="custom-ribbon text-center py-5">
         <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Bude zde nějaky text?</span>
     </div>
@@ -412,29 +389,29 @@
             <div class="row g-5 align-items-start">
                 <div class="col-lg-3 col-md-6 order-2 order-lg-1">
                     <div class="ps-lg-3">
-                        <h5 class="fw-bold mb-4">Kontakt</h5>
+                        <h3 class="h5 fw-bold mb-4">Kontakt</h3>
                         <div class="mb-4">
                             <p class="mb-1 fw-semibold text-dark">Sídlo společnosti</p>
                             <p class="text-muted mb-0 small">Kutnohorská 40, Kolín 280 02</p>
                         </div>
                         <div class="mb-4">
                             <p class="mb-1 fw-semibold text-dark">Jednatel</p>
-                            <p class="text-muted mb-0 small">Václav Vaněk, +420 676 767 676</p>
+                            <p class="text-muted mb-0 small">Václav Vaněk, +420 658 854 817</p>
                             <a href="mailto:info.povestnik@seznam.cz" class="footer-link small">info.povestnik@seznam.cz</a>
                         </div>
                         <div class="d-flex gap-3 pt-2">
-                            <a href="https://www.tiktok.com/@povestnik" class="socky-link"><img src="data/tiktok.webp" class="socky-icon" alt="TikTok"></a>
-                            <a href="https://www.instagram.com/povestnik" class="socky-link"><img src="data/instagram.webp" class="socky-icon" alt="Instagram"></a>
-                            <a href="https://x.com/Povestnik11" class="socky-link"><img src="data/X.webp" class="socky-icon" alt="X"></a>
+                            <a href="https://www.tiktok.com/@povestnik" class="socky-link"><img src="data/tlacitka/tiktok.webp" class="socky-icon" alt="TikTok"></a>
+                            <a href="https://www.instagram.com/povestnik" class="socky-link"><img src="data/tlacitka/instagram.webp" class="socky-icon" alt="Instagram"></a>
+                            <a href="https://x.com/Povestnik11" class="socky-link"><img src="data/tlacitka/X.webp" class="socky-icon" alt="X"></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-12 order-1 order-lg-2">
-                    <h5 class="fw-bold mb-3">Kde nás najdete</h5>
+                            <h3 class="h5 fw-bold mb-3">Kde nás najdete</h3>
                     <div id="historical-map" class="shadow-sm rounded"></div>
                 </div>
                 <div class="col-lg-4 col-md-6 order-3 order-lg-3">
-                    <h5 class="fw-bold mb-4">Napište nám</h5>
+                    <h3 class="h5 fw-bold mb-4">Napište nám</h3>
                     <form id="questionForm">
                         <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Váš e-mail" required></div>
                         <div class="mb-3"><textarea name="message" class="form-control" rows="3" placeholder="Jaký je váš dotaz?" required></textarea></div>
@@ -450,7 +427,7 @@
                 <div class="col-md-6 text-center text-md-end">
                     <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
                     <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Cookies</a>
-                    <a href="login.php" class="footer-link small"> Admin</a>
+                    <a href="login.php" class="footer-link small">Admin</a>
                 </div>
             </div>
         </div>

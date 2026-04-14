@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
-
+@font-face {
+    font-family: 'bootstrap-icons';
+    src: url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?1bb8886...') format('woff2');
+    font-display: swap !important; 
+}
 hr {
     border: none;         
     height: 50px;          
@@ -17,8 +21,34 @@ body{
     background-image: url('data/pozadi.webp'); 
   background-size: cover;
 }
+
 .nav-item a, .navbar-brand, .modern-burger {
     color: white !important;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+
+.navbar-nav .nav-link {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 1rem;  
+    margin-right: 1rem;  
+    display: inline-block; 
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0px;      
+    left: 0;
+    background-color: white; 
+    transition: width 0.5s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
 }
 .modern-burger {
     width: 30px;
@@ -299,6 +329,105 @@ body{
 .bg-transparent {
   background-color: transparent !important;
 }
+
+/* SEKCE S Mapou */
+
+.map-container {
+    position: relative;
+    display: inline-block;
+    width: 100%; 
+    max-width: 1000px; 
+}
+
+.map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.map-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden; 
+}
+
+.map-point {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%); 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    transition: transform 0.2s ease-in-out;
+}
+
+.map-point:hover {
+    transform: translate(-50%, -50%) scale(1.3);
+    z-index: 20;
+}
+
+.custom-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 28px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    color: #212529;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e0e0e0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none; 
+}
+
+.custom-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.map-point:hover .custom-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.pt-orange    { background-color: #ff8c00; }
+.pt-yellow    { background-color: #ffff00; }
+.pt-darkred   { background-color: #800000; }
+.pt-green     { background-color: #28a745; }
+.pt-lightblue { background-color: #00bfff; }
+.pt-purple    { background-color: #9932cc; }
+.pt-blue      { background-color: #0000ff; }
+.pt-white     { background-color: #ffffff; }
+
+.pos-1 { top: 23%; left: 32%; }
+.pos-2 { top: 33%; left: 32%; }
+.pos-3 { top: 40%; left: 35%; }
+.pos-4 { top: 43%; left: 37%; }
+.pos-5 { top: 47%; left: 37%; }
+.pos-6 { top: 50%; left: 48%; }
+.pos-7 { top: 62%; left: 42%; }
+.pos-8 { top: 67%; left: 40%; }
+
+
+
+
+
+
+
 
 /* PODPOŘIT */
 
