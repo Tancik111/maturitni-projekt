@@ -17,9 +17,9 @@ hr {
     max-height: 200px;
 }
 body{
-  font-family: "Eagle Lake", serif;
+    font-family: "Eagle Lake", serif;
     background-image: url('data/pozadi.webp'); 
-  background-size: cover;
+    background-size: cover;
 }
 
 .nav-item a, .navbar-brand, .modern-burger {
@@ -31,8 +31,8 @@ body{
 .navbar-nav .nav-link {
     padding-left: 0 !important;
     padding-right: 0 !important;
-    margin-left: 1rem;  
-    margin-right: 1rem;  
+    margin-left: 0.5rem;  
+    margin-right: 0.5rem;  
     display: inline-block; 
 }
 
@@ -113,7 +113,7 @@ body{
 }
 
 .scroll-arrow span {
-    left: 50% !important        ;
+    left: 50% !important;
     position: absolute;
     width: 30px;
     height: 30px;
@@ -244,7 +244,7 @@ body{
 .btn-text-original {
     transition: opacity 0.3s ease;
 }
-      
+
 .pergamen-container {
     background: url('data/pozadi.webp') no-repeat center center;
     background-size: 100% 100%;
@@ -413,6 +413,9 @@ body{
 .pt-blue      { background-color: #0000ff; }
 .pt-white     { background-color: #ffffff; }
 
+.pt{
+    background-color: #790409;
+}
 .pos-1 { top: 23%; left: 32%; }
 .pos-2 { top: 33%; left: 32%; }
 .pos-3 { top: 40%; left: 35%; }
@@ -762,7 +765,6 @@ footer a,
         font-size: 1.4rem;
     }
     .custom-parchment-box {
-        /* Na mobilech zmírníme asymetrii pro lepší čitelnost */
         border-radius: 15px !important;
     }
 }
