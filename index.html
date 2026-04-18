@@ -23,7 +23,6 @@
     <link rel="shortcut icon" href="data/favi.ico" type="image/x-icon">
 </head>
 <body>
-
  <nav id="mainNavbar" class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="index.html"><h2>Pověstník</h2></a>
@@ -81,7 +80,7 @@
     <section class="container my-5 py-4 overflow-hidden" id="menu1">
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <img src="data/nadpisy/o_nas.webp" alt="O nás" class="img-fluid nadpis" data-aos="fade-up">
+                <img src="data/nadpisy/poslani.webp" alt="O nás" class="img-fluid nadpis" data-aos="fade-up">
             </div>
         </div>
         <div class="row align-items-center">
@@ -134,15 +133,20 @@
                 <form id="povestForm">
                     <div class="mb-3">
                         <label for="misto-deje" class="form-label fw-bold">Místo děje:</label>
-                        <input type="text" id="misto-deje" name="misto" class="form-control" placeholder="Na kolínském nádraží" required autocomplete="street-address">
+                        <input type="text" id="misto-deje" name="misto" class="form-control" placeholder="V rozvalinách kláštera, kam se ani slunce neodváží zasvítit..." required autocomplete="street-address">
                     </div>
                     <div class="mb-3">
                         <label for="hlavni-postava" class="form-label fw-bold">Hlavní postavy:</label>
-                        <input type="text" id="hlavni-postava" name="postava" class="form-control" placeholder="Pan Zbraněk" required autocomplete="name">
+                        <input type="text" id="hlavni-postava" name="postava" class="form-control" placeholder="Zakletý mnich a dívka s čistým srdcem..." required autocomplete="name">
                     </div>
                     <div class="mb-3">
                         <label for="zapletka" class="form-label fw-bold">O čem to bude vyprávět:</label>
-                        <input type="text" id="zapletka" name="zapletka" class="form-control" placeholder="O hledání železné roury..." required autocomplete="off">
+                        <input type="text" id="zapletka" name="zapletka" class="form-control" placeholder="O rituálu, který omylem probudil stíny..." required autocomplete="off">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn-image mt-3">
+                            <img src="data/tlacitka/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
+                        </button>
                     </div>
                 </form>
             </div>
@@ -186,7 +190,7 @@
                 <div class="card h-100 border-0 bg-transparent"> 
                     <div class="card-body p-4 card-pergamen">
                         <h4 class="card-title fw-bold text-center">Václav Vaněk</h4>
-                        <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+                        <p class="card-text text-muted text-center">Zastává pozici hlavního designéra a grafika zodpovědného za kompletní vizuální podobu našeho webu.</p>
                     </div>
                 </div>
             </div>
@@ -194,7 +198,7 @@
                 <div class="card h-100 border-0 bg-transparent"> 
                     <div class="card-body p-4 card-pergamen">
                         <h4 class="card-title fw-bold text-center">Zdeněk Peterka</h4>
-                        <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+                        <p class="card-text text-muted text-center">Působí jako hlavní koordinátor celého projektu a zároveň jako programátor.</p>
                     </div>
                 </div>
             </div>
@@ -202,7 +206,7 @@
                 <div class="card h-100 border-0 bg-transparent"> 
                     <div class="card-body p-4 card-pergamen">
                         <h4 class="card-title fw-bold text-center">Štěpán Karoch</h4>
-                        <p class="card-text text-muted text-center">Text o tom jak absolutně zatím netuším co zde mám napsat.</p>
+                        <p class="card-text text-muted text-center">Je naším hlavním programátorem, který se stará o technickou architekturu a stabilitu celého webu.</p>
                     </div>
                 </div>
             </div>
@@ -315,7 +319,7 @@
                 <a href="cech/cech.html" class="map-point pos-1" aria-label="Microsite Čech"><i class="bi bi-geo-alt-fill" ></i><span class="custom-tooltip">O Čechovi</span></a>
                 <a href="krok/krok.html" class="map-point pos-2" aria-label="Microsite Krok"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
                 <a href="bruncvik/bruncvik.html" class="map-point pos-3" aria-label="Microsite Bruncvík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bruncvíkovi</span></a>
-                <a href="#" class="map-point pos-4" aria-label="Microsite Libuše a Šemík" onclick="randomRedirect(event, 'libuse/libuse.html', 'semik/semik.html')"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
+                <a href="#" class="map-point pos-4 random-link" data-url1="libuse/libuse.html" data-url2="semik/semik.html" aria-label="Microsite Libuše a Šemík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
                 <a href="bivoj/bivoj.html" class="map-point pos-5" aria-label="Microsite Bivoj"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bivojovi</span></a>
                 <a href="haviri/haviri.html" class="map-point pos-6" aria-label="Microsite Havíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Kutnohorští havíři</span></a>
                 <a href="rytiri/rytiri.html" class="map-point pos-7" aria-label="Microsite Rytíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Blaničtí rytíři</span></a>
@@ -366,7 +370,7 @@
 </div>
 
 <div class="custom-ribbon text-center py-5">
-    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Bude zde nějaky text?</span>
+    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Sdílejte náš příběh</span>
 </div>
 
 <div id="cookie-bar" class="cookie-simple-bar bg-dark text-white p-3 shadow-lg">
@@ -406,7 +410,7 @@
         </div>
     </div>
 <button class="radio-trigger-clean" onclick="togglePanel()">
-        <img src="data/tlacitka/vytvorit_povest.webp" alt="Rádio">
+        <img src="data/tlacitka/harfa2.png" alt="Rádio">
     </button>
 </div>
 

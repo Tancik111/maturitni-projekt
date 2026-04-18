@@ -705,3 +705,150 @@ background: none;
     filter: hue-rotate(160deg) saturate(0.5) brightness(0.7);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ZÁKLADNÍ KONTEJNER */
+.medieval-radio-container {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transition: bottom 0.3s ease;
+}
+
+/* POZADÍ PANELU (PERGAMEN) */
+.parchment-bg {
+    background-color: #e4d1b9;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.05) 100%), url('https://www.transparenttextures.com/patterns/old-map.png');
+    border: 1px solid #c4b494;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    width: 260px;
+    box-shadow: -5px 5px 20px rgba(0,0,0,0.4);
+    color: #4a332d;
+    display: none;
+}
+
+.radio-expanded.active { 
+    display: block; 
+    animation: medievalSlideIn 0.3s ease-out; 
+}
+
+.controls-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.controls-center button {
+    background: none;
+    border: none;
+    color: #4a332d;
+    padding: 0;
+}
+
+.nav-btn { font-size: 2rem; }
+.main-play { font-size: 3.5rem; }
+
+.medieval-range {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+}
+
+.medieval-range::-webkit-slider-runnable-track {
+    background: rgba(74, 51, 45, 0.2);
+    border-radius: 10px;
+    height: 6px;
+}
+
+.medieval-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    background: #4a332d;
+    border-radius: 50%;
+    margin-top: -5px;
+}
+
+.medieval-range::-moz-range-track { 
+    background: rgba(74, 51, 45, 0.2); 
+    height: 6px; 
+    border-radius: 10px; 
+}
+
+.medieval-range::-moz-range-thumb { 
+    background: #4a332d; 
+    border: none; 
+    height: 16px; 
+    width: 16px; 
+    border-radius: 50%; 
+}
+
+/* HLASITOST A ČAS */
+.volume-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.vol-slider { width: 100px !important; }
+
+.track-info-mini {
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-bottom: 1px dashed rgba(74, 51, 45, 0.3);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.time-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* SPOUŠTĚCÍ TLAČÍTKO */
+.radio-trigger-clean {
+    background: none;
+    border: none;
+    width: 120px;
+    height: 120px;
+}
+
+.radio-trigger-clean img { width: 100%; height: 100%; object-fit: contain; }
+
+@keyframes medievalSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

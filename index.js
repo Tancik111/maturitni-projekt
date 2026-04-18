@@ -198,11 +198,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Toto je funkce, která zajišťuje vybrání náhodné stránky u společného bodu
 
-function randomRedirect(event, url1, url2) {
-    event.preventDefault(); 
-    const finalUrl = Math.random() < 0.5 ? url1 : url2;
-    window.location.href = finalUrl;
-}
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('.random-link');
+    if (link) {
+        e.preventDefault();
+        const url1 = link.dataset.url1;
+        const url2 = link.dataset.url2;
+        const finalUrl = Math.random() < 0.5 ? url1 : url2;
+        window.location.href = finalUrl;
+    }
+});
 
 
 // Tento kód se týká hudebního přehrávače, který umožňuje přehrávat skladby z předdefinovaného playlistu. Uživatel může ovládat přehrávání, posouvat se mezi skladbami, upravovat hlasitost a sledovat aktuální čas a délku skladby. Kromě toho se automaticky přechází na další skladbu po skončení aktuální a zobrazuje se název právě přehrávané skladby.
@@ -228,8 +233,16 @@ const playlist = [
     { title: "Příslib nového věku", src: "data/hudba/18.opus" }
 ];
 
-let currentIdx = 0;
+// --- NAČTENÍ STAVU Z LOCALSTORAGE ---
+let currentIdx = parseInt(localStorage.getItem('radio_idx')) || 0;
+let savedTime = parseFloat(localStorage.getItem('radio_time')) || 0;
+let wasPlaying = localStorage.getItem('radio_playing') === 'true';
+let savedVolume = localStorage.getItem('radio_volume') || 0.20;
+
 const audio = new Audio(playlist[currentIdx].src);
+audio.currentTime = savedTime;
+audio.volume = savedVolume;
+
 const playBtn = document.getElementById('playBtn');
 const trackTitle = document.getElementById('trackTitle');
 const radioPanel = document.getElementById('radioPanel');
@@ -237,10 +250,39 @@ const progressSlider = document.getElementById('progressSlider');
 const volumeSlider = document.getElementById('volumeSlider');
 const currentTimeEl = document.getElementById('currentTime');
 const durationTimeEl = document.getElementById('durationTime');
-audio.volume = volumeSlider.value;
+
+volumeSlider.value = audio.volume;
+
+// Funkce pro uložení všeho důležitého
+function saveRadioState() {
+    localStorage.setItem('radio_idx', currentIdx);
+    localStorage.setItem('radio_time', audio.currentTime);
+    localStorage.setItem('radio_playing', !audio.paused);
+    localStorage.setItem('radio_volume', audio.volume);
+}
+
+// Pokus o automatické spuštění (s ošetřením blokace prohlížečem)
+function attemptPlay() {
+    if (wasPlaying) {
+        audio.play().then(() => {
+            playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+        }).catch(err => {
+            console.log("Autoplay čeká na interakci uživatele.");
+            // Pokud autoplay selže, zkusíme to znovu při prvním kliknutí na dokument
+            document.addEventListener('click', () => {
+                if (wasPlaying && audio.paused) {
+                    audio.play();
+                    playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                }
+            }, { once: true });
+        });
+    }
+}
+
 function togglePanel() {
     radioPanel.classList.toggle('active');
 }
+
 function togglePlay() {
     if (audio.paused) {
         audio.play();
@@ -249,13 +291,16 @@ function togglePlay() {
         audio.pause();
         playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
     }
+    saveRadioState();
 }
+
 function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00";
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
+
 audio.ontimeupdate = () => {
     if (!isNaN(audio.duration)) {
         const progress = (audio.currentTime / audio.duration) * 100;
@@ -263,30 +308,48 @@ audio.ontimeupdate = () => {
         currentTimeEl.innerText = formatTime(audio.currentTime);
         durationTimeEl.innerText = formatTime(audio.duration);
     }
+    // Ukládáme čas každou vteřinu (nenáročné, spolehlivé)
+    if (Math.floor(audio.currentTime) % 2 === 0) { 
+        saveRadioState(); 
+    }
 };
+
 progressSlider.oninput = () => {
     const seekTime = (progressSlider.value / 100) * audio.duration;
     audio.currentTime = seekTime;
+    saveRadioState();
 };
+
 volumeSlider.oninput = () => {
     audio.volume = volumeSlider.value;
+    saveRadioState();
 };
+
 function updateTitle() {
     trackTitle.innerText = playlist[currentIdx].title;
 }
+
 function nextTrack() {
     currentIdx = (currentIdx + 1) % playlist.length;
     changeTrack();
 }
+
 function prevTrack() {
     currentIdx = (currentIdx - 1 + playlist.length) % playlist.length;
     changeTrack();
 }
+
 function changeTrack() {
     audio.src = playlist[currentIdx].src;
+    audio.currentTime = 0; // Nová skladba od nuly
     audio.play();
     playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
     updateTitle();
+    saveRadioState();
 }
+
 audio.onended = nextTrack;
+
+// Inicializace po načtení
 updateTitle();
+attemptPlay();

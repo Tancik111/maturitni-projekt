@@ -63,7 +63,6 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    cursor: pointer;
 }
         .modern-burger span {
             display: block;
@@ -174,7 +173,6 @@ body{
     background: none;
     border: none;
     font-size: 4rem;
-    cursor: pointer;
     padding: 0 20px;
     z-index: 10;
     user-select: none;
@@ -206,7 +204,6 @@ body{
         }
 .generate-btn{
     width:230px;
-    cursor:pointer;
 }
 .btn-text-loading {
     transition: opacity 0.3s ease;
@@ -239,7 +236,6 @@ body{
     top: 30px;
     right: 40px;
     width: 50px;
-    cursor: pointer;
     z-index: 10;
 }
 
@@ -407,7 +403,6 @@ body{
     background: none;
     border: none;
     padding: 0;
-    cursor: pointer;
     outline: none;
     transition: transform 0.2s ease;
 }
@@ -467,7 +462,6 @@ body{
     width: 100%; 
     max-width: 250px;
     border-radius: 4px;
-    cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
     transition: transform 0.2s;
@@ -572,7 +566,6 @@ body{
     background: none !important;
     border: none !important;
     padding: 0 !important;
-    cursor: pointer;
     width: 35%; 
     max-width: 180px;
     min-width: 140px;
@@ -671,6 +664,9 @@ footer a,
     .mapa{
         display: none;
     }
+    .radio-trigger-clean{
+        display: none;
+    }
 }
 
 /* MEDIA QUERIES - Minimální šířka 768px ------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -762,8 +758,8 @@ footer a,
 /* ZÁKLADNÍ KONTEJNER */
 .medieval-radio-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 0px;
+    right: 0px;
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -771,22 +767,10 @@ footer a,
     transition: bottom 0.3s ease;
 }
 
-/* MOBILNÍ ÚPRAVA */
-@media (max-width: 768px) {
-    .medieval-radio-container {
-        bottom: 80px; 
-        right: 15px;
-    }
-    .parchment-bg {
-        width: 220px;
-    }
-}
-
 /* POZADÍ PANELU (PERGAMEN) */
 .parchment-bg {
     background-color: #e4d1b9;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.05) 100%), 
-                      url('https://www.transparenttextures.com/patterns/old-map.png');
+    background-image: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.05) 100%), url('https://www.transparenttextures.com/patterns/old-map.png');
     border: 1px solid #c4b494;
     border-radius: 5px;
     padding: 15px;
@@ -802,7 +786,6 @@ footer a,
     animation: medievalSlideIn 0.3s ease-out; 
 }
 
-/* OVLÁDACÍ TLAČÍTKA */
 .controls-center {
     display: flex;
     align-items: center;
@@ -815,19 +798,16 @@ footer a,
     background: none;
     border: none;
     color: #4a332d;
-    cursor: pointer;
     padding: 0;
 }
 
 .nav-btn { font-size: 2rem; }
 .main-play { font-size: 3.5rem; }
 
-/* SLIDERY (ODSTRANĚNÍ MODRÉ) */
 .medieval-range {
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
-    cursor: pointer;
     outline: none;
     width: 100%;
 }
@@ -893,9 +873,8 @@ footer a,
 .radio-trigger-clean {
     background: none;
     border: none;
-    width: 65px;
-    height: 65px;
-    cursor: pointer;
+    width: 120px;
+    height: 120px;
 }
 
 .radio-trigger-clean img { width: 100%; height: 100%; object-fit: contain; }
