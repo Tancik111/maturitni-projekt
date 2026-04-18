@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Objevte zapomenuté pověsti českého kraje v moderním hávu. Prozkoumejte interaktivní mapu legend nebo si nechte od AI vyprávět svůj vlastní příběh z tajné kroniky.">
     <title>Pověstník</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?1bb88869c979cf3276cd86b24056291a" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
     <link rel="preload" href="index.css" as="style">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
     <link rel="shortcut icon" href="data/favi.ico" type="image/x-icon">
 </head>
 <body>
@@ -122,7 +124,7 @@
         </div>
     </section>
 
-            <div class="col-12 text-center">
+            <div class="col-12 text-center" id="menu3">
                 <img src="data/nadpisy/nadpis_ai.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
             </div>
     <div class="container my-4 legend-container border border-3 border-brown bez-borderu" data-aos="zoom-in">
@@ -131,21 +133,16 @@
             <div class="col-md-6 p-4 border-end border-3 border-brown bez-borderu" data-aos="fade-right" data-aos-delay="300">
                 <form id="povestForm">
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Místo děje:</label>
-                        <input type="text" name="misto" class="form-control" placeholder="Na kolínském nádraží" required>
+                        <label for="misto-deje" class="form-label fw-bold">Místo děje:</label>
+                        <input type="text" id="misto-deje" name="misto" class="form-control" placeholder="Na kolínském nádraží" required autocomplete="street-address">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-bold">Hlavní postavy:</label>
-                        <input type="text" name="postava" class="form-control" placeholder="Pan Zbraněk" required>
+                        <label for="hlavni-postava" class="form-label fw-bold">Hlavní postavy:</label>
+                        <input type="text" id="hlavni-postava" name="postava" class="form-control" placeholder="Pan Zbraněk" required autocomplete="name">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-bold">O čem to bude vyprávět:</label>
-                        <input type="text" name="zapletka" class="form-control" placeholder="O hledání železné roury..." required>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn-image mt-3">
-                            <img src="data/tlacitka/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
-                        </button>
+                        <label for="zapletka" class="form-label fw-bold">O čem to bude vyprávět:</label>
+                        <input type="text" id="zapletka" name="zapletka" class="form-control" placeholder="O hledání železné roury..." required autocomplete="off">
                     </div>
                 </form>
             </div>
@@ -175,7 +172,7 @@
 
 
 
-    <div class="col-12 text-center">
+    <div class="col-12 text-center" id="menu4">
         <img src="data/nadpisy/nadpis_tym.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
     </div>
 
@@ -301,7 +298,7 @@
 <section class="container py-5 overflow-hidden">
     <div class="row g-5">
         <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
-            <h2 class="mb-4">HODNOCENÍ OD VÁS</h2>
+            <img src="data/nadpisy/hodnoceni.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
             <div class="mb-5 review-box p-3">
                 <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
                 <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
@@ -312,7 +309,7 @@
             </div>
         </div>
         <div class="col-lg-8 text-center mapa" data-aos="fade-left">
-            <h2 class="mb-4">MAPA POVĚSTÍ</h2>
+                    <img src="data/nadpisy/mapa.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
             <div class="map-wrapper">
                 <img src="data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
                 <a href="cech/cech.html" class="map-point pos-1" aria-label="Microsite Čech"><i class="bi bi-geo-alt-fill" ></i><span class="custom-tooltip">O Čechovi</span></a>
@@ -397,7 +394,7 @@
         </div>
         <div class="volume-row">
             <i class="bi bi-volume-down-fill"></i>
-            <input type="range" id="volumeSlider" class="medieval-range vol-slider" min="0" max="1" step="0.01" value="0.7">
+            <input type="range" id="volumeSlider" class="medieval-range vol-slider" min="0" max="1" step="0.01" value="0.20">
             <i class="bi bi-volume-up-fill"></i>
         </div>
         <div class="progress-section">
@@ -444,11 +441,17 @@
                 </div>
                 <div class="col-lg-4 col-md-6 order-3 order-lg-3">
                     <h3 class="h5 fw-bold mb-4">Napište nám</h3>
-                    <form id="questionForm">
-                        <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Váš e-mail" required></div>
-                        <div class="mb-3"><textarea name="message" class="form-control" rows="3" placeholder="Jaký je váš dotaz?" required></textarea></div>
-                        <button type="submit" class="btn w-100 py-2 fw-bold shadow-sm">Odeslat zprávu</button>
-                    </form>
+                        <form id="questionForm">
+                            <div class="mb-3">
+                                <label for="footer-email" class="visually-hidden">Váš e-mail</label>
+                                <input type="email" id="footer-email" name="email" class="form-control" placeholder="Váš e-mail" required autocomplete="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="footer-message" class="visually-hidden">Váš dotaz</label>
+                                <textarea id="footer-message" name="message" class="form-control" rows="3" placeholder="Jaký je váš dotaz?" required autocomplete="off"></textarea>
+                            </div>
+                            <button type="submit" class="btn w-100 py-2 fw-bold shadow-sm">Odeslat zprávu</button>
+                        </form>
                     <div id="responseMessage">Dotaz byl úspěšně odeslán!</div>
                 </div>
             </div>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Objevte zapomenuté pověsti českého kraje v moderním hávu. Prozkoumejte interaktivní mapu legend nebo si nechte od AI vyprávět svůj vlastní příběh z tajné kroniky.">
+    <title>Pověstník</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?1bb88869c979cf3276cd86b24056291a" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="css.css" as="style">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="shortcut icon" href="../data/favi.ico" type="image/x-icon">
+</head>
+<body>
+
+<!-- Responsivní navigační lišta v Bootstrapu 5, fixovaná na horním okraji přes úvodní sekci. Obsahuje animované burger menu a navigační odkazy na kotvy hlavní stránky. -->   
+<nav id="mainNavbar" class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="../index.html"><h2>Pověstník</h2></a>
+        
+        <button class="navbar-toggler border-0 p-0 shadow-none collapsed" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#mainMenu" 
+                aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="modern-burger">
+                <span></span>
+                <span></span>
+                <span></span> </div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav ms-auto fs-5">
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu1" >Naše poslání</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu2">Pověsti</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu3">Vlastní pověst</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu4">O nás</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu5">Mapa</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html#menu6">Sponzoři</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Úvodní blok na celou výšku obrazovky s obrázkem na pozadí a texty animovanými přes knihovnu AOS. Obsahuje navigační šipku pro snazší skrolování dolů. -->   
+<section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white">
+    <img src="./data/blanik.webp" alt="Pozadí" class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
+    <div class="position-absolute w-100 h-100 top-0 start-0 hero-overlay z-0"></div>
+    <div class="container position-relative z-1 text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="fw-bold mb-3 hero-nadpis text-uppercase" data-aos="zoom-out" data-aos-duration="2000">Blaničtí rytíři</h1>
+                <div class="hero-divider mb-4 mx-auto" data-aos="zoom-in-left" data-aos-delay="600"></div>
+                <p class="lead mb-5 hero-subtext" data-aos="fade-up" data-aos-delay="900">
+                        Až bude zemi nejhůře, <span class="text-accent">vojsko pod horou</span> procitne
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-1">
+        <a href="#sipka" class="scroll-arrow" aria-label="Posunout dolů">
+            <span></span>
+            <span></span>
+        </a>
+    </div>
+</section>
+
+<!-- Červený pás s textem rozdělující hero sekci a první část s informacemi -->   
+<div class="custom-ribbon text-center py-5">
+    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Oživujeme příběhy našich předků</span>
+</div>
+
+<!-- Informační sekce, která kombinuje pergameny s postavami. Využívá mřížku Bootstrapu pro rozložení prvků, které se na mobilních zařízeních řadí pod sebe. Všechny obrázky jsou animovány pomocí AOS pro dynamický efekt při skrolování. -->   
+<section class="info-section py-5" id="sipka">
+    <div class="container">
+        
+        <div class="row mb-5">
+            <div class="col-12 d-flex justify-content-center" data-aos="zoom-in">
+                <img src="./data/informace.webp" alt="Základní informace" class="img-fluid main-header-img">
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-4 text-center text-md-start">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <div class="parchment-container">
+                    <img src="./data/blanicti1.webp" alt="Kdo byli rytíři" class="img-fluid" data-aos="fade-right">
+                    </div>
+            </div>
+            <div class="col-md-5  justify-content-center">
+                <img src="./data/ObrBlanik.webp" alt="Postava" class="img-fluid character-img" data-aos="fade-left" data-aos-delay="300">
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-4 text-center text-md-start flex-column-reverse flex-md-row ">
+            <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+                <img src="./data/ObrBlanik1.webp" alt="Rytíř" id="line-rytir" class="img-fluid character-img " style="max-width: 100%;" data-aos="fade-right">
+            </div>
+            <div class="col-md-7">
+                <div class="parchment-container">
+                    <img src="./data/blanicti2.webp" alt="Magická místa" class="img-fluid" data-aos="fade-left">
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center text-center text-md-start">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <div class="parchment-container">
+                    <img src="./data/blanicti3.webp" alt="Symbolika Prahy" class="img-fluid" data-aos="fade-right">
+                </div>
+            </div>
+            <div class="col-md-5  justify-content-center">
+                <img src="./data/ObrBlanik3.webp" alt="Postava" id="line-nekdo" class="img-fluid character-img" data-aos="fade-left" data-aos-delay="300">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Interaktivní sekce „Kronika“, která simuluje listování knihou pomocí vrstvených elementů. Obsah je rozdělen na statické okraje a pohyblivé stránky s oboustranným obsahem. Pro lepší přístupnost na mobilních zařízeních jsou texty uloženy v elementech <details>-->   
+<section class="kronika-section" data-aos="zoom-in">
+    <div class="container d-flex flex-column align-items-center">
+        
+        <img src="./data/kronika.webp" alt="Z kronik" class="img-fluid mb-5 kronika-header">
+        <div class="parchment-frame">
+            <div class="book-viewport">
+                <div class="book-container" id="book">
+                    
+                    <div class="page-static-left">
+                        <details class="mobile-accordion" open>
+                            <summary><h2>Blaničtí rytíři</h2></summary>
+                            <div class="content-wrapper">
+                                <p>V hlubinách hory Blaník spí vojsko, které čeká na svou chvíli. Nejsmutnější legenda, která však dává naději v dobách nejtěžších. Listujte vpravo a nahlédněte do nitra hory, kde čas plyne jinak a kde spravedlnost čeká na své probuzení.</p>
+                                <span class="page-num">1</span>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="page" style="z-index: 5;">
+                        <div class="front">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Spánek hrdinů</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Uprostřed hory, v obrovské kamenné síni, sedí u stolu svatý Václav se svými nejvěrnějšími rytíři. Jejich koně jsou osedláni, meče nabroušeny a prapory připraveny. Legenda praví, že jeden rok uvnitř hory je pro lidi venku dlouhý jako celé století.</p>
+                                    <span class="page-num">2</span>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="back">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Tajemství hory</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Občas se stane, že se hora otevře a smrtelník nahlédne dovnitř. Traduje se příběh o děvečce, která v hoře uklízela a myslela si, že uběhla hodina, zatímco venku ji rodina hledala celé roky. Rytíři spí hlubokým spánkem, ale jejich smysly jsou stále bdělé.</p>
+                                    <span class="page-num">3</span>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="page" style="z-index: 4;">
+                        <div class="front">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Znamení hůry</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Existují znamení, která ohlásí příchod rytířů. Až se suchý dub na vrcholu hory zazelená a pramen pod ním vytryskne čistou vodou, bude jasné, že čas spánku skončil. Tehdy se hora zachvěje a z jejích útrob se ozve dusot tisíců koňských kopyt.</p>
+                                    <span class="page-num">4</span>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="back">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Až bude nejhůře</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Svatý Václav na bílém koni povede rytíře do vítězné bitvy. Vojsko vyjede na pomoc zemi ve chvíli, kdy nepřátelé budou nejsilnější a naděje nejslabší. Rytíři zahnali každého, kdo by chtěl ublížit českému národu, a vrátili do země mír a svobodu.</p>
+                                    <span class="page-num">5</span>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="page" style="z-index: 3;">
+                        <div class="front">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Věrnost Václava</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Kníže Václav, patron naší země, neopouští svůj lid ani po smrti. Jeho přítomnost v hoře je slibem, že český národ nikdy nezanikne. Rytíři nejsou jen válečníci, jsou to strážci našich hodnot, pravdy a práva, které dřímá v samotném srdci hory.</p>
+                                    <span class="page-num">6</span>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="back">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Víra v budoucnost</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Lidé po staletí vzhlíží k Blaníku s úctou. I v dobách válek a útlaku byla legenda o spícím vojsku zdrojem síly. Připomíná nám, že spravedlnost může být na čas skryta před zraky světa, ale nakonec se vždy ukáže v plné síle a slávě.</p>
+                                    <span class="page-num">7</span>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="page" style="z-index: 2;">
+                        <div class="front">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Duch národa</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Hora Blaník není jen geologickým útvarem, je to duchovní symbol. Rytíři v ní představují nezlomnost české povahy. Učí nás trpělivosti a víře, že i když je země v tísni, někde v hloubi stále existuje síla schopná ji zachránit a znovu pozvednout.</p>
+                                    <span class="page-num">8</span>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="back">
+                            <details class="mobile-accordion" open>
+                                <summary><h2>Věčná naděje</h2></summary>
+                                <div class="content-wrapper">
+                                    <p>Naděje, která neumírá. Blaník zůstává strážcem našeho národa i v těch nejtemnějších časech historie. Až příště půjdete kolem této hory, naslouchejte tichu – možná uslyšíte tiché řinčení zbroje těch, kteří na nás stále dohlížejí.</p>
+                                    <span class="page-num">9</span>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="page-static-right">
+                        <details class="mobile-accordion" open>
+                            <summary><h3>Zde končí zápis</h3></summary>
+                            <div class="content-wrapper">
+                                <div class="end-content">
+                                    <p>Pověst o Blanických rytířích zůstává symbolem naší naděje a ochrany v dobách nejtěžších zkoušek.</p>
+                                    <hr>
+                                    <p style="font-size: 0.8rem;">Pro více informací o našem spolku a dalších pověstech navštivte sekci "O nás".</p>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sekce s interaktivní mapou, která je zasazena do stylového kontejneru s texturou a vnitřním stínem pro dosažení historického vzhledu. Obsahuje tematické záhlaví a samotný prvek mapy, přičemž vše je doplněno o instrukci pro uživatele k interakci s body zájmu -->   
+<section class="mapa-section py-5">
+    <div class="container d-flex flex-column align-items-center">
+        
+        <div class="text-center mb-5">
+            <img src="./data/mapa_blanik.webp" alt="Legendy Blaníku" class="img-fluid mapa-header" data-aos="fade-up">
+        </div>
+
+        <div class="old-school-container" data-aos="fade-right" data-aos-duration="1500">
+            <div id="map"></div>
+            
+            <div class="map-overlay-texture"></div>
+            <div class="inner-shadow"></div>
+        </div>
+
+        <p class="text-center mt-4 text-muted fst-italic">
+            Pověsti se nedrží hranic ani přesných metrů. Naše mapa vás provede místy, která k legendám neodmyslitelně patří. Berte ji jako zajímavou trasu k objevování stop naší minulosti v moderní krajině.
+        </p>
+
+    </div>
+</section>
+
+<!-- Checklist jako obrázek ve formátu .webp -->   
+<section class="checklist-section container-fluid px-0">
+    <div class="checklist-bg d-flex justify-content-center align-items-center">
+        <img src="data/potreby.webp" alt="Poutníkův checklist" class="img-fluid w-100">
+    </div>
+</section>
+
+<!-- Modální okno s informacemi o ochraně osobních údajů (GDPR), které je vizuálně stylizováno do podoby pergamenu. Obsahuje strukturovaný text rozdělený do tematických sekcí (správce, účel zpracování, práva uživatele) a využívá grafická tlačítka pro potvrzení souhlasu či nesouhlasu-->   
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="GDPR" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content custom-parchment-box">
+            <div class="modal-body p-4 p-md-5">
+                <h2 class="modal-title-medieval text-center mb-4">Ochrana soukromí a osobních údajů (GDPR)</h2>
+                <div class="modal-text-content">
+                    <p class="lead text-center">Vítejte u projektu Pověstník. Vaše soukromí chráníme stejně pečlivě jako naše pověsti. Data zpracováváme jen v nezbytném rozsahu.</p>
+                    <div class="medieval-section">
+                        <h5>1. Správce údajů</h5>
+                        <ul>
+                            <li><b>Projekt:</b> Pověstník (Kutnohorská 40, 280 02 Kolín)</li>
+                            <li><b>Web:</b> karoch.soskolin.eu/maturita/index.html</li>
+                            <li><b>Kontakt:</b> info.povestnik@seznam.cz</li>
+                        </ul>
+                    </div>
+                    <div class="medieval-section">
+                        <h5>2. Jaké údaje sbíráme a proč?</h5>
+                        <ul>
+                            <li><b>Komunikace:</b> Jméno a e-mail z formulářů a zpráv ukládáme pouze pro vyřízení vašeho dotazu (max. 1 rok).</li>
+                            <li><b>Bezpečnost & AI:</b> Pro ochranu webu a AI technologií před útoky a přetížením evidujeme vaši IP adresu (max. 90 dnů).</li>
+                            <li><b>Podpora (Dary):</b> U dobrovolných plateb evidujeme jméno plátce a číslo účtu pro účely účetnictví (zákonná povinnost 10 let).</li>
+                        </ul>
+                    </div>
+                    <div class="medieval-section">
+                        <h5>3. Sdílení a zabezpečení</h5>
+                        <p>Data neprodáváme. Přístup k nim mají pouze nezbytní partneři (hosting, banka, IT správa). Web je šifrován pomocí SSL.</p>
+                    </div>
+                    <div class="medieval-section">
+                        <h5>4. Vaše práva</h5>
+                        <p>Dle GDPR máte právo na přístup k údajům, jejich opravu, výmaz nebo vznesení námitky proti zpracování. Kontaktujte nás na výše uvedeném e-mailu.</p>
+                    </div>
+                    <div class="medieval-section">
+                        <h5>5. Odpovědnost</h5>
+                        <p>Trasy využíváte na vlastní odpovědnost. Neodpovídáme za stav cest v terénu ani za zásahy vyšší moci či nadpřirozených bytostí.</p>
+                    </div>
+                </div>
+                <div class="modal-footer-btns mt-4">
+                    <button type="button" class="img-btn-link" data-bs-dismiss="modal">
+                        <img src="../data/tlacitka/souhlas.webp" alt="Souhlasím">
+                    </button>
+                    <button type="button" class="img-btn-link">
+                        <img src="../data/tlacitka/n_souhlas.webp" alt="Nesouhlasím">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modální okno pro správu cookies a nastavení soukromí, které využívá stejný historický vizuální styl jako zbytek projektu. Informuje uživatele o nezbytných souborech cookies potřebných pro stabilitu serveru a ochranu interaktivních funkcí. Obsahuje dvě grafická tlačítka pro potvrzení nebo odebrání souhlasu, přičemž jedno z nich je napojeno na specifické ID pro následnou programovou manipulaci -->   
+<div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-labelledby="Cookies" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-parchment-box">
+            <div class="modal-body p-4 p-md-5">
+                <h2 class="modal-title-medieval text-center mb-4">Nastavení soukromí</h2>
+                <div class="modal-text-content">
+                    <p>Tyto cookies jsou pro chod webu kritické. Bez nich by stránka nemusela správně zobrazovat mapy nebo interaktivní prvky.</p>
+                    <div class="medieval-section">
+                        <h5>1. Účel</h5>
+                            <ul>
+                                <li>zajišťují stabilitu serveru</li>
+                                <li>chrání naše AI funkce před přetížením</li>
+                            </ul>
+                        </div>
+                        <div class="medieval-section">
+                            <h5>2. Právní základ</h5>
+                            <ul>
+                                <li>oprávněný zájem správce</li>
+                                <li>souhlas není vyžadován, ale informujeme vás</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer-btns mt-4">
+                        <button type="button" class="img-btn-link" data-bs-dismiss="modal">
+                            <img src="../data/tlacitka/souhlasit.webp" alt="Ponechat">
+                        </button>
+                        <button type="button" class="img-btn-link" id="btn-revoke-everything">
+                        <img src="../data/tlacitka/nesouhlas.webp" alt="Odebrat">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jednoduchá informační lišta pro správu cookies, která se zobrazuje na spodním okraji stránky. Využívá tmavý motiv Bootstrapu s flexbox rozložením pro zajištění responzivity. Obsahuje tlačítko pro rychlé udělení souhlasu a odkaz na detailní nastavení soukromí, který otevírá příslušné modální okno -->   
+<div id="cookie-bar" class="cookie-simple-bar bg-dark text-white p-3 shadow-lg">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+        <span>Tento web používá cookies pro zajištění nejlepšího zážitku.</span>
+        <div class="d-flex gap-2">
+            <button id="accept-cookies" class="btn btn-light btn-sm fw-bold">Souhlasím</button>
+            <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Nastavení</button>
+        </div>
+    </div>
+</div>
+
+<!-- Patička webu navržená s důrazem na přehlednost a responzivitu. Je rozdělena do tří hlavních sloupců obsahujících kontaktní údaje včetně sociálních sítí, interaktivní mapu sídla a kontaktní formulář pro dotazy uživatelů. Spodní lišta patičky zahrnuje právní informace (GDPR, Cookies), autorská práva a diskrétní odkaz pro administrátorské rozhraní. Celý blok automaticky vyplňuje zbývající prostor stránky díky využití flexboxu -->   
+<footer class="container-fluid py-5 mt-auto">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-3 col-md-6 order-2 order-lg-1">
+                <div class="ps-lg-3">
+                    <h3 class="h5 fw-bold mb-4">Kontakt</h3>
+                    <div class="mb-4">
+                        <p class="mb-1 fw-semibold text-dark">Sídlo společnosti</p>
+                        <p class="text-muted mb-0 small">Kutnohorská 40</p>
+                        <p class="text-muted mb-0 small">Kolín 280 02</p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mb-1 fw-semibold text-dark">Jednatel</p>
+                        <p class="text-muted mb-0 small">Václav Vaněk</p>
+                        <p class="text-muted mb-0 small">+420 658 854 817</p>
+                        <a href="mailto:info.povestnik@seznam.cz" class="footer-link small">info.povestnik@seznam.cz</a>
+                    </div>
+                    <div class="d-flex gap-3 pt-2">
+                        <a href="https://www.tiktok.com/@povestnik" class="socky-link"><img src="../data/tlacitka/tiktok.webp" class="socky-icon" alt="TikTok"></a>
+                        <a href="https://www.instagram.com/povestnik" class="socky-link"><img src="../data/tlacitka/instagram.webp" class="socky-icon" alt="Instagram"></a>
+                        <a href="https://x.com/Povestnik11" class="socky-link"><img src="../data/tlacitka/X.webp" class="socky-icon" alt="X"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 order-1 order-lg-2">
+                        <h3 class="h5 fw-bold mb-3">Kde nás najdete</h3>
+                <div id="historical-map" class="shadow-sm rounded"></div>
+            </div>
+            <div class="col-lg-4 col-md-6 order-3 order-lg-3">
+                <h3 class="h5 fw-bold mb-4">Napište nám</h3>
+                <form id="questionForm">
+                    <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Váš e-mail" required></div>
+                    <div class="mb-3"><textarea name="message" class="form-control" rows="3" placeholder="Jaký je váš dotaz?" required></textarea></div>
+                    <button type="submit" class="btn w-100 py-2 fw-bold shadow-sm">Odeslat zprávu</button>
+                </form>
+                <div id="responseMessage">Dotaz byl úspěšně odeslán!</div>
+            </div>
+        </div>
+        <div class="row mt-5 pt-4">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <span class="small text-muted">© 2026 Pověstník. Všechna práva vyhrazena.</span>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#privacyModal">GDPR</a>
+                <a href="#" class="footer-link small me-4" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Cookies</a>
+                <a href="../login.php" class="footer-link small">Admin</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Blok externích skriptů nezbytných pro plnou funkcionalitu webu -->   
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+<script src="js.js" defer></script>
+
+<!-- Script spojený s knihou na telefonu, konkrétně zavírání "akordeonu" -->           
+<script>
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.mobile-accordion').forEach(el => el.removeAttribute('open'));
+}
+</script>
+
+</body>
+</html>

@@ -125,47 +125,46 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
-// moje věci, pak se dokomentuje
-
+// V tomhle skriptu jsem naprogramoval logiku listování v 3D knize. Hlavní výzva byla v tom, aby se stránky při otáčení správně překrývaly, takže pomocí JavaScriptu v polovině animace dynamicky měním jejich z-index. Také jsem tam přidal postupné stínování, aby celá kronika působila jako reálný historický dokument.“
 
 document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page');
     const audio = document.getElementById('kronikaAudio');
     
-
     pages.forEach((page, index) => {
+        // Tady stránky skládám na sebe podle jejich pořadí (první musí být úplně nahoře)
         page.style.zIndex = pages.length - index + 1;
 
+        // Každé stránce vytvořím div pro stín, aby listování vypadalo prostorově
         const shadow = document.createElement('div');
         shadow.className = 'page-shadow';
         page.appendChild(shadow);
 
         page.addEventListener('click', () => {
-            if (audio) {
-                audio.currentTime = 0;
-                audio.play().catch(() => {});
-            }
-
             const currentShadow = page.querySelector('.page-shadow');
 
+            // Kontroluji, jestli je stránka už otočená (třída flipped)
             if (page.classList.contains('flipped')) {
+                // zavírání stránky (zpět doprava)
                 page.classList.remove('flipped');
                 
-       
+                // Krátce zvýším viditelnost stínu během pohybu
                 currentShadow.style.opacity = '0.5';
                 setTimeout(() => { currentShadow.style.opacity = '0'; }, 800);
 
+                // Z-index vracím až po 800ms (v půlce animace), aby se listy vizuálně nesrazily
                 setTimeout(() => {
                     page.style.zIndex = pages.length - index + 1;
                 }, 800);
             } else {
-                // Otevírání stránky (doleva)
+                // otevírání stránky (doleva)
                 page.classList.add('flipped');
 
+                // Efekt ohybu papíru pomocí průhlednosti stínu
                 currentShadow.style.opacity = '0.5';
                 setTimeout(() => { currentShadow.style.opacity = '0'; }, 800);
 
+                // Stránce, která se právě otočila, musím zvednout z-index, aby překryla levou stranu
                 setTimeout(() => {
                     page.style.zIndex = 20 + index;
                 }, 800);
@@ -174,43 +173,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// V této části kódu pracuji s knihovnou Leaflet pro zobrazení interaktivní mapy Vyšehradu. Abych nemusel psát kód pro každý bod zvlášť, uložil jsem si všechna zajímavá místa do pole objektů a pomocí cyklu forEach je automaticky vykresluji na mapu i s jejich popisky. Také jsem vypnul zoomování kolečkem myši, aby se uživatelům stránka při skrolování nechtěně nezasekávala na mapě.“
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Kontroluji, jestli prvek pro mapu na stránce vůbec existuje, abych předešel chybám
     if (document.getElementById('map')) {
+        
+        // Inicializace mapy: nastavuji střed na Vyšehrad a úroveň přiblížení
+        // scrollWheelZoom: false zajišťuje, že mapa nebude „krást“ skrolování stránky
         var map = L.map('map', {
             scrollWheelZoom: false 
         }).setView([50.0644, 14.4195], 16);
 
+        // Načítám mapové dlaždice (vzhled mapy) – zvolil jsem styl 'hot', který se lépe hodí k legendám
         L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; Staré pověsti české'
         }).addTo(map);
 
+        // Všechna místa mám v poli, což je přehlednější pro správu a rozšiřování obsahu
         var points = [
             {
-                lat: 50.0641, lng: 14.4172, 
+                lat: 50.0635, lng: 14.4160, 
                 title: "Libušina lázeň", 
                 desc: "Zřícenina na skále, odkud kněžna věštila slávu Prahy."
             },
             {
-                lat: 50.0647, lng: 14.4201, 
+                lat: 50.0644, lng: 14.4180, 
                 title: "Bazilika sv. Petra a Pavla", 
                 desc: "Místo, kde odpočívají největší osobnosti českých dějin."
             },
             {
-                lat: 50.0632, lng: 14.4208, 
+                lat: 50.0643, lng: 14.4193, 
                 title: "Čertovy sloupy", 
                 desc: "Tři kamenné sloupy, které sem podle legendy vzteky odhodil čert."
             },
             {
-                lat: 50.0652, lng: 14.4194, 
+                lat: 50.0638, lng: 14.4165, 
                 title: "Vyšehradská skála", 
                 desc: "Místo, odkud bájný Šemík skočil do Vltavy."
             }
         ];
 
+        // Procházím pole bodů a pro každý vytvořím značku (marker) a informační okno (popup)
         points.forEach(function(p) {
             var marker = L.marker([p.lat, p.lng]).addTo(map);
+            // V bindPopup skládám HTML obsah, který se zobrazí po kliknutí na bod
             marker.bindPopup("<h5 style='margin-bottom:5px; font-weight:bold;'>" + p.title + "</h5><p style='margin:0;'>" + p.desc + "</p>");
         });
     }

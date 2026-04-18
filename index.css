@@ -21,7 +21,7 @@ body{
     font-family: "Eagle Lake", serif;
     background-image: url('data/pozadi.webp'); 
     background-size: cover;
-    zoom: 1.1; 
+    zoom: 1.05; 
      /* Timhle lze zoomovat web aby byl vetsi, nutno otestovat */
 }
 
@@ -283,7 +283,11 @@ body{
 }
 
 /* SEKCE S MAPOU A RECENZEMI - Nastavení pozice bodů na mapě, Nastavení vzhledu popisků -------------------------------------------------------------------------------------------------------------*/
-
+.nadpis-mapa {
+    height: 140px; /* Vyzkoušejte hodnotu mezi 60px - 100px */
+    width: auto;
+    object-fit: contain;
+}
 .map-wrapper {
     position: relative;
     display: block;
