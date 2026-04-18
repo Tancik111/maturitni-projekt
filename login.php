@@ -52,6 +52,7 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vstup do kroniky | Pověstník</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="data/favi.ico" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
         body {

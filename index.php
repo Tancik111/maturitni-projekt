@@ -1,5 +1,3 @@
-<!-- Tento kód je zodpovědný za zpracování požadavků na generování pověstí pomocí API Groq. Nejprve načítá konfiguraci z .env souboru, poté se připojuje k databázi a kontroluje počet požadavků z dané IP adresy za posledních 10 minut, aby se zabránilo zneužití. Následně sanitizuje vstupní data, kontroluje je proti blacklistu nevhodných slov a pokud jsou data v pořádku, posílá požadavek na API Groq pro generování pověsti. Výsledek se vrací jako JSON odpověď. Pokud dojde k chybě, vrací se chybová zpráva. -->
-
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -80,7 +78,7 @@ try {
         }
     }
 
-    $system_prompt = "Jsi mistr vypravěč starých českých pověstí. Piš tajuplně, archaicky, bezpečně. Rozsah 250 slov. Na konci dej Ponaučení.";
+    $system_prompt = "Jsi mistr vypravěč starých českých pověstí. Piš tajuplně, archaicky, bezpečně. Rozsah 350 slov. Na konci dej Ponaučení.";
     $user_prompt = "Napiš pověst. Místo: $misto. Postavy: $postava. Zápletka: $zapletka.";
 
     $ch = curl_init('https://api.groq.com/openai/v1/chat/completions');
@@ -97,7 +95,7 @@ try {
             array('role' => 'system', 'content' => $system_prompt),
             array('role' => 'user', 'content' => $user_prompt)
         ),
-        'max_tokens' => 1200, 
+        'max_tokens' => 2000, 
         'temperature' => 0.75
     ));
     

@@ -198,9 +198,100 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Toto je funkce, která zajišťuje vybrání náhodné stránky u společného bodu
 
-
 function randomRedirect(event, url1, url2) {
     event.preventDefault(); 
     const finalUrl = Math.random() < 0.5 ? url1 : url2;
     window.location.href = finalUrl;
 }
+
+
+
+
+
+
+
+
+
+
+
+const playlist = [
+    { title: "Středověká krčma", src: "song.mp3" },
+    { title: "Rytířský turnaj", src: "cesta/k/hudbe2.mp3" },
+    { title: "Tajemný les", src: "cesta/k/hudbe3.mp3" }
+];
+
+let currentIdx = 0;
+const audio = new Audio(playlist[currentIdx].src);
+
+const playBtn = document.getElementById('playBtn');
+const trackTitle = document.getElementById('trackTitle');
+const radioPanel = document.getElementById('radioPanel');
+const progressSlider = document.getElementById('progressSlider');
+const volumeSlider = document.getElementById('volumeSlider');
+const currentTimeEl = document.getElementById('currentTime');
+const durationTimeEl = document.getElementById('durationTime');
+
+audio.volume = volumeSlider.value;
+
+function togglePanel() {
+    radioPanel.classList.toggle('active');
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    } else {
+        audio.pause();
+        playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+    }
+}
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "0:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+audio.ontimeupdate = () => {
+    if (!isNaN(audio.duration)) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressSlider.value = progress;
+        currentTimeEl.innerText = formatTime(audio.currentTime);
+        durationTimeEl.innerText = formatTime(audio.duration);
+    }
+};
+
+progressSlider.oninput = () => {
+    const seekTime = (progressSlider.value / 100) * audio.duration;
+    audio.currentTime = seekTime;
+};
+
+volumeSlider.oninput = () => {
+    audio.volume = volumeSlider.value;
+};
+
+function updateTitle() {
+    trackTitle.innerText = playlist[currentIdx].title;
+}
+
+function nextTrack() {
+    currentIdx = (currentIdx + 1) % playlist.length;
+    changeTrack();
+}
+
+function prevTrack() {
+    currentIdx = (currentIdx - 1 + playlist.length) % playlist.length;
+    changeTrack();
+}
+
+function changeTrack() {
+    audio.src = playlist[currentIdx].src;
+    audio.play();
+    playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    updateTitle();
+}
+
+audio.onended = nextTrack;
+updateTitle();

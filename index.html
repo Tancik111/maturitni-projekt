@@ -49,7 +49,7 @@
 </nav>
 
     <section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white">
-        <video autoplay muted loop playsinline class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
+        <video autoplay muted loop playsinline muted class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
             <source src="data/video.webm" type="video/mp4">
         </video>
         <div class="position-absolute w-100 h-100 top-0 start-0 hero-overlay z-0"></div>
@@ -99,7 +99,7 @@
         </div>
     </section>
 
-    <hr data-aos="fade-up"  class="py-5">
+
 
     <section class="container py-5 overflow-hidden" id="menu2">
             <div class="col-12 text-center">
@@ -108,25 +108,24 @@
         <div class="carousel-container" data-aos="fade-up" data-aos-delay="200">
             <button class="nav-btn" onclick="scrollCarousel(-1)" aria-label="Předchozí">❮</button>
             <div class="povesti-track" id="track" tabindex="0">
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/bivoj.webp" alt="O Bivojovi"><h3 class="pt-3">O Bivojovi</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/blanicti.webp" alt="Blaničtí rytíři"><h3 class="pt-3">Blaničtí rytíři</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/cech.webp" alt="O Čechovi"><h3 class="pt-3">O Čechovi</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/haviri.webp" alt="Kutnohorští havíři"><h3 class="pt-3">Kutnohorští havíři</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/krok.webp" alt="O Krokovi"><h3 class="pt-3">O Krokovi a dcerách</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/libuse.webp" alt="O Libuši"><h3 class="pt-3">O Libuši</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/semik.webp" alt="O Semíkovi"><h3 class="pt-3">O Horymírovi</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/zizka.webp" alt="O Žižkovi"><h3 class="pt-3">O Žižkovi</h3></div></div>
-                <div class="povest-item"><div class="povest-card"><img src="data/povesti/bruncvik.webp" alt="O Bruncvíkovi"><h3 class="pt-3">O Bruncvíkovi</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="bivoj/bivoj.html"><img src="data/povesti/bivoj.webp" alt="O Bivojovi"></a><h3 class="pt-3">O Bivojovi</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="rytiri/rytiri.html"><img src="data/povesti/blanicti.webp" alt="Blaničtí rytíři"></a><h3 class="pt-3">Blaničtí rytíři</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="cech/cech.html"><img src="data/povesti/cech.webp" alt="O Čechovi"></a><h3 class="pt-3">O Čechovi</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="haviri/haviri.html"><img src="data/povesti/haviri.webp" alt="Kutnohorští havíři"></a><h3 class="pt-3">Kutnohorští havíři</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="krok/krok.html"><img src="data/povesti/krok.webp" alt="O Krokovi"></a><h3 class="pt-3">O Krokovi a dcerách</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="libuse/libuse.html"><img src="data/povesti/libuse.webp" alt="O Libuši"></a><h3 class="pt-3">O Libuši</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="semik/semik.html"><img src="data/povesti/semik.webp" alt="O Semíkovi"></a><h3 class="pt-3">O Horymírovi</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="zizka/zizka.html"><img src="data/povesti/zizka.webp" alt="O Žižkovi"></a><h3 class="pt-3">O Žižkovi</h3></div></div>
+                <div class="povest-item"><div class="povest-card"><a href="bruncvik/bruncvik.html"><img src="data/povesti/bruncvik.webp" alt="O Bruncvíkovi"></a><h3 class="pt-3">O Bruncvíkovi</h3></div></div>
             </div>
             <button class="nav-btn" onclick="scrollCarousel(1)" aria-label="Další">❯</button>
         </div>
     </section>
 
-    <hr data-aos="fade-up" id="menu3"  class="py-5">
             <div class="col-12 text-center">
                 <img src="data/nadpisy/nadpis_ai.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
             </div>
-    <div class="container my-4 legend-container border border-3 border-brown" data-aos="zoom-in">
+    <div class="container my-4 legend-container border border-3 border-brown bez-borderu" data-aos="zoom-in">
         <div class="text-center fs-3 fw-bold py-2 border-bottom border-3 border-brown">Vytvořte si vlastní pověst</div>
         <div class="row g-0">
             <div class="col-md-6 p-4 border-end border-3 border-brown bez-borderu" data-aos="fade-right" data-aos-delay="300">
@@ -143,16 +142,18 @@
                         <label class="form-label fw-bold">O čem to bude vyprávět:</label>
                         <input type="text" name="zapletka" class="form-control" placeholder="O hledání železné roury..." required>
                     </div>
-                    <button type="submit" class="btn-image mt-3" style="border: none; background: none; padding: 0;">
-                        <img src="data/tlacitka/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
-                    </button>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn-image mt-3">
+                            <img src="data/tlacitka/vytvorit_povest.webp" class="img-fluid generate-btn" id="genBtn" alt="Generovat">
+                        </button>
+                    </div>
                 </form>
             </div>
             <div class="col-md-6 p-4 d-flex align-items-start" data-aos="fade-left" data-aos-delay="500">
                 <ul class="rules-text flex-grow-1 me-4">
                     <li>Pro vygenerování pověsti musí být vyplněno: hlavní postava, místo děje a zápletka.</li>
                     <li>AI může vygenerovat maximálně 5 pověstí za 10 minut.</li>
-                    <li>xxx</li>
+                    <li>AI obsahuje filtr na vulgární a jinak nevhodná slova.</li>
                     <li>Text se generuje v délce cca 300-350 slov.</li>
                 </ul>
                 <img src="data/pravidla.webp" class="img-fluid lev" alt="lev" style="max-width:300px; height:auto;">
@@ -172,7 +173,7 @@
         </div>
     </div>
 
-    <hr data-aos="fade-up" id="menu4"  class="py-5">
+
 
     <div class="col-12 text-center">
         <img src="data/nadpisy/nadpis_tym.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
@@ -295,38 +296,38 @@
         </div>
     </div>
 
-    <hr data-aos="fade-up" id="menu5" class="py-5">
 
-    <section class="container py-5 overflow-hidden">
-        <div class="row g-5">
-            <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
-                <h2 class="mb-4">HODNOCENÍ OD VÁS</h2>
-                <div class="mb-5 review-box p-3">
-                    <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                    <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
-                </div>
-                <div class="review-box p-3">
-                    <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                    <p>"Baví mě ten koncept – interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. Jen tak dál!"</p>
-                </div>
-            </div>
-            <div class="col-lg-8 text-center" data-aos="fade-left">
-                <h2 class="mb-4">MAPA POVĚSTÍ</h2>
-                    <div class="map-wrapper">
-                        <img src="data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
-                        <a href="cech/cech.html" class="map-point pt pos-1" aria-label="O Čechovi"><span class="custom-tooltip">O Čechovi</span></a>
-                        <a href="krok/krok.html" class="map-point pt pos-2" aria-label="O Krokovi a jeho dcerách"><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
-                        <a href="bruncvik/bruncvik.html" class="map-point pt pos-3" aria-label="O Bruncvíkovi"><span class="custom-tooltip">O Bruncvíkovi</span></a>
-                        <a href="libuse/libuse.html" class="map-point pt pos-4" onclick="randomRedirect(event, 'libuse/libuse.html', 'semik/semik.html')" aria-label="Pověst o Libuši nebo o Horymírovi"><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
-                        <a href="bivoj/bivoj.html" class="map-point pt pos-5" aria-label="O Bivojovi"><span class="custom-tooltip">O Bivojovi</span></a>
-                        <a href="haviri/haviri.html" class="map-point pt pos-6" aria-label="Kurnohorští havíři"><span class="custom-tooltip">Kutnohorští havíři</span></a>
-                        <a href="rytiri/rytiri.html" class="map-point pt pos-7" aria-label="Blaničtí rytíři"><span class="custom-tooltip">Blaničtí rytíři</span></a>
-                        <a href="zizka/zizka.html" class="map-point pt pos-8" aria-label="O Žižkovi"><span class="custom-tooltip">O Žižkovi</span></a>
-                    </div>
-            </div>
-    </section>
 
-    <hr data-aos="fade-up" id="menu6" class="py-5">
+<section class="container py-5 overflow-hidden">
+    <div class="row g-5">
+        <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
+            <h2 class="mb-4">HODNOCENÍ OD VÁS</h2>
+            <div class="mb-5 review-box p-3">
+                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
+            </div>
+            <div class="review-box p-3">
+                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>"Baví mě ten koncept – interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. Jen tak dál!"</p>
+            </div>
+        </div>
+        <div class="col-lg-8 text-center mapa" data-aos="fade-left">
+            <h2 class="mb-4">MAPA POVĚSTÍ</h2>
+            <div class="map-wrapper">
+                <img src="data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
+                <a href="cech/cech.html" class="map-point pos-1" aria-label="Microsite Čech"><i class="bi bi-geo-alt-fill" ></i><span class="custom-tooltip">O Čechovi</span></a>
+                <a href="krok/krok.html" class="map-point pos-2" aria-label="Microsite Krok"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
+                <a href="bruncvik/bruncvik.html" class="map-point pos-3" aria-label="Microsite Bruncvík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bruncvíkovi</span></a>
+                <a href="#" class="map-point pos-4" aria-label="Microsite Libuše a Šemík" onclick="randomRedirect(event, 'libuse/libuse.html', 'semik/semik.html')"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
+                <a href="bivoj/bivoj.html" class="map-point pos-5" aria-label="Microsite Bivoj"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bivojovi</span></a>
+                <a href="haviri/haviri.html" class="map-point pos-6" aria-label="Microsite Havíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Kutnohorští havíři</span></a>
+                <a href="rytiri/rytiri.html" class="map-point pos-7" aria-label="Microsite Rytíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Blaničtí rytíři</span></a>
+                <a href="zizka/zizka.html" class="map-point pos-8" aria-label="Microsite Žižka"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Žižkovi</span></a>
+            </div>
+        </div>
+</section>
+
+
 
             <div class="col-12 text-center">
                 <img src="data/nadpisy/nadpis_sponzori.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
@@ -351,35 +352,67 @@
         </div>
     </section>
 
-    <div id="platebniModal" class="modal" tabindex="-1" aria-labelledby="QR" aria-hidden="false">
-        <div class="modal-obsah">
-            <span class="zavrit" onclick="zavritModal()">&times;</span>
-            <h2>Podpořit projekt</h2>
-            <p>Zadejte částku v Kč:</p>
-            <div class="input-group">
-                <input type="number" id="castkaInput" value="200" min="10">
-            </div>
-            <button class="btn-update" onclick="generovatQR()">Zobrazit QR kód</button>
-            <div class="qr-vystup">
-                <img id="qrObrazek" src="" alt="QR Platba" style="display:none; max-width: 180px;">
-                <p id="nacitaciText">Zadejte částku...</p>
+<div id="platebniModal" class="modal" tabindex="-1" aria-labelledby="QR" aria-hidden="false">
+    <div class="modal-obsah">
+        <span class="zavrit" onclick="zavritModal()">&times;</span>
+        <h2>Podpořit projekt</h2>
+        <p>Zadejte částku v Kč:</p>
+        <div class="input-group">
+            <input type="number" id="castkaInput" value="200" min="10">
+        </div>
+        <button class="btn-update" onclick="generovatQR()">Zobrazit QR kód</button>
+        <div class="qr-vystup">
+            <img id="qrObrazek" src="" alt="QR Platba" style="display:none; max-width: 180px;">
+            <p id="nacitaciText">Zadejte částku...</p>
+        </div>
+    </div>
+</div>
+
+<div class="custom-ribbon text-center py-5">
+    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Bude zde nějaky text?</span>
+</div>
+
+<div id="cookie-bar" class="cookie-simple-bar bg-dark text-white p-3 shadow-lg">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+        <span>Tento web používá cookies pro zajištění nejlepšího zážitku.</span>
+        <div class="d-flex gap-2">
+            <button id="accept-cookies" class="btn btn-light btn-sm fw-bold">Souhlasím</button>
+            <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Nastavení</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="medieval-radio-container">
+    <div class="radio-expanded parchment-bg" id="radioPanel">
+        <div class="track-info-mini text-center">
+            <span id="trackTitle">Načítání barda...</span>
+        </div>
+        <div class="controls-center">
+            <button onclick="prevTrack()" class="nav-btn"><i class="bi bi-skip-start-fill"></i></button>
+            <button onclick="togglePlay()" id="playBtn" class="main-play"><i class="bi bi-play-fill"></i></button>
+            <button onclick="nextTrack()" class="nav-btn"><i class="bi bi-skip-end-fill"></i></button>
+        </div>
+        <div class="volume-row">
+            <i class="bi bi-volume-down-fill"></i>
+            <input type="range" id="volumeSlider" class="medieval-range vol-slider" min="0" max="1" step="0.01" value="0.7">
+            <i class="bi bi-volume-up-fill"></i>
+        </div>
+        <div class="progress-section">
+            <input type="range" id="progressSlider" class="medieval-range slider-large" value="0" step="0.1">
+            <div class="time-meta">
+                <span id="currentTime">0:00</span>
+                <span id="durationTime">0:00</span>
             </div>
         </div>
     </div>
+<button class="radio-trigger-clean" onclick="togglePanel()">
+        <img src="data/tlacitka/vytvorit_povest.webp" alt="Rádio">
+    </button>
+</div>
 
-    <div id="cookie-bar" class="cookie-simple-bar bg-dark text-white p-3 shadow-lg">
-        <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
-            <span>Tento web používá cookies pro zajištění nejlepšího zážitku.</span>
-            <div class="d-flex gap-2">
-                <button id="accept-cookies" class="btn btn-light btn-sm fw-bold">Souhlasím</button>
-                <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">Nastavení</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="custom-ribbon text-center py-5">
-        <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Bude zde nějaky text?</span>
-    </div>
 
     <footer class="container-fluid py-5 mt-auto">
         <div class="container">
