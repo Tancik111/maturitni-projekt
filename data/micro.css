@@ -360,6 +360,10 @@ footer a,
         height: 100vh !important;
         transition: opacity 0.4s ease !important;
     }
+    .parchment-frame{
+        background: none !important;
+    }
+ 
 }
 
 /* moje */
