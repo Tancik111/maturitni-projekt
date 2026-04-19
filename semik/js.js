@@ -223,3 +223,153 @@ var points = [
         });
     }
 });
+
+// Toto je funkce, která zajišťuje vybrání náhodné stránky u společného bodu
+
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('.random-link');
+    if (link) {
+        e.preventDefault();
+        const url1 = link.dataset.url1;
+        const url2 = link.dataset.url2;
+        const finalUrl = Math.random() < 0.5 ? url1 : url2;
+        window.location.href = finalUrl;
+    }
+});
+
+// Tento kód se týká hudebního přehrávače, který umožňuje přehrávat skladby z předdefinovaného playlistu. Uživatel může ovládat přehrávání, posouvat se mezi skladbami, upravovat hlasitost a sledovat aktuální čas a délku skladby. Kromě toho se automaticky přechází na další skladbu po skončení aktuální a zobrazuje se název právě přehrávané skladby.
+
+const playlist = [
+    { title: "Královský posel", src: "../data/hudba/1.opus" },
+    { title: "Úsvit nad knížectvím", src: "../data/hudba/2.opus" },
+    { title: "Poutníkova píseň", src: "../data/hudba/3.opus" },
+    { title: "Dvorská veselice", src: "../data/hudba/4.opus" },
+    { title: "Zlatý věk", src: "../data/hudba/5.opus" },
+    { title: "Šepot starých zdí", src: "../data/hudba/6.opus" },
+    { title: "Tržiště v podhradí", src: "../data/hudba/7.opus" },
+    { title: "Legenda o meči", src: "../data/hudba/8.opus" },
+    { title: "Stráž u ohniště", src: "../data/hudba/9.opus" },
+    { title: "Kronika zapomenutých časů", src: "../data/hudba/10.opus" },
+    { title: "Turnajové klání", src: "../data/hudba/11.opus" },
+    { title: "Královská cesta", src: "../data/hudba/12.opus" },
+    { title: "Balada o zapomenuté lásce", src: "../data/hudba/13.opus" },
+    { title: "Lov v hlubokých hvozdech", src: "../data/hudba/14.opus" },
+    { title: "U kulatého stolu", src: "../data/hudba/15.opus" },
+    { title: "Ozvěny bitevního pole", src: "../data/hudba/16.opus" },
+    { title: "Tanec v hodovní síni", src: "../data/hudba/17.opus" },
+    { title: "Příslib nového věku", src: "../data/hudba/18.opus" }
+];
+
+let currentIdx = parseInt(localStorage.getItem('radio_idx')) || 0;
+let savedTime = parseFloat(localStorage.getItem('radio_time')) || 0;
+let wasPlaying = localStorage.getItem('radio_playing') === 'true';
+let savedVolume = localStorage.getItem('radio_volume') || 0.20;
+
+const audio = new Audio(playlist[currentIdx].src);
+audio.currentTime = savedTime;
+audio.volume = savedVolume;
+
+const playBtn = document.getElementById('playBtn');
+const trackTitle = document.getElementById('trackTitle');
+const radioPanel = document.getElementById('radioPanel');
+const progressSlider = document.getElementById('progressSlider');
+const volumeSlider = document.getElementById('volumeSlider');
+const currentTimeEl = document.getElementById('currentTime');
+const durationTimeEl = document.getElementById('durationTime');
+
+volumeSlider.value = audio.volume;
+
+function saveRadioState() {
+    localStorage.setItem('radio_idx', currentIdx);
+    localStorage.setItem('radio_time', audio.currentTime);
+    localStorage.setItem('radio_playing', !audio.paused);
+    localStorage.setItem('radio_volume', audio.volume);
+}
+
+function attemptPlay() {
+    if (wasPlaying) {
+        audio.play().then(() => {
+            playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+        }).catch(err => {
+            console.log("Autoplay čeká na interakci uživatele.");
+            document.addEventListener('click', () => {
+                if (wasPlaying && audio.paused) {
+                    audio.play();
+                    playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+                }
+            }, { once: true });
+        });
+    }
+}
+
+function togglePanel() {
+    radioPanel.classList.toggle('active');
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    } else {
+        audio.pause();
+        playBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+    }
+    saveRadioState();
+}
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "0:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+audio.ontimeupdate = () => {
+    if (!isNaN(audio.duration)) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressSlider.value = progress;
+        currentTimeEl.innerText = formatTime(audio.currentTime);
+        durationTimeEl.innerText = formatTime(audio.duration);
+    }
+    if (Math.floor(audio.currentTime) % 2 === 0) { 
+        saveRadioState(); 
+    }
+};
+
+progressSlider.oninput = () => {
+    const seekTime = (progressSlider.value / 100) * audio.duration;
+    audio.currentTime = seekTime;
+    saveRadioState();
+};
+
+volumeSlider.oninput = () => {
+    audio.volume = volumeSlider.value;
+    saveRadioState();
+};
+
+function updateTitle() {
+    trackTitle.innerText = playlist[currentIdx].title;
+}
+
+function nextTrack() {
+    currentIdx = (currentIdx + 1) % playlist.length;
+    changeTrack();
+}
+
+function prevTrack() {
+    currentIdx = (currentIdx - 1 + playlist.length) % playlist.length;
+    changeTrack();
+}
+
+function changeTrack() {
+    audio.src = playlist[currentIdx].src;
+    audio.currentTime = 0; 
+    audio.play();
+    playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    updateTitle();
+    saveRadioState();
+}
+
+audio.onended = nextTrack;
+updateTitle();
+attemptPlay();

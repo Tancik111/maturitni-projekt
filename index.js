@@ -233,7 +233,6 @@ const playlist = [
     { title: "Příslib nového věku", src: "data/hudba/18.opus" }
 ];
 
-// --- NAČTENÍ STAVU Z LOCALSTORAGE ---
 let currentIdx = parseInt(localStorage.getItem('radio_idx')) || 0;
 let savedTime = parseFloat(localStorage.getItem('radio_time')) || 0;
 let wasPlaying = localStorage.getItem('radio_playing') === 'true';
@@ -253,7 +252,6 @@ const durationTimeEl = document.getElementById('durationTime');
 
 volumeSlider.value = audio.volume;
 
-// Funkce pro uložení všeho důležitého
 function saveRadioState() {
     localStorage.setItem('radio_idx', currentIdx);
     localStorage.setItem('radio_time', audio.currentTime);
@@ -261,14 +259,12 @@ function saveRadioState() {
     localStorage.setItem('radio_volume', audio.volume);
 }
 
-// Pokus o automatické spuštění (s ošetřením blokace prohlížečem)
 function attemptPlay() {
     if (wasPlaying) {
         audio.play().then(() => {
             playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
         }).catch(err => {
             console.log("Autoplay čeká na interakci uživatele.");
-            // Pokud autoplay selže, zkusíme to znovu při prvním kliknutí na dokument
             document.addEventListener('click', () => {
                 if (wasPlaying && audio.paused) {
                     audio.play();
@@ -308,7 +304,6 @@ audio.ontimeupdate = () => {
         currentTimeEl.innerText = formatTime(audio.currentTime);
         durationTimeEl.innerText = formatTime(audio.duration);
     }
-    // Ukládáme čas každou vteřinu (nenáročné, spolehlivé)
     if (Math.floor(audio.currentTime) % 2 === 0) { 
         saveRadioState(); 
     }
@@ -341,7 +336,7 @@ function prevTrack() {
 
 function changeTrack() {
     audio.src = playlist[currentIdx].src;
-    audio.currentTime = 0; // Nová skladba od nuly
+    audio.currentTime = 0; 
     audio.play();
     playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
     updateTitle();
@@ -349,7 +344,5 @@ function changeTrack() {
 }
 
 audio.onended = nextTrack;
-
-// Inicializace po načtení
 updateTitle();
 attemptPlay();

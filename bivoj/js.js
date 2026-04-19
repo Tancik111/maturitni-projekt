@@ -208,6 +208,21 @@ var points = [
     }
 });
 
+// Toto je funkce, která zajišťuje vybrání náhodné stránky u společného bodu
+
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('.random-link');
+    if (link) {
+        e.preventDefault();
+        const url1 = link.dataset.url1;
+        const url2 = link.dataset.url2;
+        const finalUrl = Math.random() < 0.5 ? url1 : url2;
+        window.location.href = finalUrl;
+    }
+});
+
+// Tento kód se týká hudebního přehrávače, který umožňuje přehrávat skladby z předdefinovaného playlistu. Uživatel může ovládat přehrávání, posouvat se mezi skladbami, upravovat hlasitost a sledovat aktuální čas a délku skladby. Kromě toho se automaticky přechází na další skladbu po skončení aktuální a zobrazuje se název právě přehrávané skladby.
+
 const playlist = [
     { title: "Královský posel", src: "../data/hudba/1.opus" },
     { title: "Úsvit nad knížectvím", src: "../data/hudba/2.opus" },
@@ -229,7 +244,6 @@ const playlist = [
     { title: "Příslib nového věku", src: "../data/hudba/18.opus" }
 ];
 
-// --- NAČTENÍ STAVU Z LOCALSTORAGE ---
 let currentIdx = parseInt(localStorage.getItem('radio_idx')) || 0;
 let savedTime = parseFloat(localStorage.getItem('radio_time')) || 0;
 let wasPlaying = localStorage.getItem('radio_playing') === 'true';
@@ -249,7 +263,6 @@ const durationTimeEl = document.getElementById('durationTime');
 
 volumeSlider.value = audio.volume;
 
-// Funkce pro uložení všeho důležitého
 function saveRadioState() {
     localStorage.setItem('radio_idx', currentIdx);
     localStorage.setItem('radio_time', audio.currentTime);
@@ -257,14 +270,12 @@ function saveRadioState() {
     localStorage.setItem('radio_volume', audio.volume);
 }
 
-// Pokus o automatické spuštění (s ošetřením blokace prohlížečem)
 function attemptPlay() {
     if (wasPlaying) {
         audio.play().then(() => {
             playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
         }).catch(err => {
             console.log("Autoplay čeká na interakci uživatele.");
-            // Pokud autoplay selže, zkusíme to znovu při prvním kliknutí na dokument
             document.addEventListener('click', () => {
                 if (wasPlaying && audio.paused) {
                     audio.play();
@@ -304,7 +315,6 @@ audio.ontimeupdate = () => {
         currentTimeEl.innerText = formatTime(audio.currentTime);
         durationTimeEl.innerText = formatTime(audio.duration);
     }
-    // Ukládáme čas každou vteřinu (nenáročné, spolehlivé)
     if (Math.floor(audio.currentTime) % 2 === 0) { 
         saveRadioState(); 
     }
@@ -337,7 +347,7 @@ function prevTrack() {
 
 function changeTrack() {
     audio.src = playlist[currentIdx].src;
-    audio.currentTime = 0; // Nová skladba od nuly
+    audio.currentTime = 0; 
     audio.play();
     playBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
     updateTitle();
@@ -345,7 +355,5 @@ function changeTrack() {
 }
 
 audio.onended = nextTrack;
-
-// Inicializace po načtení
 updateTitle();
 attemptPlay();

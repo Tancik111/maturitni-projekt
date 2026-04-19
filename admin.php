@@ -7,11 +7,9 @@ error_reporting(E_ALL);
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
-
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-
 function loadEnv($path) {
     if (!file_exists($path)) return;
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -24,7 +22,6 @@ function loadEnv($path) {
     }
 }
 loadEnv(__DIR__ . '/.env');
-
 $host = 'localhost';
 $db   = 'c554contact'; 
 $user = 'c554karoch';
@@ -38,7 +35,6 @@ try {
 } catch (PDOException $e) {
     die("Chyba archivu: " . $e->getMessage());
 }
-
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     try {
         $id_ke_smazani = $_GET['delete'];
@@ -50,7 +46,6 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
         $error = "Nepodařilo se zápis spálit: " . $e->getMessage();
     }
 }
-
 if (isset($_POST['send_reply'])) {
     $mail = new PHPMailer(true);
     try {
@@ -67,7 +62,6 @@ if (isset($_POST['send_reply'])) {
         $mail->addReplyTo('info.povestnik@seznam.cz', 'Pověstník');
         $reply_text = $_POST['reply_text'];
         $original_query = $_POST['original_query'];
-
         $email_template = "
         <div style='padding: 50px 0; font-family: \"Georgia\", serif; color: #2c1a05; margin: 0;'>
             <div style='max-width: 600px; margin: 0 auto; background-color: #fdfaf2; border: 1px solid #d4c5a9; box-shadow: 0 15px 40px rgba(0,0,0,0.15);'>
@@ -90,7 +84,6 @@ if (isset($_POST['send_reply'])) {
                 </div>
             </div>
         </div>";
-
         $mail->isHTML(true);
         $mail->Subject = 'Odpověď na Váš dotaz:';
         $mail->Body    = $email_template;
@@ -104,7 +97,6 @@ if (isset($_POST['send_reply'])) {
         $error = "Posel zabloudil: {$mail->ErrorInfo}";
     }
 }
-
 $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DESC")->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -117,89 +109,136 @@ $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DES
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: "Eagle Lake", serif; 
-            background-image: url('data/pozadi.webp'); 
-            background-size: cover; 
-            background-attachment: fixed; 
+    body { 
+        font-family: "Eagle Lake", serif; 
+        background-image: url('data/pozadi.webp'); 
+        background-size: cover; 
+        background-attachment: fixed; 
+        background-color: #2c1a05;
+    }
+    .admin-nav { 
+        background-color: #8b1a1a; 
+        padding: 15px 0; 
+    }
+            .admin-nav h1 { 
+                color: #f1e9d2; 
+                font-size: 1.5rem; 
+            }
+    .btn-logout { 
+        border: 2px solid #f1e9d2; 
+        color: #f1e9d2 !important; 
+        text-decoration: none; 
+        padding: 8px 15px; 
+        transition: 0.3s;
+        font-size: 0.9rem;
+    }
+            .btn-logout:hover { 
+                background: #f1e9d2; 
+                color: #8b1a1a !important; 
+            }
+    .admin-container { 
+        max-width: 950px; 
+        margin: 40px auto; 
+        padding: 0 15px; 
+    }
+    .card-dotaz { 
+        background-image: url('data/pergamen2.webp'); 
+        background-size: 100% 100%; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        border: none; 
+        margin-bottom: 50px; 
+        padding: 90px 110px; 
+        min-height: 400px; 
+        position: relative; 
+        background-color: transparent !important; 
+    }
+    .dotaz-header {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .email-text {
+        color: #4a0404;
+        font-size: 1.3rem;
+        word-break: break-all;
+        margin: 0;
+        line-height: 1.2;
+    }
+    .dotaz-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .dotaz-obsah { 
+        background: rgba(0, 0, 0, 0.05); 
+        border-radius: 4px; 
+        padding: 20px; 
+        margin: 20px 0; 
+        font-style: italic; 
+        font-size: 1.1rem; 
+        line-height: 1.6; 
+        border-left: 4px solid #8b1a1a; 
+        word-wrap: break-word;
+    }
+    .btn-povestnik { 
+        background-color: #8b1a1a; 
+        color: #f1e9d2; 
+        border: none; 
+        padding: 12px 25px; 
+        font-family: "Eagle Lake", serif; 
+        transition: 0.3s; 
+    }
+    .btn-povestnik:hover { 
+        background-color: #5a1111; 
+        color: white; 
+        transform: translateY(-2px); 
+    }
+    .btn-delete { 
+        color: #080808; 
+        text-decoration: underline; 
+        font-size: 0.9rem; 
+    }
+    .status-badge { 
+        font-weight: bold; 
+        letter-spacing: 1px; 
+        padding: 8px 12px; 
+    }
+    @media (min-width: 768px) {
+        .dotaz-header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
         }
-        .admin-nav { 
-            background-color: #8b1a1a; 
-            padding: 15px 0; 
+    }
+    @media (max-width: 767px) {
+        .card-dotaz {
+            padding: 50px 40px; 
+            min-height: auto;
+            margin-bottom: 30px;
         }
-        .admin-container { 
-            max-width: 950px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
+        .email-text { 
+            font-size: 1.1rem; 
         }
-        .card-dotaz { 
-            background-image: url('data/pergamen2.webp'); 
-            background-size: 100% 100%; 
-            background-repeat: no-repeat; 
-            background-position: center; border: none; 
-            margin-bottom: 50px; padding: 90px 110px; 
-            min-height: 400px; position: relative; 
-            ackground-color: transparent !important; 
-        }
-        .card-dotaz.vyrizeno { 
-            opacity: 0.85; 
-            filter: sepia(0.3) contrast(0.9); 
-        }
-        .dotaz-obsah { 
-            background: rgba(0, 0, 0, 0.04); 
-            border-radius: 4px; 
-            padding: 25px; 
-            margin: 25px 0; 
-            font-style: italic; 
+        .admin-nav h1 { 
             font-size: 1.2rem; 
-            line-height: 1.6; 
-            border-left: 4px solid #8b1a1a; 
         }
         .btn-povestnik { 
-            background-color: #8b1a1a; 
-            color: #f1e9d2; 
-            border: none; 
-            padding: 12px 25px; 
-            font-family: "Eagle Lake", serif; 
-            transition: 0.3s; 
+            width: 100%; 
         }
-        .btn-povestnik:hover { 
-            background-color: #5a1111; 
-            color: white; 
-            transform: translateY(-2px); 
+    }
+    @media (min-width: 768px) {
+        .dotaz-actions {
+            flex-direction: column;
+            align-items: flex-end;
         }
-        .btn-delete { 
-            color: #080808; 
-            text-decoration: none; 
-            font-size: 0.9rem; 
-            margin-left: 20px; 
-        }
-        .btn-delete:hover { 
-            text-decoration: underline; 
-            color: #f00;
-        }
-        .status-badge { 
-            font-weight: bold; 
-            letter-spacing: 1px; 
-            padding: 8px 12px; 
-        }
-        .btn-logout { 
-            border: 2px solid #f1e9d2; 
-            color: #f1e9d2; 
-            text-decoration: none; 
-            padding: 8px 20px; 
-            transition: 0.3s; 
-        }
-        .btn-logout:hover { 
-            background: #f1e9d2; 
-            color: #8b1a1a; 
-        }
-    </style>
+    }       
+</style>
 </head>
 <body>
 <nav class="admin-nav sticky-top">
     <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="h3 m-0" style="color: #f1e9d2;">Správa kroniky</h1>
+        <h1 class="m-0">Správa kroniky</h1>
         <a href="logout.php" class="btn-logout">Opustit archiv</a>
     </div>
 </nav>
@@ -214,31 +253,27 @@ $dotazy = $pdo->query("SELECT * FROM dotazy ORDER BY vyrizeno ASC, vytvoreno DES
         <?php foreach ($dotazy as $d): ?>
         <div class="col-12">
             <div class="card card-dotaz <?php echo $d['vyrizeno'] ? 'vyrizeno' : ''; ?>">
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="dotaz-header">
                     <div>
-                        <h2 class="h4 mb-1" style="color: #4a0404;"><?php echo htmlspecialchars($d['email']); ?></h2>
+                        <h2 class="email-text"><?php echo htmlspecialchars($d['email']); ?></h2>
                         <small class="text-muted italic">Zapsáno: <?php echo date("d.m.Y H:i", strtotime($d['vytvoreno'])); ?></small>
                     </div>
-                    <div class="text-end">
+                    <div class="dotaz-actions">
                         <?php if ($d['vyrizeno']): ?>
                             <span class="badge bg-success status-badge">VYŘÍZENO</span>
                         <?php else: ?>
                             <span class="badge bg-danger status-badge">NEVYŘÍZENO</span>
                         <?php endif; ?>
-                        <br>
                         <a href="admin.php?delete=<?php echo $d['id']; ?>" class="btn-delete" onclick="return confirm('Opravdu chceš tento zápis spálit?')">Smazat</a>
                     </div>
                 </div>
-
                 <div class="dotaz-obsah">
                     "<?php echo nl2br(htmlspecialchars($d['dotaz'])); ?>"
                 </div>
-
                 <?php if (!$d['vyrizeno']): ?>
                 <button class="btn btn-povestnik" type="button" data-bs-toggle="collapse" data-bs-target="#reply-<?php echo $d['id']; ?>">
                     Zapsat odpověď
                 </button>
-
                 <div class="collapse mt-4" id="reply-<?php echo $d['id']; ?>">
                     <div class="p-4 border-top border-2 border-danger" style="background: rgba(255,255,255,0.3);">
                         <form method="POST">

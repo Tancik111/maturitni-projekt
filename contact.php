@@ -12,9 +12,7 @@ function loadEnv($path) {
         }
     }
 }
-
 loadEnv(__DIR__ . '/.env');
-
 $host = 'localhost';
 $db   = getenv('DB_NAME') ?: 'c554contact'; 
 $user = 'c554karoch';
@@ -26,7 +24,6 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
-
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     $pdo->exec("CREATE TABLE IF NOT EXISTS dotazy (
@@ -35,18 +32,15 @@ try {
         dotaz TEXT NOT NULL,
         vytvoreno TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'] ?? '';
         $message = $_POST['message'] ?? ''; 
-
         if (!empty($email) && !empty($message)) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 http_response_code(400);
                 echo "Invalid email format";
                 exit;
             }
-
             $sql = "INSERT INTO dotazy (email, dotaz) VALUES (?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$email, $message]);

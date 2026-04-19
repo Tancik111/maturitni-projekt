@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Objevte zapomenuté pověsti českého kraje v moderním hávu. Prozkoumejte interaktivní mapu legend nebo si nechte od AI vyprávět svůj vlastní příběh z tajné kroniky.">
     <title>Pověstník</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2?1bb88869c979cf3276cd86b24056291a" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="css.css" as="style">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css.css">
+    <link rel="preload" href="../data/micro.css" as="style">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../data/micro.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
     <link rel="shortcut icon" href="../data/favi.ico" type="image/x-icon">
 </head>
 <body>
@@ -267,6 +269,37 @@
     </div>
 </section>
 
+<!-- Levá strana s recenzemi a pravá s mapou, která je zároveň interaktivní a obsahuje odkazy na další pověsti. -->
+
+<section class="container py-5 overflow-hidden">
+    <div class="row g-5">
+        <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
+            <img src="../data/nadpisy/hodnoceni.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
+            <div class="mb-5 review-box p-3">
+                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
+            </div>
+            <div class="review-box p-3">
+                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>"Baví mě ten koncept – interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. Jen tak dál!"</p>
+            </div>
+        </div>
+        <div class="col-lg-8 text-center mapa" data-aos="fade-left">
+                    <img src="../data/nadpisy/mapa.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
+            <div class="map-wrapper">
+                <img src="../data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
+                <a href="../cech/cech.html" class="map-point pos-1" aria-label="Microsite Čech"><i class="bi bi-geo-alt-fill" ></i><span class="custom-tooltip">O Čechovi</span></a>
+                <a href="../krok/krok.html" class="map-point pos-2" aria-label="Microsite Krok"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
+                <a href="../bruncvik/bruncvik.html" class="map-point pos-3" aria-label="Microsite Bruncvík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bruncvíkovi</span></a>
+                <a href="#" class="map-point pos-4 random-link" data-url1="../libuse/libuse.html" data-url2="../semik/semik.html" aria-label="Microsite Libuše a Šemík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
+                <a href="../bivoj/bivoj.html" class="map-point pos-5" aria-label="Microsite Bivoj"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bivojovi</span></a>
+                <a href="../haviri/haviri.html" class="map-point pos-6" aria-label="Microsite Havíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Kutnohorští havíři</span></a>
+                <a href="../rytiri/rytiri.html" class="map-point pos-7" aria-label="Microsite Rytíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Blaničtí rytíři</span></a>
+                <a href="../zizka/zizka.html" class="map-point pos-8" aria-label="Microsite Žižka"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Žižkovi</span></a>
+            </div>
+        </div>
+</section>
+
 <!-- Checklist jako obrázek ve formátu .webp -->   
 <section class="checklist-section container-fluid px-0">
     <div class="checklist-bg d-flex justify-content-center align-items-center">
@@ -370,6 +403,37 @@
         </div>
     </div>
 </div>
+
+<!-- Hudební přehrávač, který je dostupný na všech stránkách a umožňuje poslouchat písně během procházení webu. Obsahuje základní ovládací prvky pro přehrávání, pauzu, posouvání mezi skladbami a nastavení hlasitosti. -->
+
+<div class="medieval-radio-container">
+    <div class="radio-expanded parchment-bg" id="radioPanel">
+        <div class="track-info-mini text-center">
+            <span id="trackTitle">Načítání barda...</span>
+        </div>
+        <div class="controls-center">
+            <button onclick="prevTrack()" class="nav-btn"><i class="bi bi-skip-start-fill"></i></button>
+            <button onclick="togglePlay()" id="playBtn" class="main-play"><i class="bi bi-play-fill"></i></button>
+            <button onclick="nextTrack()" class="nav-btn"><i class="bi bi-skip-end-fill"></i></button>
+        </div>
+        <div class="volume-row">
+            <i class="bi bi-volume-down-fill"></i>
+            <input type="range" id="volumeSlider" class="medieval-range vol-slider" min="0" max="1" step="0.01" value="0.20">
+            <i class="bi bi-volume-up-fill"></i>
+        </div>
+        <div class="progress-section">
+            <input type="range" id="progressSlider" class="medieval-range slider-large" value="0" step="0.1">
+            <div class="time-meta">
+                <span id="currentTime">0:00</span>
+                <span id="durationTime">0:00</span>
+            </div>
+        </div>
+    </div>
+<button class="radio-trigger-clean" onclick="togglePanel()">
+        <img src="../data/tlacitka/harfa2.png" alt="Rádio">
+    </button>
+</div>
+
 
 <!-- Patička webu navržená s důrazem na přehlednost a responzivitu. Je rozdělena do tří hlavních sloupců obsahujících kontaktní údaje včetně sociálních sítí, interaktivní mapu sídla a kontaktní formulář pro dotazy uživatelů. Spodní lišta patičky zahrnuje právní informace (GDPR, Cookies), autorská práva a diskrétní odkaz pro administrátorské rozhraní. Celý blok automaticky vyplňuje zbývající prostor stránky díky využití flexboxu -->   
 <footer class="container-fluid py-5 mt-auto">
