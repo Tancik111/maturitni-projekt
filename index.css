@@ -846,6 +846,9 @@ footer a,
     .radio-trigger-clean{
         display: none;
     }
+    .nav-btn {
+        background-color: black !important;
+    }
 }
 
 /* MEDIA QUERIES - Minimální šířka 768px ------------------------------------------------------------------------------------------------------------------------------------------------------------*/

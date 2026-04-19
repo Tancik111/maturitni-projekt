@@ -23,7 +23,8 @@
     <link rel="shortcut icon" href="data/favi.ico" type="image/x-icon">
 </head>
 <body>
-<!-- Načítací funkce zajištůjící plynulé načtení celé stránky a jejího obsahu.     -->
+
+<!-- Načítací funkce zajištůjící plynulé načtení celé stránky a jejího obsahu.-->
 
 <div id="loader-wrapper">
     <div class="loader-medieval">
@@ -32,6 +33,9 @@
     </div>
     <p class="loader-text">Načítám kroniky...</p>
 </div>
+
+<!-- Responsivní navigační lišta v Bootstrapu 5, fixovaná na horním okraji přes úvodní sekci. Obsahuje animované burger menu a navigační odkazy na kotvy hlavní stránky. --> 
+
 <nav id="mainNavbar" class="navbar navbar-expand-lg bg-none position-absolute top-0 start-0 w-100 z-3">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="index.html"><h2>Pověstník</h2></a>
@@ -58,6 +62,8 @@
     </div>
 </nav>
 
+<!-- Úvodní blok na celou výšku obrazovky s obrázkem na pozadí a texty animovanými přes knihovnu AOS. Obsahuje navigační šipku pro snazší skrolování dolů. -->   
+
     <section class="hero-section position-relative overflow-hidden vh-100 d-flex align-items-center text-white">
         <video autoplay muted loop playsinline muted class="position-absolute w-100 h-100 top-0 start-0 z-n1 object-fit-cover">
             <source src="data/video.webm" type="video/mp4">
@@ -82,9 +88,13 @@
         </div>
     </section>
 
+<!-- Červený pás s textem rozdělující hero sekci a první část s informacemi -->   
+
     <div class="custom-ribbon text-center py-5">
         <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Oživujeme příběhy našich předků</span>
     </div>
+
+<!-- Fotka s dvoumi odstavci textu, které popisují naši společnosti -->
 
     <section class="container my-5 py-4 overflow-hidden" id="menu1">
         <div class="row mb-5">
@@ -109,7 +119,7 @@
         </div>
     </section>
 
-
+<!-- Carousel s kartami s pověstmi, které vedou na jednotlive microsity -->
 
     <section class="container py-5 overflow-hidden" id="menu2">
             <div class="col-12 text-center">
@@ -132,9 +142,11 @@
         </div>
     </section>
 
-            <div class="col-12 text-center" id="menu3">
-                <img src="data/nadpisy/nadpis_ai.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
-            </div>
+<!-- Formulář který pomocí AI vygeneruje vlastní pověst na základě zadaných parametrů. Obsahuje pravidla pro generování a modální okno pro zobrazení výsledku. -->
+
+    <div class="col-12 text-center" id="menu3">
+        <img src="data/nadpisy/nadpis_ai.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
+    </div>
     <div class="container my-4 legend-container border border-3 border-brown bez-borderu" data-aos="zoom-in">
         <div class="text-center fs-3 fw-bold py-2 border-bottom border-3 border-brown">Vytvořte si vlastní pověst</div>
         <div class="row g-0">
@@ -161,16 +173,15 @@
             </div>
             <div class="col-md-6 p-4 d-flex align-items-start" data-aos="fade-left" data-aos-delay="500">
                 <ul class="rules-text flex-grow-1 me-4">
-                    <li>Pro vygenerování pověsti musí být vyplněno: hlavní postava, místo děje a zápletka.</li>
-                    <li>AI může vygenerovat maximálně 5 pověstí za 10 minut.</li>
-                    <li>AI obsahuje filtr na vulgární a jinak nevhodná slova.</li>
-                    <li>Text se generuje v délce cca 300-350 slov.</li>
+                    <li>Pro vygenerování pověsti musí být vyplněno: hlavní postava, místo děje a zápletka</li>
+                    <li>AI může vygenerovat maximálně 5 pověstí za 10 minut</li>
+                    <li>AI obsahuje filtr na vulgární a jinak nevhodná slova</li>
+                    <li>Text se generuje v délce cca 300-350 slov</li>
                 </ul>
                 <img src="data/pravidla.webp" class="img-fluid lev" alt="lev" style="max-width:300px; height:auto;">
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="vysledekModal" tabindex="-1" aria-labelledby="Pověst" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered modal-lg" data-aos="zoom-in">
             <div class="modal-content" style="background: transparent; border: none;">
@@ -183,12 +194,11 @@
         </div>
     </div>
 
-
+<!-- Sekce s informacemi o našem týmu, doplněná o ilustraci a karty s popisem jednotlivých členů. -->
 
     <div class="col-12 text-center" id="menu4">
         <img src="data/nadpisy/nadpis_tym.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
     </div>
-
     <div class="container-fluid p-0 team-top-wrapper text-center">
         <img src="data/muzi.webp" class="img-fluid team-main-img" alt="Ilustrace týmu" data-aos="fade-in">
     </div>
@@ -221,6 +231,84 @@
             </div>
         </div>
     </div>
+
+<!-- Recenze a mapa s hodnoceními od uživatelů -->
+
+<section class="container py-5 overflow-hidden" id="menu5">
+    <div class="row g-5">
+        <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
+            <img src="data/nadpisy/hodnoceni.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
+            <div class="mb-5 review-box p-3">
+                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
+            </div>
+            <div class="review-box p-3">
+                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>"Baví mě ten koncept – interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. Jen tak dál!"</p>
+            </div>
+        </div>
+        <div class="col-lg-8 text-center mapa" data-aos="fade-left">
+                    <img src="data/nadpisy/mapa.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
+            <div class="map-wrapper">
+                <img src="data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
+                <a href="cech/cech.html" class="map-point pos-1" aria-label="Microsite Čech"><i class="bi bi-geo-alt-fill" ></i><span class="custom-tooltip">O Čechovi</span></a>
+                <a href="krok/krok.html" class="map-point pos-2" aria-label="Microsite Krok"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
+                <a href="bruncvik/bruncvik.html" class="map-point pos-3" aria-label="Microsite Bruncvík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bruncvíkovi</span></a>
+                <a href="#" class="map-point pos-4 random-link" data-url1="libuse/libuse.html" data-url2="semik/semik.html" aria-label="Microsite Libuše a Šemík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
+                <a href="bivoj/bivoj.html" class="map-point pos-5" aria-label="Microsite Bivoj"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bivojovi</span></a>
+                <a href="haviri/haviri.html" class="map-point pos-6" aria-label="Microsite Havíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Kutnohorští havíři</span></a>
+                <a href="rytiri/rytiri.html" class="map-point pos-7" aria-label="Microsite Rytíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Blaničtí rytíři</span></a>
+                <a href="zizka/zizka.html" class="map-point pos-8" aria-label="Microsite Žižka"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Žižkovi</span></a>
+            </div>
+        </div>
+</section>
+
+<!-- Sekce s logy měst a sponzorů, které nás podporují. Sekce obsahuje také tlačítko pro podporu projektu, které otevírá modální okno s možností zadání částky a zobrazení QR kódu pro platbu. -->
+
+<div class="col-12 text-center" id="menu6">
+    <img src="data/nadpisy/nadpis_sponzori.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
+</div>
+<section class="stredoveka-sekce pt-5 pb-5">
+    <div class="kontejner">
+        <div class="logo-grid">
+            <a href="https://www.kutnahora.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="100"><img src="data/sponzori/hora.webp" alt="Město 1"></a>
+            <a href="https://www.mesto-trebenice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="200"><img src="data/sponzori/trebenice.webp" alt="Město 2"></a>
+            <a href="https://www.mesto-milovice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="300"><img src="data/sponzori/milovice.webp" alt="Město 3"></a>
+            <a href="https://www.getyourguide.com/cs-cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="400"><img src="data/sponzori/gyg.webp" alt="Sponzor 1"></a>
+            <a href="https://www.regiontourist.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="500"><img src="data/sponzori/regiontourist.webp" alt="Sponzor 2"></a>
+            <a href="https://www.kudyznudy.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="600"><img src="data/sponzori/kudy_z_nudy.webp" alt="Sponzor 3"></a>
+        </div>
+        <div class="podpora-sekce text-center mt-5">
+            <button class="podporit-tlacitko" onclick="otevritModal()" data-aos="zoom-in" data-aos-duration="1500">
+                <img src="data/sponzori/donate.webp" alt="Podpořit nás" style="max-width: 300px;">
+            </button>
+        </div>
+    </div>
+</section>
+
+<div id="platebniModal" class="modal" tabindex="-1" aria-labelledby="QR" aria-hidden="false">
+    <div class="modal-obsah">
+        <span class="zavrit" onclick="zavritModal()">&times;</span>
+        <h2>Podpořit projekt</h2>
+        <p>Zadejte částku v Kč:</p>
+        <div class="input-group">
+            <input type="number" id="castkaInput" value="200" min="10">
+        </div>
+        <button class="btn-update" onclick="generovatQR()">Zobrazit QR kód</button>
+        <div class="qr-vystup">
+            <img id="qrObrazek" src="" alt="QR Platba" style="display:none; max-width: 180px;">
+            <p id="nacitaciText">Zadejte částku...</p>
+        </div>
+    </div>
+</div>
+
+<!-- Červený pás s textem rozdělující hero sekci a první část s informacemi -->   
+
+<div class="custom-ribbon text-center py-5">
+    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Sdílejte náš příběh</span>
+</div>
+
+<!-- Modály pro zobrazení informací o ochraně soukromí a nastavení cookies, které jsou přizpůsobené vizuálnímu stylu webu a obsahují jasné informace o zpracování dat a právech uživatelů. Obsahují také možnosti pro souhlas nebo nesouhlas s podmínkami, které jsou prezentovány formou obrázků pro lepší zapamatování a vizuální přitažlivost. -->
 
 <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="GDPR" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -306,82 +394,6 @@
         </div>
     </div>
 
-
-
-<section class="container py-5 overflow-hidden">
-    <div class="row g-5">
-        <div class="col-lg-4 d-flex flex-column text-center" data-aos="fade-right">
-            <img src="data/nadpisy/hodnoceni.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
-            <div class="mb-5 review-box p-3">
-                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
-            </div>
-            <div class="review-box p-3">
-                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                <p>"Baví mě ten koncept – interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. Jen tak dál!"</p>
-            </div>
-        </div>
-        <div class="col-lg-8 text-center mapa" data-aos="fade-left">
-                    <img src="data/nadpisy/mapa.webp" alt="O nás" class="img-fluid pb-5 nadpis-mapa" data-aos="fade-up">
-            <div class="map-wrapper">
-                <img src="data/mapa.webp" class="img-fluid w-100 d-block" alt="Mapa České republiky">
-                <a href="cech/cech.html" class="map-point pos-1" aria-label="Microsite Čech"><i class="bi bi-geo-alt-fill" ></i><span class="custom-tooltip">O Čechovi</span></a>
-                <a href="krok/krok.html" class="map-point pos-2" aria-label="Microsite Krok"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Krokovi a jeho dcerách</span></a>
-                <a href="bruncvik/bruncvik.html" class="map-point pos-3" aria-label="Microsite Bruncvík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bruncvíkovi</span></a>
-                <a href="#" class="map-point pos-4 random-link" data-url1="libuse/libuse.html" data-url2="semik/semik.html" aria-label="Microsite Libuše a Šemík"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Libuši, O Horymírovi</span></a>
-                <a href="bivoj/bivoj.html" class="map-point pos-5" aria-label="Microsite Bivoj"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Bivojovi</span></a>
-                <a href="haviri/haviri.html" class="map-point pos-6" aria-label="Microsite Havíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Kutnohorští havíři</span></a>
-                <a href="rytiri/rytiri.html" class="map-point pos-7" aria-label="Microsite Rytíři"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">Blaničtí rytíři</span></a>
-                <a href="zizka/zizka.html" class="map-point pos-8" aria-label="Microsite Žižka"><i class="bi bi-geo-alt-fill"></i><span class="custom-tooltip">O Žižkovi</span></a>
-            </div>
-        </div>
-</section>
-
-
-
-            <div class="col-12 text-center">
-                <img src="data/nadpisy/nadpis_sponzori.webp" alt="O nás" class="img-fluid pb-5 nadpis" data-aos="fade-up">
-            </div>
-
-
-    <section class="stredoveka-sekce pt-5 pb-5">
-        <div class="kontejner">
-            <div class="logo-grid">
-                <a href="https://www.kutnahora.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="100"><img src="data/sponzori/hora.webp" alt="Město 1"></a>
-                <a href="https://www.mesto-trebenice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="200"><img src="data/sponzori/trebenice.webp" alt="Město 2"></a>
-                <a href="https://www.mesto-milovice.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="300"><img src="data/sponzori/milovice.webp" alt="Město 3"></a>
-                <a href="https://www.getyourguide.com/cs-cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="400"><img src="data/sponzori/gyg.webp" alt="Sponzor 1"></a>
-                <a href="https://www.regiontourist.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="500"><img src="data/sponzori/regiontourist.webp" alt="Sponzor 2"></a>
-                <a href="https://www.kudyznudy.cz/" class="logo-item" data-aos="zoom-in-up" data-aos-delay="600"><img src="data/sponzori/kudy_z_nudy.webp" alt="Sponzor 3"></a>
-            </div>
-            <div class="podpora-sekce text-center mt-5">
-                <button class="podporit-tlacitko" onclick="otevritModal()" data-aos="zoom-in" data-aos-duration="1500">
-                    <img src="data/sponzori/donate.webp" alt="Podpořit nás" style="max-width: 300px;">
-                </button>
-            </div>
-        </div>
-    </section>
-
-<div id="platebniModal" class="modal" tabindex="-1" aria-labelledby="QR" aria-hidden="false">
-    <div class="modal-obsah">
-        <span class="zavrit" onclick="zavritModal()">&times;</span>
-        <h2>Podpořit projekt</h2>
-        <p>Zadejte částku v Kč:</p>
-        <div class="input-group">
-            <input type="number" id="castkaInput" value="200" min="10">
-        </div>
-        <button class="btn-update" onclick="generovatQR()">Zobrazit QR kód</button>
-        <div class="qr-vystup">
-            <img id="qrObrazek" src="" alt="QR Platba" style="display:none; max-width: 180px;">
-            <p id="nacitaciText">Zadejte částku...</p>
-        </div>
-    </div>
-</div>
-
-<div class="custom-ribbon text-center py-5">
-    <span class="fs-3 fw-light tracking-widest text-uppercase" data-aos="fade-left">Sdílejte náš příběh</span>
-</div>
-
 <div id="cookie-bar" class="cookie-simple-bar bg-dark text-white p-3 shadow-lg">
     <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
         <span>Tento web používá cookies pro zajištění nejlepšího zážitku.</span>
@@ -392,8 +404,7 @@
     </div>
 </div>
 
-
-
+<!-- Přehravač hudby -->
 
 <div class="medieval-radio-container">
     <div class="radio-expanded parchment-bg" id="radioPanel">
@@ -423,6 +434,7 @@
     </button>
 </div>
 
+<!-- Patička s kontaktními informacemi -->
 
     <footer class="container-fluid py-5 mt-auto">
         <div class="container">
@@ -485,8 +497,5 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script src="index.js" defer></script>
-
-
-
 </body>
 </html>
