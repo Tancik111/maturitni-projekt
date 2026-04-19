@@ -10,9 +10,9 @@ hr {
 }
 
 body{
-  font-family: "Eagle Lake", serif;
+    font-family: "Eagle Lake", serif;
     background-image: url('../data/pozadi.webp'); 
-  background-size: cover;
+    background-size: cover;
 }
 .nav-item a, .navbar-brand, .modern-burger {
     color: white !important;
@@ -907,4 +907,63 @@ background: none;
 @keyframes medievalSlideIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+/* SEKCE S LOADEREM - Vytvoření loaderu s animací, Zajištění správné pozice a zobrazení loaderu -----------------------------------------------------------------------------------------------------*/ 
+
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f5e6d3; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; 
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.loader-medieval {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 8px solid rgba(121, 4, 9, 0.1); 
+    border-top: 8px solid #790409; 
+    border-radius: 50%;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+.loader-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: auto;
+    filter: sepia(0.5);
+}
+.loader-text {
+    margin-top: 20px;
+    font-family: "Eagle Lake", serif;
+    color: #4a0404;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
 }

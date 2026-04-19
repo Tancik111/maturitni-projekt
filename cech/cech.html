@@ -23,9 +23,18 @@
     <link rel="shortcut icon" href="../data/favi.ico" type="image/x-icon">
 </head>
 <body>
+<!-- Načítací funkce zajištůjící plynulé načtení celé stránky a jejího obsahu.     -->
+
+<div id="loader-wrapper">
+    <div class="loader-medieval">
+        <div class="spinner-ring"></div>
+        <img src="data/logo.webp" alt="Logo" class="loader-logo">
+    </div>
+    <p class="loader-text">Načítám kroniky...</p>
+</div>
 
 <!-- Responsivní navigační lišta v Bootstrapu 5, fixovaná na horním okraji přes úvodní sekci. Obsahuje animované burger menu a navigační odkazy na kotvy hlavní stránky. -->   
-<nav id="mainNavbar" class="navbar navbar-expand-sm bg-none position-absolute top-0 start-0 w-100 z-3">
+<nav id="mainNavbar" class="navbar navbar-expand-lg bg-none position-absolute top-0 start-0 w-100 z-3">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="../index.html"><h2>Pověstník</h2></a>
         
@@ -280,8 +289,8 @@
                 <p>"Projít si trasu podle legendy je úplně jiný zážitek než obyčejná turistika. Web funguje skvěle, trasy jsou promyšlené a ten lidský přístup „za nic si neúčtujeme“ mě vážně dostal."</p>
             </div>
             <div class="review-box p-3">
-                <div class="mb-3 hvezdy"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-                <p>"Baví mě ten koncept – interaktivní průvodce v kapse. Web šlape čistě, žádné otravné reklamy, jen čistý obsah a mapy. Jen tak dál!"</p>
+                <div class="mb-3 hvezdy"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p>„Pěkný příběh, jen u té Pražské vyhlídky byl trochu nával. Web je fajn, že vás nenutí nic stahovat, prostě se jen díváte do mapy v prohlížeči. Jen tak dál!“</p>
             </div>
         </div>
         <div class="col-lg-8 text-center mapa" data-aos="fade-left">

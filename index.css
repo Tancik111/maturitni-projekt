@@ -172,10 +172,13 @@ body{
 .nav-btn {
     background: none;
     border: none;
-    font-size: 4rem;
-    padding: 0 20px;
+    font-size: 4rem !important; 
+    padding: 0 30px;
     z-index: 10;
     user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* SEKCE AI  - Formulář pro AI, Zajíštění správné velikosti tlačítek, Nastavení vzhledu výstupu -----------------------------------------------------------------------------------------------------*/
@@ -436,6 +439,7 @@ body{
     right: 20px;
     font-size: 28px; 
     color: #5d1111;
+    cursor: pointer;
 }
 .input-group {
     margin: 15px 0;
@@ -704,7 +708,7 @@ body{
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* SEKCE FOOTER - Kontakty, Mapa a formulář */
+/* SEKCE FOOTER - Kontakty, Mapa a formulář ---------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 #responseMessage{
     display: none;
@@ -745,6 +749,61 @@ footer a,
 .footer-link {
     color: inherit !important;
     text-decoration: none !important;
+}
+
+/* SEKCE S LOADEREM - Vytvoření loaderu s animací, Zajištění správné pozice a zobrazení loaderu -----------------------------------------------------------------------------------------------------*/ 
+
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f5e6d3; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; 
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.loader-medieval {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 8px solid rgba(121, 4, 9, 0.1); 
+    border-top: 8px solid #790409; 
+    border-radius: 50%;
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+.loader-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: auto;
+    filter: sepia(0.5);
+}
+.loader-text {
+    margin-top: 20px;
+    font-family: "Eagle Lake", serif;
+    color: #4a0404;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* MEDIA QUERIES - Maximální šířka 480px ------------------------------------------------------------------------------------------------------------------------------------------------------------*/

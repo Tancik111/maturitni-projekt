@@ -346,3 +346,26 @@ function changeTrack() {
 audio.onended = nextTrack;
 updateTitle();
 attemptPlay();
+
+// Funkce pro načítací obrazovku - tento kód zajišťuje zobrazení načítací obrazovky s logem a textem Načítám kroniky... pro zajištění správného načtení.
+
+window.addEventListener("load", function() {
+    const loader = document.getElementById("loader-wrapper");
+    const minimalniCasZobrazeni = 1200; 
+    const casStartu = performance.now(); 
+
+    function skrytLoader() {
+        const aktualniCas = performance.now();
+        const uplynutyCas = aktualniCas - casStartu;
+        if (uplynutyCas < minimalniCasZobrazeni) {
+            setTimeout(() => {
+                loader.classList.add("loader-hidden");
+                setTimeout(() => loader.style.display = "none", 500);
+            }, minimalniCasZobrazeni - uplynutyCas);
+        } else {
+            loader.classList.add("loader-hidden");
+            setTimeout(() => loader.style.display = "none", 500);
+        }
+    }
+    skrytLoader();
+});

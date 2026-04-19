@@ -1,3 +1,26 @@
+// Funkce pro načítací obrazovku - tento kód zajišťuje zobrazení načítací obrazovky s logem a textem Načítám kroniky... pro zajištění správného načtení.
+
+window.addEventListener("load", function() {
+    const loader = document.getElementById("loader-wrapper");
+    const minimalniCasZobrazeni = 1200; 
+    const casStartu = performance.now(); 
+
+    function skrytLoader() {
+        const aktualniCas = performance.now();
+        const uplynutyCas = aktualniCas - casStartu;
+        if (uplynutyCas < minimalniCasZobrazeni) {
+            setTimeout(() => {
+                loader.classList.add("loader-hidden");
+                setTimeout(() => loader.style.display = "none", 500);
+            }, minimalniCasZobrazeni - uplynutyCas);
+        } else {
+            loader.classList.add("loader-hidden");
+            setTimeout(() => loader.style.display = "none", 500);
+        }
+    }
+    skrytLoader();
+});
+
 // Logika pro zavírání menu po kliknutí na odkaz v mobilní verzi. Tento kód naslouchá na kliknutí na dokument a kontroluje, zda bylo kliknuto na odkaz s třídou 'nav-link'. Pokud ano, zkontroluje, zda je menu otevřené (má třídu 'show') a pokud ano, zavře ho odstraněním této třídy a aktualizuje stav burger tlačítka pro správnou animaci a přístupnost.
 
 document.addEventListener('click', function (e) {
